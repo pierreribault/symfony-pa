@@ -1,6 +1,13 @@
-controllers:
+admin:
+    resource: ../../src/Controller/Admin
+    type: annotation
+    prefix: /admin
+    name_prefix: admin_
+
+front:
     resource: ../../src/Controller/
     type: annotation
+    name_prefix: front_
 
 kernel:
     resource: ../../src/Kernel.php
