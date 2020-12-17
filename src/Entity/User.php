@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,6 +43,53 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    private $enabled;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Person::class, mappedBy="account", cascade={"persist", "remove"})
+     */
+    private $person;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Company::class, mappedBy="account", cascade={"persist", "remove"})
+     */
+    private $company;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RoadTrip::class, mappedBy="author")
+     */
+    private $roadTrips;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ForumThread::class, mappedBy="author")
+     */
+    private $forumThreads;
+
+    /**
+     * @ORM\OneToMany(targetEntity=ForumThreadAnswer::class, mappedBy="author")
+     */
+    private $forumThreadAnswers;
+
+    public function __construct()
+    {
+        $this->roadTrips = new ArrayCollection();
+        $this->forumThreads = new ArrayCollection();
+        $this->forumThreadAnswers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,6 +177,169 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getPerson(): ?Person
+    {
+        return $this->person;
+    }
+
+    public function setPerson(Person $person): self
+    {
+        $this->person = $person;
+
+        // set the owning side of the relation if necessary
+        if ($person->getAccount() !== $this) {
+            $person->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(Company $company): self
+    {
+        $this->company = $company;
+
+        // set the owning side of the relation if necessary
+        if ($company->getAccount() !== $this) {
+            $company->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RoadTrip[]
+     */
+    public function getRoadTrips(): Collection
+    {
+        return $this->roadTrips;
+    }
+
+    public function addRoadTrip(RoadTrip $roadTrip): self
+    {
+        if (!$this->roadTrips->contains($roadTrip)) {
+            $this->roadTrips[] = $roadTrip;
+            $roadTrip->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoadTrip(RoadTrip $roadTrip): self
+    {
+        if ($this->roadTrips->contains($roadTrip)) {
+            $this->roadTrips->removeElement($roadTrip);
+            // set the owning side to null (unless already changed)
+            if ($roadTrip->getAuthor() === $this) {
+                $roadTrip->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ForumThread[]
+     */
+    public function getForumThreads(): Collection
+    {
+        return $this->forumThreads;
+    }
+
+    public function addForumThread(ForumThread $forumThread): self
+    {
+        if (!$this->forumThreads->contains($forumThread)) {
+            $this->forumThreads[] = $forumThread;
+            $forumThread->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForumThread(ForumThread $forumThread): self
+    {
+        if ($this->forumThreads->contains($forumThread)) {
+            $this->forumThreads->removeElement($forumThread);
+            // set the owning side to null (unless already changed)
+            if ($forumThread->getAuthor() === $this) {
+                $forumThread->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ForumThreadAnswer[]
+     */
+    public function getForumThreadAnswers(): Collection
+    {
+        return $this->forumThreadAnswers;
+    }
+
+    public function addForumThreadAnswer(ForumThreadAnswer $forumThreadAnswer): self
+    {
+        if (!$this->forumThreadAnswers->contains($forumThreadAnswer)) {
+            $this->forumThreadAnswers[] = $forumThreadAnswer;
+            $forumThreadAnswer->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeForumThreadAnswer(ForumThreadAnswer $forumThreadAnswer): self
+    {
+        if ($this->forumThreadAnswers->contains($forumThreadAnswer)) {
+            $this->forumThreadAnswers->removeElement($forumThreadAnswer);
+            // set the owning side to null (unless already changed)
+            if ($forumThreadAnswer->getAuthor() === $this) {
+                $forumThreadAnswer->setAuthor(null);
+            }
+        }
 
         return $this;
     }
