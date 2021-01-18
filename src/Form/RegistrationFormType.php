@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -57,8 +60,36 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ]);
+            ])
+            ->add("roles", ChoiceType::class, [
+                "expanded" => true,
+                "multiple" => false,
+                "choices" => [
+                    "Entreprise" => "ROLE_COMPANY",
+                    "Particulier" => "ROLE_USER",
+                ],
+                "attr" => [
+                    "class" => "roles-select"
+                ]
+            ])->add("company", CompanyType::class, [
+                "required" => false
+            ])
         ;
+
+
+        $builder->get('roles')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagsAsArray) {
+                    // transform the array to a string
+                    return $tagsAsArray[0];
+                },
+                function ($tagsAsString) {
+                    // transform the string back to an array
+                    return [$tagsAsString];
+                }
+            ))
+        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

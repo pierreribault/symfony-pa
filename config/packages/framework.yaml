@@ -15,3 +15,6 @@ framework:
     #fragments: true
     php_errors:
         log: true
+
+parameters:
+    app.path.images: /uploads/images/

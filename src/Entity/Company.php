@@ -40,7 +40,7 @@ class Company
     private $siteUrl;
 
     /**
-     * @ORM\OneToOne(targetEntity=user::class, inversedBy="company", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="company", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $account;

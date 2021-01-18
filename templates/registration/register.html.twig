@@ -2,6 +2,14 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        .d-none {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
@@ -15,7 +23,27 @@
             label: 'Password'
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
+        {{ form_row(registrationForm.roles) }}
+        <section id="company-form" class="d-none">
+            {{ form_widget(registrationForm.company) }}
+        </section>
+        
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.querySelectorAll("[name='registration_form[roles]']").forEach(ele => ele.addEventListener("click", function (){
+            const blockCompany = document.getElementById("company-form");
+            
+            if (this.value === "ROLE_COMPANY") {
+                blockCompany.classList.remove("d-none")
+            }else{
+                blockCompany.classList.add("d-none")
+            }
+        }))
+    </script>
+
+{% endblock %}
+
