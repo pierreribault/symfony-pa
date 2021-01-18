@@ -31,7 +31,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private $roles = ["ROLE_USER"];
 
     /**
      * @var string The hashed password
@@ -55,9 +55,9 @@ class User implements UserInterface
     private $phone;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":false})
+     * @ORM\Column(type="boolean", options={"default":0})
      */
-    private $enabled;
+    private $enabled = false;
 
     /**
      * @ORM\OneToOne(targetEntity=Person::class, mappedBy="account", cascade={"persist", "remove"})
