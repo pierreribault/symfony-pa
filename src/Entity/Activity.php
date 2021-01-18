@@ -47,7 +47,7 @@ class Activity
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $manu;
+    private $menu;
 
     /**
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="activities")
@@ -66,9 +66,15 @@ class Activity
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="activity", orphanRemoval=true)
+     */
+    private $images;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,14 +142,14 @@ class Activity
         return $this;
     }
 
-    public function getManu(): ?string
+    public function getMenu(): ?string
     {
-        return $this->manu;
+        return $this->menu;
     }
 
-    public function setManu(?string $manu): self
+    public function setMenu(?string $menu): self
     {
-        $this->manu = $manu;
+        $this->menu = $menu;
 
         return $this;
     }
@@ -195,6 +201,36 @@ class Activity
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
             $category->removeActivity($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setActivity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getActivity() === $this) {
+                $image->setActivity(null);
+            }
         }
 
         return $this;
