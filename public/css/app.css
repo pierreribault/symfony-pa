@@ -1,0 +1,36 @@
+/* IMPORTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+/* CSS */
+
+body {
+    background-color: rgb(168, 222, 240);
+    color: rgb(2, 106, 169);
+    font-family: Roboto;
+}
+
+nav {
+    background-color: white;
+    margin: -8px -8px 0;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+nav a {
+    color: rgb(98, 199, 230);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+
+/* BOUTONS */
+
+.btn {
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+}

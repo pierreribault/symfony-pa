@@ -1,0 +1,27 @@
+#home {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 175px;
+}
+
+h1 {
+    font-size: 60px;
+    color: white;
+    font-family: Balsamiq Sans;
+}
+
+p {
+    text-align: center;
+    width: 800px;
+    font-size: 17px;
+    margin-bottom: 50px;
+}
+
+.btn {
+    color: rgb(98, 199, 230);
+    background-color: white;
+    font-weight: bold;
+    font-size: 18px;
+}

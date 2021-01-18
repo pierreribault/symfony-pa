@@ -2,12 +2,21 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}LMDVoyages{% endblock %}</title>
+        <link rel="stylesheet" href="{{asset('css/app.css')}}"/>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <nav>
+            <a href="/">Générateur</a>
+            <a href="/forum">Forum</a>
+            <a href="/connexion">Se connecter</a>
+        </nav>
+
         {% block body %}{% endblock %}
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
+
+        <script src="https://kit.fontawesome.com/fde258db28.js" crossorigin="anonymous"></script>
     </body>
 </html>
