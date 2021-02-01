@@ -1,8 +1,8 @@
-admin:
-    resource: ../../src/Controller/Admin
-    type: annotation
-    prefix: /admin
-    name_prefix: admin_
+#admin:
+    #resource: ../../src/Controller/Admin
+    #type: annotation
+    #prefix: /admin
+    #name_prefix: admin_
 
 front:
     resource: ../../src/Controller/
