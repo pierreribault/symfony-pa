@@ -9,3 +9,5 @@
 import './styles/app.css';
 
 import 'jquery'
+
+import '../assets/js/map.js'
