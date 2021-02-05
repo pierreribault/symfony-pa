@@ -6,9 +6,11 @@ use App\Repository\ActivityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ActivityRepository::class)
+ * @Vich\Uploadable
  */
 class Activity
 {
@@ -67,7 +69,7 @@ class Activity
     private $categories;
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="activity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="activity", orphanRemoval=true, cascade={"persist", "remove"})
      */
     private $images;
 
