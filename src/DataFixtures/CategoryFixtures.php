@@ -5,12 +5,11 @@ namespace App\DataFixtures;
 
 
 use App\Entity\Category;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class CategoryFixtures extends AbstractFixture
+class CategoryFixtures extends Fixture
 {
 
     public function load(ObjectManager $manager)
