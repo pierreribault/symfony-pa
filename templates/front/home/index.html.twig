@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}LMDVoyages{% endblock %}
+{% block title %}Traaavl{% endblock %}
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{asset('build/app/page/home.css')}}"/>
@@ -8,16 +8,57 @@
 
 {% block body %}
 
-<div id="home">
-    <h1><i class="fas fa-route"></i> Planifiez votre road trip</h1>
+<div id="home" class="container">
+    <header class="grid grid-cols-3 items-center mt-10">
+        <p class="text-5xl font-bold spectral">Traaavl.</p>
+        <div class="flex justify-center font-medium text-lg mt-1">
+            <a href="/" class="text-eden border-b border-black cursor-pointer">
+                <p>Home</p>
+            </a>
+            <a href="" class="mx-12 hover:text-eden cursor-pointer">
+                <p>Blogs</p>
+            </a>
+            <a href="/forum" class="hover:text-eden cursor-pointer">
+                <p>Forum</p>
+            </a>
+        </div>
+        {% if app.user %}
+            <a href="/logout" class="justify-end font-medium flex items-center text-lg hover:text-eden cursor-pointer">
+                <img src="images/icons/user.svg" alt="user" draggable=false />
+                <p class="mt-1 ml-2">Logout</p>
+            </a>
+        {% else %}
+            <div class="flex justify-end">
+                <a href="/login" class="justify-end font-medium flex items-center text-lg mr-12 hover:text-eden cursor-pointer">
+                    <p class="mt-1">Login</p>
+                </a>
+                <a href="/register" class="justify-end font-medium flex items-center text-lg hover:text-eden cursor-pointer">
+                    <p class="mt-1">Register</p>
+                </a>
+            </div>
+        {% endif %}
+    </header>
 
-    <p>
-        Vous souhaitez partir en road trip ? Laissez-nous organiser votre voyage de rêve pour vous !<br/>
-        <br/>
-        Envie de manger dans un resto chic, s'arrêtez dans un hôtel traditionnel, ou de passer par des parcs naturels ? Saisissez tout dans notre générateur et on s'occupe de tout :)<br/>
-        <br/>
-    </p>
+    <div class="text-center text-eden mt-24">
+        <h1 class="spectral">In <span class="font-bold spectral">pursuit</span> of new adventure</h1>
+        <h2 class="text-2xl">Find the best places to discover</h2>
 
-    <a class="btn" href="/generator">Générer mon road trip</a>
+        <form class="flex justify-center mt-20">
+            <div class="bg-white rounded-md flex items-center px-8">
+                <div class="text-left mx-4">
+                    <label for="from" class="font-medium text-black block text-md">From</label>
+                    <input id="from" type="text" class="text-silver text-md w-52 outline-none" placeholder="City of departure" />
+                </div>
+                <div class="h-11 border-l-2 border-eden"></div>
+                <div class="text-left mx-4">
+                    <label for="from" class="font-medium text-black block text-md">To</label>
+                    <input id="from" type="text" class="text-silver text-md w-52 outline-none" placeholder="City of arrival" />
+                </div>
+            </div>
+            <button class="rounded-md bg-gradient-to-r from-burn-sienna to-grenadier ml-2 flex justify-center items-center" type="submit">
+                <img src="images/icons/search.svg" alt="search" draggable=false/>
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}
