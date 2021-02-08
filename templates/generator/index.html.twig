@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LMDVoyages - Générateur{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/components/map.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Générer votre roadtrip</h1>
+
+    <div id="floating-panel">
+        <b>De: </b>
+        <select id="start">
+            <option value="paris, fr">Paris</option>
+            <option value="rouen, fr">Rouen</option>
+            <option value="lyon, fr">Lyon</option>
+            <option value="marseille, fr">Marseille</option>
+        </select>
+        <b>A: </b>
+        <select id="end">
+            <option value="paris, fr">Paris</option>
+            <option value="rouen, fr">Rouen</option>
+            <option value="lyon, fr">Lyon</option>
+            <option value="marseille, fr">Marseille</option>
+        </select>
+    </div>
+
+    <div class="map-container">
+        <div id="map" style="width:900px;height:700px;"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap">
+    </script>
+    <script>
+        let map;
+
+        window.initMap = () => {
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer();
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 7,
+                center: { lat: 48.866667, lng: 2.33 },
+            });
+            directionsRenderer.setMap(map);
+
+            const onChangeHandler = function () {
+                calculateAndDisplayRoute(directionsService, directionsRenderer);
+            };
+            document.getElementById("start").addEventListener("change", onChangeHandler);
+            document.getElementById("end").addEventListener("change", onChangeHandler);
+        }
+
+        window.calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
+            directionsService.route(
+                {
+                    origin: {
+                        query: document.getElementById("start").value,
+                    },
+
+                    // half-year 2
+                    waypoints: [
+                    ],
+
+                    destination: {
+                        query: document.getElementById("end").value,
+                    },
+                    travelMode: google.maps.TravelMode.DRIVING,
+                },
+                (response, status) => {
+                    if (status === "OK") {
+                        directionsRenderer.setDirections(response);
+                    } else {
+                        window.alert("Directions request failed due to " + status);
+                    }
+                }
+            );
+        }
+    </script>
+{% endblock %}
