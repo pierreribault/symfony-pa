@@ -9,6 +9,12 @@ front:
     type: annotation
     name_prefix: front_
 
+api:
+    resource: ../../src/Controller/API
+    type: annotation
+    prefix: /api
+    name_prefix: api_
+
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
