@@ -7,18 +7,17 @@
 
 {% block body %}
 
-<div class="container example-wrapper">
-    <h1>Générer votre roadtrip</h1>
+<div class="container mt-20">
     <div class="flex">
         <div
             id="map-container"
-            class="w-8/12"
+            class="w-8/12 rounded-lg outline-none"
             data-departure="{{ app.request.get('departure') }}"
             data-arrival="{{ app.request.get('arrival') }}"
         >
             <div id="map" style="width:900px;height:700px;"></div>
         </div>
-        <div id="activities" class="w-4/12 bg-white rounded-md p-4"></div>
+        <div id="activities" class="w-4/12 bg-white rounded-lg p-4"></div>
     </div>
 </div>
 {% endblock %}

@@ -35,8 +35,6 @@ if (activitiesList) {
 }
 
 const createActivity = (data, index) => {
-    console.log(data)
-
     const activity = document.createElement("div")
     const activityDetails = document.createElement("div")
     const activityName = document.createElement("p")
@@ -154,6 +152,8 @@ window.calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
             },
 
             waypoints: waypoints,
+
+            optimizeWaypoints: true,
                      
             destination: {
                 query: document.getElementById('map-container').getAttribute('data-arrival'),

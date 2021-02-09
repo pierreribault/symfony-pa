@@ -1,27 +1,14 @@
-#home {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 175px;
+body {
+    background-image: url('../../../public/images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: top;
 }
 
-h1 {
-    font-size: 60px;
-    color: white;
-    font-family: Balsamiq Sans;
-}
+/* MEDIA QUERIES */
 
-p {
-    text-align: center;
-    width: 800px;
-    font-size: 17px;
-    margin-bottom: 50px;
-}
-
-.btn {
-    color: rgb(98, 199, 230);
-    background-color: white;
-    font-weight: bold;
-    font-size: 18px;
+@media screen and (min-width: 1300px) {
+    body {
+        background-size: cover;
+    }
 }
