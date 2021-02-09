@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Contact;
-use App\Form\ContactType;
+use App\Form\Admin\ContactType;
 use App\Repository\ContactRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,20 +17,16 @@ class ContactController extends AbstractController
 {
     /**
      * @Route("/", name="contact_index", methods={"GET"})
-     * @param ContactRepository $contactRepository
-     * @return Response
      */
     public function index(ContactRepository $contactRepository): Response
     {
-        return $this->render('contact/index.html.twig', [
+        return $this->render('admin/contact/index.html.twig', [
             'contacts' => $contactRepository->findAll(),
         ]);
     }
 
     /**
      * @Route("/new", name="contact_new", methods={"GET","POST"})
-     * @param Request $request
-     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -43,10 +39,10 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            return $this->redirectToRoute('contact_index');
+            return $this->redirectToRoute('admin_contact_index');
         }
 
-        return $this->render('contact/new.html.twig', [
+        return $this->render('admin/contact/new.html.twig', [
             'contact' => $contact,
             'form' => $form->createView(),
         ]);
@@ -54,21 +50,16 @@ class ContactController extends AbstractController
 
     /**
      * @Route("/{id}", name="contact_show", methods={"GET"})
-     * @param Contact $contact
-     * @return Response
      */
     public function show(Contact $contact): Response
     {
-        return $this->render('contact/show.html.twig', [
+        return $this->render('admin/contact/show.html.twig', [
             'contact' => $contact,
         ]);
     }
 
     /**
      * @Route("/{id}/edit", name="contact_edit", methods={"GET","POST"})
-     * @param Request $request
-     * @param Contact $contact
-     * @return Response
      */
     public function edit(Request $request, Contact $contact): Response
     {
@@ -78,10 +69,10 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('contact_index');
+            return $this->redirectToRoute('admin_contact_index');
         }
 
-        return $this->render('contact/edit.html.twig', [
+        return $this->render('admin/contact/edit.html.twig', [
             'contact' => $contact,
             'form' => $form->createView(),
         ]);
@@ -89,9 +80,6 @@ class ContactController extends AbstractController
 
     /**
      * @Route("/{id}", name="contact_delete", methods={"DELETE"})
-     * @param Request $request
-     * @param Contact $contact
-     * @return Response
      */
     public function delete(Request $request, Contact $contact): Response
     {
@@ -101,6 +89,6 @@ class ContactController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('contact_index');
+        return $this->redirectToRoute('admin_contact_index');
     }
 }
