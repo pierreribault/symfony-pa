@@ -5,12 +5,14 @@ namespace App\Form;
 use App\Entity\Activity;
 use App\Entity\Category;
 use App\Entity\City;
+use Doctrine\DBAL\Types\FloatType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,6 +26,8 @@ class ActivityType extends AbstractType
             ->add('description', CKEditorType::class)
             ->add('reservationUrl', TextType::class)
             ->add('address', TextType::class)
+            ->add('longitude', NumberType::class)
+            ->add('latitude', NumberType::class)
             ->add('phone', TelType::class)
             ->add('menu', CKEditorType::class)
             ->add('images', CollectionType::class, [

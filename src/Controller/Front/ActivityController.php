@@ -25,7 +25,7 @@ class ActivityController extends AbstractController
     /**
      * @param Request $request
      * @param ActivityRepository $activityRepository
-     * @Route("/", name="_all", methods={"GET"})
+     * @Route("/", name="_index", methods={"GET"})
      */
     public function getAll(Request $request, ActivityRepository $activityRepository)
     {
@@ -50,7 +50,7 @@ class ActivityController extends AbstractController
             $this->getDoctrine()->getManager()->persist($activity);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("app_activity_all");
+            return $this->redirectToRoute("front_app_activity_index");
         }
 
         return $this->render("activity/new.html.twig", [

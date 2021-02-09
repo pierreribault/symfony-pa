@@ -7,11 +7,16 @@ use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
-class CitiesController extends AbstractController
+/**
+ * Class CityController
+ * @Route("/cities", name="_cities")
+ */
+class CityController extends AbstractController
 {
     /**
-     * @Route("/cities/search", name="cities.search", methods={"POST"})
+     * @Route("/search", name="_search", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      */
