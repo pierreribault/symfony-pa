@@ -7,11 +7,35 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav>
-            <a href="/">Générateur</a>
-            <a href="/forum">Forum</a>
-            <a href="/login">Se connecter</a>
-        </nav>
+        <header class="container grid grid-cols-3 items-center mt-10">
+            <p class="text-5xl font-bold spectral">Traaavl.</p>
+            <div class="flex justify-center font-medium text-lg mt-1">
+                <a href="/" class="text-eden border-b border-black cursor-pointer">
+                    <p>Home</p>
+                </a>
+                <a href="" class="mx-12 hover:text-eden cursor-pointer">
+                    <p>Blogs</p>
+                </a>
+                <a href="/forum" class="hover:text-eden cursor-pointer">
+                    <p>Forum</p>
+                </a>
+            </div>
+            {% if app.user %}
+                <a href="/logout" class="justify-end font-medium flex items-center text-lg hover:text-eden cursor-pointer">
+                    <img src="images/icons/user.svg" alt="user" draggable=false />
+                    <p class="mt-1 ml-2">Logout</p>
+                </a>
+            {% else %}
+                <div class="flex justify-end">
+                    <a href="/login" class="justify-end font-medium flex items-center text-lg mr-12 hover:text-eden cursor-pointer">
+                        <p class="mt-1">Login</p>
+                    </a>
+                    <a href="/register" class="justify-end font-medium flex items-center text-lg hover:text-eden cursor-pointer">
+                        <p class="mt-1">Register</p>
+                    </a>
+                </div>
+            {% endif %}
+        </header>
 
         {% block body %}{% endblock %}
         {{ encore_entry_script_tags('app') }}

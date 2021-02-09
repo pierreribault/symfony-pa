@@ -1,13 +1,19 @@
-admin:
-    resource: ../../src/Controller/Admin
-    type: annotation
-    prefix: /admin
-    name_prefix: admin_
+#admin:
+    #resource: ../../src/Controller/Admin
+    #type: annotation
+    #prefix: /admin
+    #name_prefix: admin_
 
 front:
     resource: ../../src/Controller/
     type: annotation
     name_prefix: front_
+
+api:
+    resource: ../../src/Controller/API
+    type: annotation
+    prefix: /api
+    name_prefix: api_
 
 kernel:
     resource: ../../src/Kernel.php
