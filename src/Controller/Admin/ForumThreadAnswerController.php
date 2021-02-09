@@ -20,7 +20,7 @@ class ForumThreadAnswerController extends AbstractController
      */
     public function index(ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
     {
-        return $this->render('forum_thread_answer/index.html.twig', [
+        return $this->render('admin/forum_thread_answer/index.html.twig', [
             'forum_thread_answers' => $forumThreadAnswerRepository->findAll(),
         ]);
     }
@@ -39,10 +39,10 @@ class ForumThreadAnswerController extends AbstractController
             $entityManager->persist($forumThreadAnswer);
             $entityManager->flush();
 
-            return $this->redirectToRoute('forum_thread_answer_index');
+            return $this->redirectToRoute('admin_forum_thread_answer_index');
         }
 
-        return $this->render('forum_thread_answer/new.html.twig', [
+        return $this->render('admin/forum_thread_answer/new.html.twig', [
             'forum_thread_answer' => $forumThreadAnswer,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class ForumThreadAnswerController extends AbstractController
      */
     public function show(ForumThreadAnswer $forumThreadAnswer): Response
     {
-        return $this->render('forum_thread_answer/show.html.twig', [
+        return $this->render('admin/forum_thread_answer/show.html.twig', [
             'forum_thread_answer' => $forumThreadAnswer,
         ]);
     }
@@ -69,10 +69,10 @@ class ForumThreadAnswerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('forum_thread_answer_index');
+            return $this->redirectToRoute('admin_forum_thread_answer_index');
         }
 
-        return $this->render('forum_thread_answer/edit.html.twig', [
+        return $this->render('admin/forum_thread_answer/edit.html.twig', [
             'forum_thread_answer' => $forumThreadAnswer,
             'form' => $form->createView(),
         ]);
@@ -89,6 +89,6 @@ class ForumThreadAnswerController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('forum_thread_answer_index');
+        return $this->redirectToRoute('admin_forum_thread_answer_index');
     }
 }

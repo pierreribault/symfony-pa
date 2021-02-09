@@ -21,8 +21,8 @@
                 <td>{{ road_trip.createdAt ? road_trip.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ road_trip.updatedAt ? road_trip.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('road_trip_show', {'id': road_trip.id}) }}">show</a>
-                    <a href="{{ path('road_trip_edit', {'id': road_trip.id}) }}">edit</a>
+                    <a href="{{ path('admin_road_trip_show', {'id': road_trip.id}) }}">show</a>
+                    <a href="{{ path('admin_road_trip_edit', {'id': road_trip.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('road_trip_new') }}">Create new</a>
+    <a href="{{ path('admin_road_trip_new') }}">Create new</a>
 {% endblock %}

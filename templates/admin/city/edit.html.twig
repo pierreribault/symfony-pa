@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit City</h1>
 
-    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/city_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('city_index') }}">back to list</a>
+    <a href="{{ path('admin_city_index') }}">back to list</a>
 
-    {{ include('city/_delete_form.html.twig') }}
+    {{ include('admin/city_delete_form.html.twig') }}
 {% endblock %}

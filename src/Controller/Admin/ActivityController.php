@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Activity;
-use App\Form\Activity1Type;
+use App\Form\Admin\ActivityType;
 use App\Repository\ActivityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ class ActivityController extends AbstractController
      */
     public function index(ActivityRepository $activityRepository): Response
     {
-        return $this->render('activity/index.html.twig', [
+        return $this->render('admin/activity/index.html.twig', [
             'activities' => $activityRepository->findAll(),
         ]);
     }
@@ -31,7 +31,7 @@ class ActivityController extends AbstractController
     public function new(Request $request): Response
     {
         $activity = new Activity();
-        $form = $this->createForm(Activity1Type::class, $activity);
+        $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -39,10 +39,10 @@ class ActivityController extends AbstractController
             $entityManager->persist($activity);
             $entityManager->flush();
 
-            return $this->redirectToRoute('activity_index');
+            return $this->redirectToRoute('admin_activity_index');
         }
 
-        return $this->render('activity/new.html.twig', [
+        return $this->render('admin/activity/new.html.twig', [
             'activity' => $activity,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class ActivityController extends AbstractController
      */
     public function show(Activity $activity): Response
     {
-        return $this->render('activity/show.html.twig', [
+        return $this->render('admin/activity/show.html.twig', [
             'activity' => $activity,
         ]);
     }
@@ -63,16 +63,16 @@ class ActivityController extends AbstractController
      */
     public function edit(Request $request, Activity $activity): Response
     {
-        $form = $this->createForm(Activity1Type::class, $activity);
+        $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('activity_index');
+            return $this->redirectToRoute('admin_activity_index');
         }
 
-        return $this->render('activity/edit.html.twig', [
+        return $this->render('admin/activity/edit.html.twig', [
             'activity' => $activity,
             'form' => $form->createView(),
         ]);
@@ -89,6 +89,6 @@ class ActivityController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('activity_index');
+        return $this->redirectToRoute('admin_activity_index');
     }
 }

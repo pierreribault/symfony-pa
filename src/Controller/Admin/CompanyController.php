@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Company;
-use App\Form\Company1Type;
+use App\Form\Admin\CompanyType;
 use App\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ class CompanyController extends AbstractController
      */
     public function index(CompanyRepository $companyRepository): Response
     {
-        return $this->render('company/index.html.twig', [
+        return $this->render('admin/company/index.html.twig', [
             'companies' => $companyRepository->findAll(),
         ]);
     }
@@ -31,7 +31,7 @@ class CompanyController extends AbstractController
     public function new(Request $request): Response
     {
         $company = new Company();
-        $form = $this->createForm(Company1Type::class, $company);
+        $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -39,10 +39,10 @@ class CompanyController extends AbstractController
             $entityManager->persist($company);
             $entityManager->flush();
 
-            return $this->redirectToRoute('company_index');
+            return $this->redirectToRoute('admin_company_index');
         }
 
-        return $this->render('company/new.html.twig', [
+        return $this->render('admin/company/new.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class CompanyController extends AbstractController
      */
     public function show(Company $company): Response
     {
-        return $this->render('company/show.html.twig', [
+        return $this->render('admin/company/show.html.twig', [
             'company' => $company,
         ]);
     }
@@ -63,16 +63,16 @@ class CompanyController extends AbstractController
      */
     public function edit(Request $request, Company $company): Response
     {
-        $form = $this->createForm(Company1Type::class, $company);
+        $form = $this->createForm(CompanyType::class, $company);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('company_index');
+            return $this->redirectToRoute('admin_company_index');
         }
 
-        return $this->render('company/edit.html.twig', [
+        return $this->render('admin/company/edit.html.twig', [
             'company' => $company,
             'form' => $form->createView(),
         ]);
@@ -89,6 +89,6 @@ class CompanyController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('company_index');
+        return $this->redirectToRoute('admin_company_index');
     }
 }
