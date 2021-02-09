@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau sujet{% endblock %}
+
+{% block body %}
+    <h1>Nouveau sujet</h1>
+
+    {{ include('front/forum_thread/_form.html.twig') }}
+
+    <a href="{{ path('front_forum') }}">back to list</a>
+{% endblock %}

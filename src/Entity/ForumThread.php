@@ -101,9 +101,9 @@ class ForumThread
      * @ORM\PrePersist()
      * @return $this
      */
-    protected function setCreatedAt(): self
+    public function setCreatedAt(): self
     {
-        $this->createdAt = new DateTime();
+        $this->createdAt = new \DateTime();
 
         return $this;
     }
@@ -115,11 +115,12 @@ class ForumThread
 
     /**
      * @ORM\PreUpdate()
+     * @ORM\PrePersist()
      * @return $this
      */
-    protected function setUpdatedAt(): self
+    public function setUpdatedAt(): self
     {
-        $this->updatedAt = new DateTime();
+        $this->updatedAt = new \DateTime();
 
         return $this;
     }

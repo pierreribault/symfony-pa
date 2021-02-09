@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ActivityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -47,17 +48,29 @@ class Activity
     private $phone;
 
     /**
+     * @ORM\Column(type="float")
+     */
+    private $longitude;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $latitude;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $menu;
 
     /**
+     * 
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */
     private $city;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -152,6 +165,30 @@ class Activity
     public function setMenu(?string $menu): self
     {
         $this->menu = $menu;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }

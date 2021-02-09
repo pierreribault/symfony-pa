@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+
+{% block body %}
+
+    <h1>Forum</h1>
+    <a href="{{ path('front_forum_thread_new') }}" class="btn">Nouveau sujet</a> <br><br>
+
+    {% for thread in threads %}
+        Titre : {{ thread.title|capitalize }} <br>
+        Description : {{ thread.description }} <br>
+        Date de publication : {{ thread.createdAt ? thread.createdAt|date('d/m/Y') : 'NC' }} <br>
+        <a href="{{ path('front_forum_thread_show', {'id': thread.id}) }}" class="btn">Voir</a>
+        <br><br>
+    {% endfor %}
+
+{% endblock %}
