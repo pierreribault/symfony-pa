@@ -39,7 +39,7 @@ class ForumThreadController extends AbstractController
             $entityManager->persist($forumThread);
             $entityManager->flush();
 
-            return $this->redirectToRoute('forum_thread_index');
+            return $this->redirectToRoute('admin_forum_thread_index');
         }
 
         return $this->render('admin/forum_thread/new.html.twig', [

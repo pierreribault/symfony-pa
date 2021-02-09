@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\City;
-use App\Form\CityType;
+use App\Form\Admin\CityType;
 use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ class CityController extends AbstractController
      */
     public function index(CityRepository $cityRepository): Response
     {
-        return $this->render('city/index.html.twig', [
+        return $this->render('admin/city/index.html.twig', [
             'cities' => $cityRepository->findAll(),
         ]);
     }
@@ -39,10 +39,10 @@ class CityController extends AbstractController
             $entityManager->persist($city);
             $entityManager->flush();
 
-            return $this->redirectToRoute('city_index');
+            return $this->redirectToRoute('admin_city_index');
         }
 
-        return $this->render('city/new.html.twig', [
+        return $this->render('admin/city/new.html.twig', [
             'city' => $city,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class CityController extends AbstractController
      */
     public function show(City $city): Response
     {
-        return $this->render('city/show.html.twig', [
+        return $this->render('admin/city/show.html.twig', [
             'city' => $city,
         ]);
     }
@@ -69,10 +69,10 @@ class CityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('city_index');
+            return $this->redirectToRoute('admin_city_index');
         }
 
-        return $this->render('city/edit.html.twig', [
+        return $this->render('admin/city/edit.html.twig', [
             'city' => $city,
             'form' => $form->createView(),
         ]);
@@ -89,6 +89,6 @@ class CityController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('city_index');
+        return $this->redirectToRoute('admin_city_index');
     }
 }

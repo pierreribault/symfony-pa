@@ -29,8 +29,8 @@
                 <td>{{ contact.message }}</td>
                 <td>{{ contact.createdAt ? contact.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
+                    <a href="{{ path('admin_contact_show', {'id': contact.id}) }}">show</a>
+                    <a href="{{ path('admin_contact_edit', {'id': contact.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -41,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('contact_new') }}">Create new</a>
+    <a href="{{ path('admin_contact_new') }}">Create new</a>
 {% endblock %}
