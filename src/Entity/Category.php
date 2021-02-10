@@ -30,6 +30,11 @@ class Category
     private $type;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $url;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Activity::class, inversedBy="categories")
      */
     private $activities;
@@ -64,6 +69,18 @@ class Category
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }

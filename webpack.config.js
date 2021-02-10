@@ -23,6 +23,9 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('collection', './assets/js/collectionForm.js')
 
+    .addStyleEntry('app/page/home', './assets/styles/pages/home.scss')
+    .addStyleEntry('app/page/login', './assets/styles/pages/login.scss')
+
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
@@ -68,6 +71,12 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
+  
+    .enablePostCssLoader((options) => {
+        options.config = {
+            path: './postcss.config.js'
+        };
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

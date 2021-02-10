@@ -27,6 +27,14 @@
                 <th>SiteUrl</th>
                 <td>{{ activity.reservationUrl }}</td>
             </tr>
+            <tr>
+                <th>Images</th>
+                <td>
+                    {% for image in activity.images%}
+                        <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="">
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

@@ -30,7 +30,7 @@ class ActivityController extends AbstractController
     public function getAll(Request $request, ActivityRepository $activityRepository)
     {
         $activities = $activityRepository->findBy(["company" => $this->getUser()->getCompany()]);
-        return $this->render("activity/index.html.twig", [
+        return $this->render("front/activity/index.html.twig", [
             "activities" => $activities
         ]);
     }
@@ -46,14 +46,24 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+
             $activity->setCompany($this->getUser()->getCompany());
+
+            foreach ($activity->getImages() as $image) {
+                $image->setActivity($activity);
+            }
+
+            foreach ($activity->getCategories() as $category) {
+                $category->addActivity($activity);
+            }
+
             $this->getDoctrine()->getManager()->persist($activity);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("app_activity_all");
+            return $this->redirectToRoute("front_app_activity_all");
         }
 
-        return $this->render("activity/new.html.twig", [
+        return $this->render("front/activity/new.html.twig", [
             "form" => $form->createView()
         ]);
     }
@@ -63,7 +73,7 @@ class ActivityController extends AbstractController
      */
     public function show(Activity $activity)
     {
-        return $this->render("activity/show.html.twig", [
+        return $this->render("front/activity/show.html.twig", [
             "activity" => $activity
         ]);
     }
@@ -80,10 +90,10 @@ class ActivityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("app_activity_all");
+            return $this->redirectToRoute("front_app_activity_all");
         }
 
-        return $this->render("activity/edit.html.twig", [
+        return $this->render("front/activity/edit.html.twig", [
             "form" => $form->createView(),
             "activity" => $activity
         ]);
@@ -101,6 +111,6 @@ class ActivityController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_activity_all');
+        return $this->redirectToRoute('front_app_activity_all');
     }
 }

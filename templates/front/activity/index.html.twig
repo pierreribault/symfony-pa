@@ -10,9 +10,11 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Siret</th>
                 <th>Description</th>
-                <th>SiteUrl</th>
+                <th>ReservationUrl</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Menu</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -21,21 +23,23 @@
             <tr>
                 <td>{{ activity.id }}</td>
                 <td>{{ activity.name }}</td>
-                <td>{{ activity.address }}</td>
                 <td>{{ activity.description }}</td>
                 <td>{{ activity.reservationUrl }}</td>
+                <td>{{ activity.address }}</td>
+                <td>{{ activity.phone }}</td>
+                <td>{{ activity.menu }}</td>
                 <td>
-                    <a href="{{ path('front_app_activity_show', {'id': activity.id}) }}">show</a>
-                    <a href="{{ path('front_app_activity_edit', {'id': activity.id}) }}">edit</a>
+                    <a href="{{ path('admin_activity_show', {'id': activity.id}) }}">show</a>
+                    <a href="{{ path('admin_activity_edit', {'id': activity.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('front_app_activity_new') }}">Create new</a>
+    <a href="{{ path('admin_activity_new') }}">Create new</a>
 {% endblock %}

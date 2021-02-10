@@ -17,4 +17,4 @@ framework:
         log: true
 
 parameters:
-    app.path.images: /uploads/images/
+    app.path.images: /uploads/images

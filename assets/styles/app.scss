@@ -1,0 +1,41 @@
+/* IMPORTS */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+/* CSS */
+
+body {
+    background-color: #F8F8F8;
+    
+    .spectral {
+        font-family: Spectral;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    form {
+        height: 65px;
+
+        button {
+            width: 65px;
+        }
+    }
+}
+
+/* BOUTONS */
+
+.btn {
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+}
