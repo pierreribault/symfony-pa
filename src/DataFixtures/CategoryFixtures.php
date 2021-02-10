@@ -3,22 +3,25 @@
 
 namespace App\DataFixtures;
 
-
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
 class CategoryFixtures extends Fixture
 {
-
     public function load(ObjectManager $manager)
     {
+        $categories = [
+            ['name' => 'hotel', 'type' => 'hotel', 'url' => '/images/icons/maps/hotel.png'],
+            ['name' => 'bar', 'type' => 'bar', 'url' => '/images/icons/maps/bar.png'],
+            ['name' => 'museum', 'type' => 'museum', 'url' => '/images/icons/maps/museum_science.png']
+        ];
 
-        $faker = Factory::create();
-
-        for ($i = 0; $i < 10; $i++) {
-            $category = (new Category())->setName($faker->word)->setType($faker->word);
+        foreach ($categories as $data) {
+            $category = new Category();
+            $category->setName($data['name']);
+            $category->setType($data['type']);
+            $category->setUrl($data['url']);
             $manager->persist($category);
             $manager->flush();
         }

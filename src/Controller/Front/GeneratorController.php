@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,17 +20,7 @@ class GeneratorController extends AbstractController
                 'controller_name' => 'GeneratorController',
             ]);
         }
-    }
 
-    /**
-     * @Route("/generator/{departure}/{arrival}", name="create")
-     */
-    public function create(string $departure, string $arrival): Response
-    {
-        return $this->render('generator/index.html.twig', [
-            'controller_name' => 'GeneratorController',
-            'departure' => $departure,
-            'arrival' => $arrival
-        ]);
+        return $this->redirectToRoute("front_home");
     }
 }
