@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('build/app/page/forum.css')}}"/>
+{% endblock %}
+
+{% block body %}
+<section id="new_answer">
+    <h1 class="text-4xl font-bold text-eden inline-block">Reply</h1>
+
+    {{ include('front/forum_thread_answer/_form.html.twig') }}
+</section>
+{% endblock %}
