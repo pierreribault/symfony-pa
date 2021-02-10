@@ -46,9 +46,14 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+
             $activity->setCompany($this->getUser()->getCompany());
-            foreach ($activity->getImages() as $image){
+            foreach ($activity->getImages() as $image) {
                 $image->setActivity($activity);
+            }
+
+            foreach ($activity->getCategories() as $category) {
+                $category->addActivity($activity);
             }
             $this->getDoctrine()->getManager()->persist($activity);
             $this->getDoctrine()->getManager()->flush();
