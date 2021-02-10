@@ -91,6 +91,11 @@ class User implements UserInterface
         $this->forumThreadAnswers = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->email;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
