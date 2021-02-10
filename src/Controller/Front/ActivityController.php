@@ -30,7 +30,7 @@ class ActivityController extends AbstractController
     public function getAll(Request $request, ActivityRepository $activityRepository)
     {
         $activities = $activityRepository->findBy(["company" => $this->getUser()->getCompany()]);
-        return $this->render("activity/index.html.twig", [
+        return $this->render("front/activity/index.html.twig", [
             "activities" => $activities
         ]);
     }
@@ -63,7 +63,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute("front_app_activity_all");
         }
 
-        return $this->render("activity/new.html.twig", [
+        return $this->render("front/activity/new.html.twig", [
             "form" => $form->createView()
         ]);
     }
@@ -73,7 +73,7 @@ class ActivityController extends AbstractController
      */
     public function show(Activity $activity)
     {
-        return $this->render("activity/show.html.twig", [
+        return $this->render("front/activity/show.html.twig", [
             "activity" => $activity
         ]);
     }
@@ -93,7 +93,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute("front_app_activity_all");
         }
 
-        return $this->render("activity/edit.html.twig", [
+        return $this->render("front/activity/edit.html.twig", [
             "form" => $form->createView(),
             "activity" => $activity
         ]);

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New RoadTrip{% endblock %}
+
+{% block body %}
+    <h1>Create new RoadTrip</h1>
+
+    {{ include('admin/road_trip/_form.html.twig') }}
+
+    <a href="{{ path('admin_road_trip_index') }}">back to list</a>
+{% endblock %}

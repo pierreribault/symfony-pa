@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ForumThreadAnswer{% endblock %}
+
+{% block body %}
+    <h1>Edit ForumThreadAnswer</h1>
+
+    {{ include('admin/forum_thread_answer/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_forum_thread_answer_index') }}">back to list</a>
+
+    {{ include('admin/forum_thread_answer/_delete_form.html.twig') }}
+{% endblock %}

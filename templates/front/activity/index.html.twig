@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Activity index{% endblock %}
+
+{% block body %}
+    <div class="container mt-20">
+
+        <table class="table table-auto">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Siret</th>
+                    <th>Description</th>
+                    <th>SiteUrl</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for activity in activities %}
+                <tr>
+                    <td>{{ activity.id }}</td>
+                    <td>{{ activity.name }}</td>
+                    <td>{{ activity.address }}</td>
+                    <td>{{ activity.description }}</td>
+                    <td>{{ activity.reservationUrl }}</td>
+                    <td>
+                        <a href="{{ path('front_app_activity_show', {'id': activity.id}) }}">show</a>
+                        <a href="{{ path('front_app_activity_edit', {'id': activity.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('front_app_activity_new') }}">Create new</a>
+    </div>
+{% endblock %}

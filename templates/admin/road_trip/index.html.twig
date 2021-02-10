@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RoadTrip index{% endblock %}
+
+{% block body %}
+    <h1>RoadTrip index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for road_trip in road_trips %}
+            <tr>
+                <td>{{ road_trip.id }}</td>
+                <td>{{ road_trip.createdAt ? road_trip.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ road_trip.updatedAt ? road_trip.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_road_trip_show', {'id': road_trip.id}) }}">show</a>
+                    <a href="{{ path('admin_road_trip_edit', {'id': road_trip.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_road_trip_new') }}">Create new</a>
+{% endblock %}

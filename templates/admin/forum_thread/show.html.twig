@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ForumThread{% endblock %}
+
+{% block body %}
+    <h1>ForumThread</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ forum_thread.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ forum_thread.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ forum_thread.description }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ forum_thread.createdAt ? forum_thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ forum_thread.updatedAt ? forum_thread.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_forum_thread_index') }}">back to list</a>
+
+    <a href="{{ path('admin_forum_thread_edit', {'id': forum_thread.id}) }}">edit</a>
+
+    {{ include('admin_admin/forum_thread/_delete_form.html.twig') }}
+{% endblock %}
