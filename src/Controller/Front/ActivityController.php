@@ -25,7 +25,7 @@ class ActivityController extends AbstractController
     /**
      * @param Request $request
      * @param ActivityRepository $activityRepository
-     * @Route("/", name="_index", methods={"GET"})
+     * @Route("/", name="_all", methods={"GET"})
      */
     public function getAll(Request $request, ActivityRepository $activityRepository)
     {
@@ -46,11 +46,21 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+
             $activity->setCompany($this->getUser()->getCompany());
+
+            foreach ($activity->getImages() as $image) {
+                $image->setActivity($activity);
+            }
+
+            foreach ($activity->getCategories() as $category) {
+                $category->addActivity($activity);
+            }
+
             $this->getDoctrine()->getManager()->persist($activity);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("front_app_activity_index");
+            return $this->redirectToRoute("front_app_activity_all");
         }
 
         return $this->render("activity/new.html.twig", [
@@ -80,7 +90,7 @@ class ActivityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute("app_activity_all");
+            return $this->redirectToRoute("front_app_activity_all");
         }
 
         return $this->render("activity/edit.html.twig", [
@@ -101,6 +111,6 @@ class ActivityController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_activity_all');
+        return $this->redirectToRoute('front_app_activity_all');
     }
 }

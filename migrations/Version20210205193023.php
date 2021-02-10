@@ -10,11 +10,11 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210209110017 extends AbstractMigration
+final class Version20210205193023 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return '';
+        return 'Init the database';
     }
 
     public function up(Schema $schema) : void
@@ -33,10 +33,10 @@ final class Version20210209110017 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE road_trip_activity_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE road_trip_city_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE "user_id_seq" INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE activity (id INT NOT NULL, city_id INT NOT NULL, company_id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, reservation_url TEXT DEFAULT NULL, address TEXT NOT NULL, phone VARCHAR(20) DEFAULT NULL, longitude DOUBLE PRECISION NOT NULL, latitude DOUBLE PRECISION NOT NULL, menu TEXT DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE activity (id INT NOT NULL, city_id INT NOT NULL, company_id INT NOT NULL, name VARCHAR(255) NOT NULL, description TEXT NOT NULL, reservation_url TEXT DEFAULT NULL, address TEXT NOT NULL, phone VARCHAR(20) DEFAULT NULL, menu TEXT DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_AC74095A8BAC62AF ON activity (city_id)');
         $this->addSql('CREATE INDEX IDX_AC74095A979B1AD6 ON activity (company_id)');
-        $this->addSql('CREATE TABLE category (id INT NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, url VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE category (id INT NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE category_activity (category_id INT NOT NULL, activity_id INT NOT NULL, PRIMARY KEY(category_id, activity_id))');
         $this->addSql('CREATE INDEX IDX_1B0E8D2112469DE2 ON category_activity (category_id)');
         $this->addSql('CREATE INDEX IDX_1B0E8D2181C06096 ON category_activity (activity_id)');

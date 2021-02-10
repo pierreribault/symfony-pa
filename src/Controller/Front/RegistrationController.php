@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Front;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
@@ -81,6 +81,6 @@ class RegistrationController extends AbstractController
 
         $this->addFlash('success', 'Your email address has been verified.');
 
-        return $this->redirectToRoute('front_app_login');
+        return $this->redirectToRoute('app_login');
     }
 }

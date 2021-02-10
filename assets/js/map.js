@@ -43,7 +43,7 @@ const createActivity = (data, index) => {
     const activityButton = document.createElement("button")
     
     activity.className = "border-b border-gray-200 py-4 flex justify-between items-center"
-    activityButton.className = "addMarker p-2 rounded-full bg-green-500 w-10 h-10 text-white"
+    activityButton.className = "addMarker p-2 rounded-full bg-green-500 w-10 h-10 text-white focus:outline-none"
     activityButton.dataset.index = index
     activityButton.id = 'btn-' + index
     activityButton.dataset.longitude = data.longitude
