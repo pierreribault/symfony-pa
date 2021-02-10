@@ -1,0 +1,46 @@
+#forum {
+    padding: 50px 5%;
+
+    .row_thread {
+        background-color: white;
+        border-radius: 10px;
+        //border: 1px solid #175D62;
+        padding: 15px 25px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .col-2 {
+            display: flex;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+#new_thread, #edit_thread, #new_answer, #edit_answer {
+    padding: 50px 5%;
+
+    form {
+        margin-top: 35px;
+        height: auto;
+        button { width: auto }
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
+#show_thread {
+    padding: 50px 5%;
+
+    .hover-underline:hover { text-decoration: underline }
+    form {
+        height: auto;
+        button { width: auto }
+    }
+}
