@@ -19,7 +19,7 @@
                     <p>Forum</p>
                 </a>
                 {% if is_granted('ROLE_COMPANY') %}
-                    <a href="{{ path('front_app_activity_index')}}" class="hover:text-eden cursor-pointer ml-12">
+                    <a href="{{ path('front_app_activity_all')}}" class="hover:text-eden cursor-pointer ml-12">
                         <p>My activities</p>
                     </a>
                 {% endif %}
