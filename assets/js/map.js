@@ -7,7 +7,7 @@ let waypoints = []
 
 if (activitiesList) {
     // Make a request for a user with a given ID
-    axios.get(`https://${window.location.host}/api/activities`)
+    axios.get('/api/activities')
     .then(function (response) {
         initMap();
         for (let activity in response.data) {
