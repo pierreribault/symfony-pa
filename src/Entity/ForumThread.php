@@ -54,7 +54,7 @@ class ForumThread
     private $roadTrip;
 
     /**
-     * @ORM\OneToMany(targetEntity=ForumThreadAnswer::class, mappedBy="forumThread")
+     * @ORM\OneToMany(targetEntity=ForumThreadAnswer::class, mappedBy="forumThread", cascade={"remove"})
      */
     private $forumThreadAnswers;
 
