@@ -4,6 +4,7 @@ namespace App\Form\Admin;
 
 use App\Entity\City;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,13 +13,13 @@ class CityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('region')
-            ->add('country')
-            ->add('regionCode')
-            ->add('cityCode')
-            ->add('longitude')
-            ->add('latitude')
+            ->add('name', TextType::class)
+            ->add('region', TextType::class)
+            ->add('country', TextType::class)
+            ->add('regionCode', TextType::class)
+            ->add('cityCode', TextType::class)
+            ->add('longitude', TextType::class)
+            ->add('latitude', TextType::class)
         ;
     }
 

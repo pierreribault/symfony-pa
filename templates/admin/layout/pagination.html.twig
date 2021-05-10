@@ -1,0 +1,80 @@
+{# Page quantity to show around current page is 2 or a calculated minimum value #}
+{% set defaultPageQuantityAround = 2 %}
+{# Mininum value #}
+{% set minimumPageQuantityAround = min(pagination.currentPageNumber - 1, pagination.totalPages - pagination.currentPageNumber) %}
+{# Condition to show the right page numbers before current page: default or minimum value #}
+{% set conditionBefore = pagination.currentPageNumber != 1 and minimumPageQuantityAround <= pagination.currentPageNumber - 1 %}
+{# Condition to show the right page numbers after current page: default or minimum value #}
+{% set conditionAfter = pagination.currentPageNumber != pagination.totalPages and minimumPageQuantityAround <= pagination.totalPages - pagination.currentPageNumber %}
+{# Define page numbers before, other pages will be replaced by "..." #}
+{% set PageQuantityAroundBefore = conditionBefore ? defaultPageQuantityAround : minimumPageQuantityAround %}
+{# Define page numbers after, other pages will be replaced by "..." #}
+{% set PageQuantityAroundAfter = conditionAfter ? defaultPageQuantityAround : minimumPageQuantityAround %}
+
+<div class="pagination_container">
+    <div class="flex-1 flex justify-between sm:hidden">
+        <a href="#"
+           class="{% if pagination.currentPageNumber == 1 %}pointer-events-none{% endif %} link">
+            Previous
+        </a>
+        <a href="#"
+           class="{% if pagination.currentPageNumber == pagination.totalPages %}pointer-events-none{% endif %} link">
+            Next
+        </a>
+    </div>
+    <div class="pagination_nav">
+        <div>
+            <p class="text-sm text-gray-700">
+                Showing
+                <span class="font-medium">{{ pagination.currentPageNumber * pagination.numItemsPerPage - (pagination.numItemsPerPage - 1) }}</span>
+                to
+                {% if pagination.currentPageNumber == pagination.totalPages %}
+                <span class="font-medium">{{ pagination.totalCount }}</span>
+                {% else %}
+                    <span class="font-medium">{{ pagination.currentPageNumber * pagination.numItemsPerPage }}</span>
+                {% endif %}
+                of
+                <span class="font-medium">{{ pagination.totalCount }}</span>
+                results
+            </p>
+        </div>
+        <div>
+            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <a href="#"
+                   class="{% if pagination.currentPageNumber == 1 %}pointer-events-none{% endif %} link">
+                    <span class="sr-only">Previous</span>
+                    <!-- Heroicon name: solid/chevron-left -->
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                         aria-hidden="true">
+                        <path fill-rule="evenodd"
+                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+                {% for i in 1..pagination.totalPages %}
+                    {% if (i < pagination.currentPageNumber and 1 != i) and (i == pagination.currentPageNumber - PageQuantityAroundBefore - 1) %}
+                <li class="pointer-events-none">...</li>
+                {# Show "..." after current page depending on page numbers to show after #}
+            {% elseif (i > pagination.currentPageNumber and pagination.totalPages != i) and (i == pagination.currentPageNumber + PageQuantityAroundAfter + 1) %}
+                <li class="pointer-events-none">...</li>
+            {% else %}
+                <a href="?page={{ i }}" class="{% if pagination.currentPageNumber == i %}link-active{% else %}link{% endif %}">
+                    {{ i }}
+                </a>
+                {% endif %}
+                {% endfor %}
+                <a href="#"
+                   class="{% if pagination.currentPageNumber == pagination.totalPages %}pointer-events-none{% endif %}link">
+                    <span class="sr-only">Next</span>
+                    <!-- Heroicon name: solid/chevron-right -->
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                         aria-hidden="true">
+                        <path fill-rule="evenodd"
+                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                              clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>

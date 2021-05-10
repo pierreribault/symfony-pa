@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}City index{% endblock %}
 
@@ -8,40 +8,30 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Region</th>
-                <th>Country</th>
-                <th>RegionCode</th>
-                <th>CityCode</th>
-                <th>Longitude</th>
-                <th>Latitude</th>
+                <th>Nom</th>
+                <th>Région</th>
+                <th>Pays</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for city in cities %}
             <tr>
-                <td>{{ city.id }}</td>
                 <td>{{ city.name }}</td>
                 <td>{{ city.region }}</td>
                 <td>{{ city.country }}</td>
-                <td>{{ city.regionCode }}</td>
-                <td>{{ city.cityCode }}</td>
-                <td>{{ city.longitude }}</td>
-                <td>{{ city.latitude }}</td>
                 <td>
-                    <a href="{{ path('admin_city_show', {'id': city.id}) }}">show</a>
-                    <a href="{{ path('admin_city_edit', {'id': city.id}) }}">edit</a>
+                    <a href="{{ path('admin_city_show', {'id': city.id}) }}" class="p-4 bg-blue-700 text-white"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('admin_city_edit', {'id': city.id}) }}" class="p-4 bg-green-700 text-white"><i class="fas fa-pen"></i></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun résultats trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_city_new') }}">Create new</a>
+    <a href="{{ path('admin_city_new') }}"><button class="button-blue">Ajout</button></a>
 {% endblock %}

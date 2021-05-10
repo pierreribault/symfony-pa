@@ -21,11 +21,18 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('admin', './assets/admin.js')
     .addEntry('collection', './assets/js/collectionForm.js')
 
     .addStyleEntry('app/page/home', './assets/styles/pages/home.scss')
     .addStyleEntry('app/page/login', './assets/styles/pages/login.scss')
-
+    .copyFiles([
+        {from: './public/bundles/fosckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './public/bundles/fosckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+        {from: './public/bundles/fosckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+        {from: './public/bundles/fosckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: './public/bundles/fosckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
+    ])
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

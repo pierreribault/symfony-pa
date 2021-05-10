@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}RoadTrip index{% endblock %}
 
@@ -8,30 +8,28 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
+                <th>Utilisateur</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for road_trip in road_trips %}
             <tr>
-                <td>{{ road_trip.id }}</td>
+                <td>{{ road_trip.author.name }}</td>
                 <td>{{ road_trip.createdAt ? road_trip.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ road_trip.updatedAt ? road_trip.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('admin_road_trip_show', {'id': road_trip.id}) }}">show</a>
-                    <a href="{{ path('admin_road_trip_edit', {'id': road_trip.id}) }}">edit</a>
+                    <a href="{{ path('admin_road_trip_show', {'id': road_trip.id}) }}" class="p-4 bg-blue-700 text-white"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('admin_road_trip_edit', {'id': road_trip.id}) }}" class="p-4 bg-green-700 text-white"><i class="fas fa-pen"></i></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun résultats trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_road_trip_new') }}">Create new</a>
+    <a href="{{ path('admin_road_trip_new') }}"><button class="button-blue">Ajout</button></a>
 {% endblock %}
