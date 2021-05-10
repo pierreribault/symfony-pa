@@ -5,6 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Contact;
 use App\Form\Admin\ContactType;
 use App\Repository\ContactRepository;
+use App\Service\Pagination;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +20,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ContactController extends AbstractController
 {
     /**
+     * @Rest\QueryParam(name="sort", default="id", requirements="id")
+     * @Rest\QueryParam(name="direction", default="asc", requirements="asc|desc")
+     * @Rest\QueryParam(name="page", default=1, requirements="\d+")
+     * @Rest\QueryParam(name="limit", default=Pagination::DEFAULT_LIMIT, requirements="\d+")
      * @Route("/", name="contact_index", methods={"GET"})
      */
-    public function index(ContactRepository $contactRepository): Response
+    public function index(ContactRepository $contactRepository, ParamFetcherInterface $paramFetcher, PaginatorInterface $paginator): Response
     {
+        $pagination = Pagination::paginate($contactRepository->createQueryBuilder("c"), $paginator, $paramFetcher);
         return $this->render('admin/contact/index.html.twig', [
-            'contacts' => $contactRepository->findAll(),
+            'contacts' => $pagination->getItems(),
+            'pagination' => $pagination,
         ]);
     }
 

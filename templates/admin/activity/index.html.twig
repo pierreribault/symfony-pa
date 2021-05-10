@@ -30,6 +30,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {{ include('admin/layout/pagination.html.twig', {pagination: pagination}) }}
 
     <a href="{{ path('admin_activity_new') }}" class="button-blue">Ajout</a>
 {% endblock %}
