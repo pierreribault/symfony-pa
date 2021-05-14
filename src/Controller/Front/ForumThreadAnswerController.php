@@ -86,7 +86,7 @@ class ForumThreadAnswerController extends AbstractController
     /**
      * @Route("/{id}", name="forum_thread_answer_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, ForumThreadAnswer $forumThreadAnswer): Response
+    public function delete(Request $request, ForumThreadAnswer $forumThreadAnswer, $idThread): Response
     {
         if ($this->isCsrfTokenValid('delete'.$forumThreadAnswer->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -94,6 +94,6 @@ class ForumThreadAnswerController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('front_forum_thread_show');
+        return $this->redirectToRoute('front_forum_thread_show', ['id' => $idThread]);
     }
 }

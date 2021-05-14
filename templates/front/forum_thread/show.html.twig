@@ -8,17 +8,17 @@
 
 {% block body %}
 <section id="show_thread">
-    <h1 class="text-4xl font-bold">Topic : <span class="text-eden">{{ forum_thread.title|capitalize }}</span></h1>
+    <a href="{{ path('front_forum') }}" class="inline-block mb-5 ml-1 hover-underline">&lt;&lt; Back to list</a>
 
-    <a
-    href="{{ path('front_forum_thread_answer_new', {'idThread': forum_thread.id}) }}"
-    class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-full py-2 px-4 mt-5 inline-block">Reply</a>
-    <a href="{{ path('front_forum') }}" class="inline-block ml-6 hover-underline">Back to list</a>
+    <h1 class="text-4xl font-bold">Topic : <span class="text-eden">{{ forum_thread.title|capitalize }}</span></h1>
 
     <div class="row_answer m-w-100 bg-white border border-silver rounded-lg mt-5 p-3">
         <div class="m-w-100 flex items-center justify-between border-b border-silver pb-2">
             <div>
-                <p class="font-bold">{{ forum_thread.author.email }}</p>
+                <p class="font-bold {{ forum_thread.author.roles[0] == "ROLE_ADMIN" ? "inline-block" : "" }}">{{ forum_thread.author.email }}</p>
+                {% if forum_thread.author.roles[0] == "ROLE_ADMIN" %}
+                    <span class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-md py-0.5 px-1.5 ml-1.5 inline-block text-xs">Admin</span>
+                {% endif %}
                 <p class="text-sm text-silver">
                 {{ forum_thread.createdAt ? forum_thread.createdAt|date('Y-m-d H:i:s') : '' }}
                 {{ forum_thread.updatedAt and forum_thread.updatedAt|date('Y-m-d H:i:s') > forum_thread.createdAt|date('Y-m-d H:i:s') ?
@@ -27,11 +27,18 @@
                 </p>
             </div>
             <div class="flex items-center">
-                <a
-                href="{{ path('front_forum_thread_edit', {'id': forum_thread.id}) }}"
-                class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-full py-2 px-4 mr-3"
-                >Edit</a>
-                {{ include('front/forum_thread/_delete_form.html.twig') }}
+                {% if app.user and app.user.id is same as(forum_thread.author.id) %}
+                    <a
+                    href="{{ path('front_forum_thread_edit', {'id': forum_thread.id}) }}"
+                    class="mr-4"
+                    >
+                        <i class="fas fa-edit text-grenadier text-lg"></i>
+                    </a>
+                {% endif %}
+
+                {% if app.user and ((app.user.id == forum_thread.author.id) or (app.user.roles[0] == "ROLE_ADMIN")) %}
+                    {{ include('front/forum_thread/_delete_form.html.twig') }}
+                {% endif %}
             </div>
         </div>
         <div class="m-w-100 mt-3">
@@ -43,16 +50,27 @@
     <div class="row_answer m-w-100 bg-white border border-silver rounded-lg mt-5 p-3">
         <div class="m-w-100 flex items-center justify-between border-b border-silver pb-2">
             <div>
-                <p class="font-bold">{{ answer.author.email }}</p>
+                <p class="font-bold {{ answer.author.roles[0] == "ROLE_ADMIN" ? "inline-block" : "" }}">{{ answer.author.email }}</p>
+                {% if answer.author.roles[0] == "ROLE_ADMIN" %}
+                    <span class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-md py-0.5 px-1.5 ml-1.5 inline-block text-xs">Admin</span>
+                {% endif %}
                 <p class="text-sm text-silver">
                 {{ answer.createdAt ? answer.createdAt|date('Y-m-d H:i:s') : '' }}
                 </p>
             </div>
             <div class="flex items-center">
-                <a
-                href="{{ path('front_forum_thread_answer_edit', {'id': answer.id, 'idThread': forum_thread.id}) }}"
-                class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-full py-2 px-4 mr-3"
-                >Edit</a>
+                {% if app.user and app.user.id is same as(answer.author.id) %}
+                    <a
+                    href="{{ path('front_forum_thread_answer_edit', {'id': answer.id, 'idThread': forum_thread.id}) }}"
+                    class="mr-4"
+                    >
+                        <i class="fas fa-edit text-grenadier text-lg"></i>
+                    </a>
+                {% endif %}
+
+                {% if app.user and ((app.user.id == answer.author.id) or (app.user.roles[0] == "ROLE_ADMIN")) %}
+                    {{ include('front/forum_thread_answer/_delete_form.html.twig') }}
+                {% endif %}
             </div>
         </div>
         <div class="m-w-100 mt-3">
@@ -61,8 +79,16 @@
     </div>
     {% endfor %}
 
-    <div class="m-w-100 flex justify-center items-center mt-5">
-        <a href="" class="bg-eden rounded-full text-white px-3 py-1">1</a>
-    </div>
+    <div class="mt-5">{{ knp_pagination_render(forum_thread_answers) }}</div>
+
+    {% if app.user %}
+        {{ include('front/forum_thread_answer/_form.html.twig') }}
+    {% else %}
+        <p class="text-center mt-10">
+            To reply to this thread, you have to
+            <a href="/login" class="bg-eden text-white rounded-full py-2 px-4">Log in</a>
+        </p>
+    {% endif %}
+
 </section>
 {% endblock %}

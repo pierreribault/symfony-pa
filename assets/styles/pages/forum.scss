@@ -44,3 +44,27 @@
         button { width: auto }
     }
 }
+
+/* PAGINATION */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+
+    span {
+        margin: 0 5px;
+        padding: 1px 8px;
+
+        &.current, &.page:hover {
+            background-color: rgb(23, 93, 98);
+            color: white;
+            border-radius: 50%;
+        }
+        &.current { cursor: default }
+        &.page:hover { cursor: pointer }
+
+        &.first, &.previous, &.next, &.last {
+            a:hover { color: rgb(23, 93, 98) }
+        }
+    }
+}
