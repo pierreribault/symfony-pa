@@ -3,13 +3,16 @@
 namespace App\Controller\Front;
 
 use App\Entity\ForumThread;
+use App\Entity\ForumThreadAnswer;
 use App\Form\ForumThreadType;
+use App\Form\ForumThreadAnswerType;
 use App\Repository\ForumThreadRepository;
 use App\Repository\ForumThreadAnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/forum/thread")
@@ -51,15 +54,43 @@ class ForumThreadController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="forum_thread_show", methods={"GET"})
+     * @Route("/{id}", name="forum_thread_show", methods={"GET","POST"})
      */
-    public function show(ForumThread $forumThread, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
+    public function show(Request $request, PaginatorInterface $paginator, ForumThread $forumThread, ForumThreadRepository $forumThreadRepository, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
     {
+
+        // PAGINATION
+        $data = $forumThreadAnswerRepository->findBy([
+            "forumThread" => $forumThread
+        ], ['createdAt' => 'asc']);
+
+        $answers = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
+
+        // ANSWER FORM
+        $forumThreadAnswer = new ForumThreadAnswer();
+        $form = $this->createForm(ForumThreadAnswerType::class, $forumThreadAnswer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $forumThreadAnswer->setAuthor($this->getUser());
+            $forumThreadAnswer->setForumThread($forumThreadRepository->findOneBy([
+                "id" => $forumThread->getId()
+            ]));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($forumThreadAnswer);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('front_forum_thread_show', ['id' => $forumThread->getId()]);
+        }
+
         return $this->render('front/forum_thread/show.html.twig', [
             'forum_thread' => $forumThread,
-            'forum_thread_answers' => $forumThreadAnswerRepository->findBy([
-                "forumThread" => $forumThread
-            ])
+            'forum_thread_answers' => $answers,
+            'form' => $form->createView()
         ]);
     }
 
