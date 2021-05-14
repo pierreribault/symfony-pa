@@ -13,14 +13,14 @@
         {% block title %}Traaavl.{% endblock %}</title>
 </head>
 <body class="flex">
-<nav>
+<nav class="fixed">
     {% include "admin/layout/nav.html.twig" %}
 </nav>
-<section class="flex flex-col w-full">
+<section class="flex flex-col w-full pl-60">
     <header class="w-full">
         {% include "admin/layout/header.html.twig" %}
     </header>
-    <main class="w-full p-4">
+    <main class="w-full p-4 h-full min-h-full">
         {% block body %}
         {% endblock %}
     </main>

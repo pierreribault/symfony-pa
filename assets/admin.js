@@ -13,3 +13,15 @@ import 'jquery'
 import '../assets/js/map.js'
 import "@fortawesome/fontawesome-free/css/all.css"
 import "@fortawesome/fontawesome-free/js/all"
+
+
+const buttonsDropdown = document.querySelectorAll(".dropdown-section button")
+
+buttonsDropdown.forEach(button => {
+    button.addEventListener("click", function (e){
+        console.log(e)
+        const menu = button.parentNode.parentNode.querySelector(".dropdown-menu");
+        menu.classList.toggle("hidden")
+    })
+})
+

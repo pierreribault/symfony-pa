@@ -15,6 +15,9 @@ module.exports = {
                 'xs': {'max': '369px'},
                 ...defaultTheme.screens
             },
+            maxWidth: {
+                '10': '10rem',
+            }
         },
         container: {
             center: true,
