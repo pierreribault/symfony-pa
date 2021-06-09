@@ -3,21 +3,59 @@
 {% block title %}Traaavl - Générateur{% endblock %}
 
 {% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('build/app/page/generator.css')}}"/>
 {% endblock %}
 
 {% block body %}
 
-<div class="container mt-20">
-    <div class="flex">
+<div id="generator-box" class="container mt-20">
+    <div class="flex h-full">
         <div
             id="map-container"
-            class="w-8/12 rounded-lg outline-none"
+            class="w-7/12 rounded-lg outline-none"
             data-departure="{{ app.request.get('departure') }}"
             data-arrival="{{ app.request.get('arrival') }}"
         >
             <div id="map" style="width:900px;height:700px;"></div>
         </div>
-        <div id="activities" class="w-4/12 bg-white rounded-lg p-4"></div>
+        <div id="activities" class="w-5/12 bg-white rounded-r-lg p-4 flex flex-col">
+            <div class="border-b-2 border-gray-300 pb-4">
+                <div class="flex">
+                    <div class="border-r-2 border-eden pr-4">
+                        <label for="rayon" class="font-medium text-black text-md">Rayon :</label>
+                        <select id="rayon" class="text-silver text-md outline-none">
+                            <option value="10">10 Km</option>
+                            <option value="20">20 Km</option>
+                            <option value="30">30 Km</option>
+                            <option value="30">40 Km</option>
+                            <option value="30">50 Km</option>
+                        </select>
+                    </div>
+                    <div class="pl-4 border-r-2 border-eden pr-4">
+                        <label for="city" class="font-medium text-black text-md">Ville :</label>
+                        <select id="city" class="text-silver text-md outline-none">
+                            <option value="">Choisir une ville</option>
+                            {% for city in cities %}
+                                <option value="{{ city.getId() }}">{{ city.getName() }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="pl-4">
+                        <label for="category" class="font-medium text-black text-md">Catégorie :</label>
+                        <select id="category" class="text-silver text-md outline-none">
+                            <option value="">Choisir une catégorie</option>
+                            {% for category in categories %}
+                                <option value="{{ category.getId() }}">{{ category.getName() }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="activity-list" class="overflow-x-scroll"></div>
+            <div class="flex justify-center pt-4 mt-auto border-t-2 border-gray-300">
+                <button id="generator-submit" class="px-5 py-2 rounded-full bg-eden text-white font-medium text-md">Valider le roadtrip</button>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

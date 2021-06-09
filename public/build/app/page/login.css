@@ -1,0 +1,17 @@
+body {
+  background-image: url(/build/images/background.a62bead2.jpg);
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (min-width: 1300px) {
+  body {
+    background-size: cover;
+  }
+}
+
+
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9hc3NldHMvc3R5bGVzL3BhZ2VzL2xvZ2luLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5REFBOEQ7RUFDOUQsNEJBQTRCO0VBQzVCLHFCQUFxQjtFQUNyQix3QkFBd0I7QUFDMUI7O0FBRUE7O0FBRUE7RUFDRTtJQUNFLHNCQUFzQjtFQUF4QjtBQUNGIiwiZmlsZSI6ImFwcC9wYWdlL2xvZ2luLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImJvZHkge1xuICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoJy4uLy4uLy4uL3B1YmxpYy9pbWFnZXMvYmFja2dyb3VuZC5qcGcnKTtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgYmFja2dyb3VuZC1zaXplOiBhdXRvO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiB0b3A7XG59XG5cbi8qIE1FRElBIFFVRVJJRVMgKi9cblxuQG1lZGlhIHNjcmVlbiBhbmQgKG1pbi13aWR0aDogMTMwMHB4KSB7XG4gIGJvZHkge1xuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXI7XG4gIH1cbn0iXSwic291cmNlUm9vdCI6IiJ9*/

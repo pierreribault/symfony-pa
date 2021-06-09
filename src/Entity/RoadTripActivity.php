@@ -24,10 +24,10 @@ class RoadTripActivity
     private $activity;
 
     /**
-     * @ORM\OneToOne(targetEntity=RoadTripCity::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=RoadTrip::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $roadTripCity;
+    private $roadTrip;
 
     public function getId(): ?int
     {
@@ -46,14 +46,14 @@ class RoadTripActivity
         return $this;
     }
 
-    public function getRoadTripCity(): ?RoadTripCity
+    public function getRoadTrip(): ?RoadTrip
     {
-        return $this->roadTripCity;
+        return $this->roadTrip;
     }
 
-    public function setRoadTripCity(RoadTripCity $roadTripCity): self
+    public function setRoadTrip(RoadTrip $roadTrip): self
     {
-        $this->roadTripCity = $roadTripCity;
+        $this->roadTrip = $roadTrip;
 
         return $this;
     }

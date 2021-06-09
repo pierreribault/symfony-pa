@@ -43,7 +43,7 @@ class Activity
     private  $address;
 
     /**
-     * @ORM\Column(type="string", length=20, nullable=true)
+     * @ORM\Column(type="string", length=30, nullable=true)
      */
     private  $phone;
 
@@ -63,7 +63,7 @@ class Activity
     private $menu;
 
     /**
-     * 
+     *
      * @ORM\ManyToOne(targetEntity=City::class, inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */

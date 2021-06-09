@@ -29,6 +29,7 @@
         "jquery": "^3.5.1",
         "postcss": "^8.2.4",
         "postcss-import": "^12.0",
+        "qs": "^6.10.1",
         "select2": "^4.1.0-rc.0"
     }
 }

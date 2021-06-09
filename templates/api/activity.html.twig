@@ -1,0 +1,16 @@
+<div id="listing-{{ activity.getId() }}" data-index="{{ activity.getId() }}" class="listing border-b border-gray-200 py-4 flex justify-between items-center">
+    <div class="">
+        <p>{{ activity.getName() }}</p>
+        <p>{{ activity.getAddress() }}</p>
+        <p>{{ activity.getPhone() }}</p>
+    </div>
+    <button
+            id="btn-{{ activity.getId() }}"
+            data-index="{{ activity.getId() }}"
+            data-longitude="{{ activity.getLongitude() }}"
+            data-latitude="{{ activity.getLatitude() }}"
+            data-marker="{{ activity.getCategories()[0].getUrl() }}"
+            class="p-2 rounded-full bg-green-500 w-10 h-10 text-white focus:outline-none">
+        +
+    </button>
+</div>
