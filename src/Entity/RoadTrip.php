@@ -6,8 +6,9 @@ use App\Repository\RoadTripRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @ORM\HasLifecycleCallbacks()
@@ -23,9 +24,9 @@ class RoadTrip
     private $id;
 
     /**
-     * @ORM\Column(type="uuid")
+     * @ORM\Column(type="ulid", unique=true)
      */
-    private $uuid;
+    private $ulid;
 
     /**
      * @ORM\Column(type="datetime")
@@ -47,22 +48,33 @@ class RoadTrip
      */
     private $arrival;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Activity::class, inversedBy="roadTrips")
+     */
+    protected $activities;
+
+    public function __construct()
+    {
+        $this->activities = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUuid(): string
+    public function getUlid(): ?Ulid
     {
-        return $this->uuid;
+        return $this->ulid;
     }
 
-    public function setUuid(string $uuid): self
+    public function setUlid(Ulid $ulid): self
     {
-        $this->uuid = $uuid;
+        $this->ulid = $ulid;
 
         return $this;
     }
+
 
     public function getCreatedAt(): ?DateTimeInterface
     {
@@ -73,7 +85,7 @@ class RoadTrip
      * @ORM\PrePersist()
      * @return $this
      */
-    protected function setCreatedAt(): self
+    public function setCreatedAt(): self
     {
         $this->createdAt = new DateTime();
 
@@ -89,7 +101,7 @@ class RoadTrip
      * @ORM\PreUpdate()
      * @return $this
      */
-    protected function setUpdatedAt(): self
+    public function setUpdatedAt(): self
     {
         $this->updatedAt = new DateTime();
 
@@ -117,6 +129,30 @@ class RoadTrip
     {
         $this->arrival = $arrival;
 
+        return $this;
+    }
+
+    /**
+     * @return PersistentCollection|Activity[]
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): self
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+        }
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): self
+    {
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
+        }
         return $this;
     }
 }

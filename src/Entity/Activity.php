@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -86,10 +87,16 @@ class Activity
      */
     private $images;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=RoadTrip::class, mappedBy="activities")
+     */
+    private $roadTrips;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->roadTrips = new ArrayCollection();
     }
 
     public function getId(): int
@@ -272,6 +279,30 @@ class Activity
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return Collection|RoadTrip[]
+     */
+    public function getRoadTrips(): Collection
+    {
+        return $this->roadTrips;
+    }
+    public function addRoadTrips(RoadTrip $roadTrip): self
+    {
+        if (!$this->roadTrips->contains($roadTrip)) {
+            $this->roadTrips[] = $roadTrip;
+            $roadTrip->addActivity($this);
+        }
+        return $this;
+    }
+    public function removeRoadTrip(RoadTrip $roadTrip): self
+    {
+        if ($this->roadTrips->contains($roadTrip)) {
+            $this->roadTrips->removeElement($roadTrip);
+            $roadTrip->removeActivity($this);
+        }
         return $this;
     }
 }

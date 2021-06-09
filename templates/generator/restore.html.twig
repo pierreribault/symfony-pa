@@ -1,0 +1,7 @@
+{% extends 'generator/index.html.twig' %}
+
+{% block restore %}
+    {% for activity in activities %}
+        {% include 'api/activity.html.twig' %}
+    {% endfor %}
+{% endblock %}

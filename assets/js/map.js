@@ -58,6 +58,18 @@ if (activitiesList) {
 }
 
  const loadActivities = () => {
+     const restore = document.getElementsByClassName('btn-listing')
+
+     if (restore) {
+        for (const activity of restore) {
+            let index = activity.getAttribute('data-index')
+
+            activityEvent(index)
+
+            activity.click()
+        }
+     }
+
      axios.post('/api/activities/', qs.stringify({
          fromLongitude: fromLongitude,
          fromLatitude: fromLatitude,
@@ -82,6 +94,12 @@ if (activitiesList) {
 const submitGenerator = () => {
     console.log(waypointsSaved)
     console.log(departure, arrival)
+
+    axios.post(`/api/roadtrip/`, qs.stringify({
+       departure: departure,
+       arrival: arrival,
+       activities: waypointsSaved,
+    }))
 }
 
 const createActivity = (data) => {
@@ -90,23 +108,7 @@ const createActivity = (data) => {
             .then(function (response) {
                 activitiesList.insertAdjacentHTML('beforeend', response.data.html);
 
-                document.getElementById('btn-' + data.id)
-                    .addEventListener('click', (event) => {
-                        let index = event.target.getAttribute('data-index')
-                        if (event.target.innerHTML.trim() === "+") {
-                            document.getElementById(`listing-${ index }`).classList.remove('listing')
-                            waypointsSaved.push(index)
-                            removeMarker(event)
-                            addWaypoint(event)
-                        } else {
-                            document.getElementById(`listing-${ index }`).classList.add('listing')
-                            waypointsSaved.splice(waypointsSaved.indexOf(`${index}`), 1)
-                            restoreMarker(event)
-                            removeWaypoint(event)
-                        }
-
-                        initMap()
-                    })
+                activityEvent(data.id)
 
                 addMarker({
                     id: data.id,
@@ -116,6 +118,26 @@ const createActivity = (data) => {
                 })
             })
     }
+}
+
+const activityEvent = (index) => {
+    document.getElementById('btn-' + index)
+        .addEventListener('click', (event) => {
+            let index = event.target.getAttribute('data-index')
+            if (event.target.innerHTML.trim() === "+") {
+                document.getElementById(`listing-${ index }`).classList.remove('listing')
+                waypointsSaved.push(index)
+                removeMarker(event)
+                addWaypoint(event)
+            } else {
+                document.getElementById(`listing-${ index }`).classList.add('listing')
+                waypointsSaved.splice(waypointsSaved.indexOf(`${index}`), 1)
+                restoreMarker(event)
+                removeWaypoint(event)
+            }
+
+            initMap()
+        })
 }
 
 const initMap = () => {

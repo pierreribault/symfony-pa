@@ -13,8 +13,8 @@
         <div
             id="map-container"
             class="w-7/12 rounded-lg outline-none"
-            data-departure="{{ app.request.get('departure') }}"
-            data-arrival="{{ app.request.get('arrival') }}"
+            data-departure="{{ departure }}"
+            data-arrival="{{ arrival }}"
         >
             <div id="map" style="width:900px;height:700px;"></div>
         </div>
@@ -51,7 +51,9 @@
                     </div>
                 </div>
             </div>
-            <div id="activity-list" class="overflow-x-scroll"></div>
+            <div id="activity-list" class="overflow-x-scroll">
+                {% block restore %}{% endblock %}
+            </div>
             <div class="flex justify-center pt-4 mt-auto border-t-2 border-gray-300">
                 <button id="generator-submit" class="px-5 py-2 rounded-full bg-eden text-white font-medium text-md">Valider le roadtrip</button>
             </div>
