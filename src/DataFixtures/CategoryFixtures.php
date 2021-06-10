@@ -18,10 +18,10 @@ class CategoryFixtures extends Fixture
         ];
 
         foreach ($categories as $data) {
-            $category = new Category();
-            $category->setName($data['name']);
-            $category->setType($data['type']);
-            $category->setUrl($data['url']);
+            $category = (new Category())
+                ->setName($data['name'])
+                ->setType($data['type'])
+                ->setUrl($data['url']);
             $manager->persist($category);
             $manager->flush();
         }

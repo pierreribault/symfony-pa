@@ -1,0 +1,44 @@
+table {
+  @apply mx-auto max-w-full w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-500;
+
+  thead {
+    tr {
+      @apply bg-gray-100 border-b;
+      th {
+        @apply font-semibold text-sm uppercase px-6 py-4 text-center;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      @apply border-b hover:bg-gray-200
+    }
+
+    td {
+      @apply px-6 py-4 text-center
+    }
+  }
+}
+
+
+.tab-col {
+}
+
+.input {
+  @apply px-3 py-3 relative bg-white bg-white rounded text-sm border-0 shadow outline-none focus:outline-none focus:ring w-full pr-10;
+
+  &-append-icon {
+    &-right {
+      @apply z-10 h-full leading-snug font-normal absolute text-center bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3;
+    }
+
+    &-icon-left {
+      @apply z-10 h-full leading-snug font-normal absolute text-center bg-transparent rounded text-base items-center justify-center w-8 left-0 pr-3 py-3;
+    }
+  }
+
+  &-group-append {
+    @apply relative flex w-full flex-wrap items-stretch mb-3;
+  }
+}

@@ -1,0 +1,19 @@
+@import "../app";
+@import "table";
+@import "pagination";
+
+
+.button {
+  &-blue {
+    @apply bg-blue-500 border rounded text-white p-2;
+  }
+  &-green {
+    @apply bg-green-500 border rounded text-white p-2;
+  }
+  &-red {
+    @apply bg-red-500 border rounded text-white p-2;
+  }
+  &-orange {
+    @apply bg-yellow-500 border rounded text-white p-2;
+  }
+}

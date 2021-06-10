@@ -4,6 +4,7 @@
         "@symfony/webpack-encore": "^1.0.4",
         "autoprefixer": "^9.0.0",
         "core-js": "^3.0.0",
+        "file-loader": "^6.0.0",
         "node-sass": "^4.0.0",
         "postcss-loader": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
@@ -21,7 +22,10 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.3",
+        "@tailwindcss/forms": "^0.3.2",
         "axios": "^0.21.1",
+        "ckeditor": "^4.0.0",
         "jquery": "^3.5.1",
         "postcss": "^8.2.4",
         "postcss-import": "^12.0"

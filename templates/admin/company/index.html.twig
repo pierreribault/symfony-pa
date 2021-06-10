@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Company index{% endblock %}
 
@@ -8,34 +8,29 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Siret</th>
-                <th>Description</th>
-                <th>SiteUrl</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for company in companies %}
             <tr>
-                <td>{{ company.id }}</td>
                 <td>{{ company.name }}</td>
                 <td>{{ company.siret }}</td>
-                <td>{{ company.description }}</td>
-                <td>{{ company.siteUrl }}</td>
                 <td>
-                    <a href="{{ path('admin_company_show', {'id': company.id}) }}">show</a>
-                    <a href="{{ path('admin_company_edit', {'id': company.id}) }}">edit</a>
+                    <a href="{{ path('admin_company_show', {'id': company.id}) }}" class="button-blue"><i class="fas fa-eye"></i></a>
+                    <a href="{{ path('admin_company_edit', {'id': company.id}) }}" class="button-green"><i class="fas fa-pen"></i></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">Aucun résultats trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_company_new') }}">Create new</a>
+    {{ include('admin/layout/pagination.html.twig', {pagination: pagination}) }}
+    <a href="{{ path('admin_company_new') }}"><button class="button-blue">Ajout</button></a>
 {% endblock %}

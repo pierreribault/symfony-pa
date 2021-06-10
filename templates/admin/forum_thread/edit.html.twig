@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Edit ForumThread{% endblock %}
 
 {% block body %}
     <h1>Edit ForumThread</h1>
 
-    {{ include('admin_admin/forum_thread/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/forum_thread/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('admin_forum_thread_index') }}">back to list</a>
 

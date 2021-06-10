@@ -25,35 +25,35 @@ class Activity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private  $name;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private  $description;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $reservationUrl;
+    private  $reservationUrl;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $address;
+    private  $address;
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      */
-    private $phone;
+    private  $phone;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $longitude;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $latitude;
 
@@ -92,7 +92,7 @@ class Activity
         $this->images = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }

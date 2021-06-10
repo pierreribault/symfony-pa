@@ -5,6 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Form\Admin\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Service\Pagination;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcher;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Knp\Component\Pager\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +22,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class CategoryController extends AbstractController
 {
     /**
+     * @Rest\QueryParam(name="sort", default="id", requirements="id")
+     * @Rest\QueryParam(name="direction", default="asc", requirements="asc|desc")
+     * @Rest\QueryParam(name="page", default=1, requirements="\d+")
+     * @Rest\QueryParam(name="limit", default=Pagination::DEFAULT_LIMIT, requirements="\d+")
      * @Route("/", name="category_index", methods={"GET"})
      */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function index(CategoryRepository $categoryRepository, ParamFetcherInterface $paramFetcher, PaginatorInterface $paginator): Response
     {
+        $pagination = Pagination::paginate($categoryRepository->createQueryBuilder("c"), $paginator, $paramFetcher);
+
         return $this->render('admin/category/index.html.twig', [
-            'categories' => $categoryRepository->findAll(),
+            'categories' => $pagination->getItems(),
+            'pagination' => $pagination,
         ]);
     }
 

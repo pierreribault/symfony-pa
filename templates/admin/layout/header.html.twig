@@ -1,0 +1,19 @@
+<div class="w-full p-4 bg-white flex flex-row justify-between px-4 border-b border-gray-500">
+    <div class="flex flex-wrap items-stretch w-80 mb-4 relative">
+        <input type="text"
+               class="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border
+                h-10 border-grey-light rounded rounded-r-none px-3 relative"
+               placeholder="Recherche">
+        <button class="flex items-center leading-normal bg-grey-lighter rounded rounded-l-none
+                border border-l-0 border-gray-500 px-3 whitespace-no-wrap text-grey-dark text-sm">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+
+    {{ include('components/dropdown.html.twig',
+        {
+            title: app.user.email,
+            links: [{
+            name: "app_logout", content: "Logout"
+        }]}) }}
+</div>

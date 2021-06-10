@@ -5,6 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\City;
 use App\Form\Admin\CityType;
 use App\Repository\CityRepository;
+use App\Service\Pagination;
+use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcherInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +20,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class CityController extends AbstractController
 {
     /**
+     * @Rest\QueryParam(name="sort", default="id", requirements="id")
+     * @Rest\QueryParam(name="direction", default="asc", requirements="asc|desc")
+     * @Rest\QueryParam(name="page", default=1, requirements="\d+")
+     * @Rest\QueryParam(name="limit", default=Pagination::DEFAULT_LIMIT, requirements="\d+")
      * @Route("/", name="city_index", methods={"GET"})
      */
-    public function index(CityRepository $cityRepository): Response
+    public function index(CityRepository $cityRepository, PaginatorInterface $paginator, ParamFetcherInterface $paramFetcher): Response
     {
+        $pagination = Pagination::paginate($cityRepository->createQueryBuilder("c"), $paginator, $paramFetcher);
+
         return $this->render('admin/city/index.html.twig', [
-            'cities' => $cityRepository->findAll(),
+            'cities' => $pagination->getItems(),
+            'pagination' => $pagination,
         ]);
     }
 

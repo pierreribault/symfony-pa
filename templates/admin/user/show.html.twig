@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}User{% endblock %}
 
@@ -44,7 +44,7 @@
 
     <a href="{{ path('admin_user_index') }}">back to list</a>
 
-    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="p-4 bg-green-700 text-white"><i class="fas fa-pen"></i></a>
 
     {{ include('admin/user/_delete_form.html.twig') }}
 {% endblock %}
