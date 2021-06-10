@@ -5,6 +5,7 @@ namespace App\Controller\Front;
 use App\Entity\ForumThread;
 use App\Form\ForumThreadType;
 use App\Repository\ForumThreadRepository;
+use App\Repository\ForumThreadAnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,10 +53,13 @@ class ForumThreadController extends AbstractController
     /**
      * @Route("/{id}", name="forum_thread_show", methods={"GET"})
      */
-    public function show(ForumThread $forumThread): Response
+    public function show(ForumThread $forumThread, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
     {
         return $this->render('front/forum_thread/show.html.twig', [
             'forum_thread' => $forumThread,
+            'forum_thread_answers' => $forumThreadAnswerRepository->findBy([
+                "forumThread" => $forumThread
+            ])
         ]);
     }
 

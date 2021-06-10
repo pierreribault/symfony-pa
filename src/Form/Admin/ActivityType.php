@@ -37,6 +37,7 @@ class ActivityType extends AbstractType
             ->add('categories', EntityType::class, [
                 "class" => Category::class,
                 "multiple" => true,
+
             ])
         ;
     }

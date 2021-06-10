@@ -1,0 +1,9 @@
+{{ form_start(form) }}
+    
+    {{ form_widget(form.content, {'attr': {'class': 'border-silver border rounded-sm block px-1.5 py-1'}}) }}
+
+    <button
+    class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-full py-2 px-4 mt-5"
+    >{{ button_label|default('Reply') }}</button>
+
+{{ form_end(form) }}

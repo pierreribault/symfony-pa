@@ -2,6 +2,7 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\Company;
 use App\Entity\ForumThread;
 use App\Entity\RoadTrip;
 use App\Entity\User;

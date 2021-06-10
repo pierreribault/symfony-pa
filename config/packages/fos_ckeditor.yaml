@@ -7,3 +7,8 @@ twig:
 fos_ck_editor:
     base_path: "build/ckeditor"
     js_path:   "build/ckeditor/ckeditor.js"
+    configs:
+        main_config:
+            toolbar:
+                - { name: "styles", items: ['Bold', 'Italic', 'Underline', 'Strike', 'Blockquote', '-', 'Link', '-', 'RemoveFormat', '-', 'NumberedList', 'BulletedList', '-', 'TextColor'] }
+
