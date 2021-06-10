@@ -1,0 +1,16 @@
+<div class="relative flex w-96 flex-wrap items-stretch mb-3 border border-gray-400 rounded" data-children-count="1">
+	<label class="z-10 h-full leading-snug font-normal text-center absolute border-r border-gray-400 bg-transparent text-base items-center w-24 py-3" for="{{ id }}">
+		{{ label }}
+	</label>
+	<select class="px-3 py-3 relative
+	bg-white bg-white rounded text-sm border outline-none focus:outline-none focus:ring w-full pl-28"
+	       name="{% if name is defined %}{{ name }}{% else %}{{ id }}{% endif %}"
+			aria-label="{% if placeholder is defined %}{{ placeholder }}{% endif %}"
+			aria-describedby="basic-addon2">
+		{% for value in values %}
+			<option value="{{ value.value }}" {% if value is selectedchoice(selectedValue) %}selected{% endif %}>
+				{{ value.label }}
+			</option>
+		{% endfor %}
+	</select>
+</div>
