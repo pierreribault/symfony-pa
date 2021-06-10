@@ -2,9 +2,9 @@
 
 namespace App\Form\Admin;
 
+use App\Entity\ForumThread;
 use App\Entity\ForumThreadAnswer;
-use App\Form\ForumThreadType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,9 +15,14 @@ class ForumThreadAnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', CKEditorType::class)
-            ->add('author', EntityType::class)
-            ->add('forumThread', ForumThreadType::class)
+            ->add('content')
+            ->add('createdAt')
+            ->add('author', EntityType::class, [
+                "class" => User::class
+            ])
+            ->add('forumThread', EntityType::class, [
+                "class" => ForumThread::class
+            ])
         ;
     }
 

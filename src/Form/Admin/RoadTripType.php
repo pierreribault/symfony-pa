@@ -3,6 +3,8 @@
 namespace App\Form\Admin;
 
 use App\Entity\RoadTrip;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +16,9 @@ class RoadTripType extends AbstractType
         $builder
             ->add('createdAt')
             ->add('updatedAt')
-            ->add('author')
+            ->add('author', EntityType::class, [
+                "class" => User::class
+            ])
         ;
     }
 

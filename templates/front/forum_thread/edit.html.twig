@@ -1,13 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ForumThread{% endblock %}
+{% block title %}Traaavl - Edit thread{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('build/app/page/forum.css')}}"/>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit ForumThread</h1>
+<section id="edit_thread">
+    <h1 class="text-4xl font-bold text-eden inline-block">Edit thread</h1>
+    <a href="{{ path('front_forum_thread_show', {'id': forum_thread.id}) }}" class="inline-block ml-6">Back to thread</a>
 
-    {{ include('front/forum_thread/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('front_forum') }}">back to list</a>
-
-    {{ include('front/forum_thread/_delete_form.html.twig') }}
+    {{ include('front/forum_thread/_form.html.twig', {'button_label': 'Edit'}) }}
+</section>
 {% endblock %}

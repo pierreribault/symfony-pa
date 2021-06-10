@@ -30,7 +30,7 @@ class ActivityController extends AbstractController
     {
         $pagination = Pagination::paginate($activityRepository->createQueryBuilder("c"), $paginator, $paramFetcher);
 
-        return $this->render('admin/activity/index.html.twig', [
+        return $this->render('admin/admin/activity/index.html.twig', [
             'activities' => $pagination->getItems(),
             'pagination' => $pagination,
         ]);
@@ -53,7 +53,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute('admin_activity_index');
         }
 
-        return $this->render('admin/activity/new.html.twig', [
+        return $this->render('admin/admin/activity/new.html.twig', [
             'activity' => $activity,
             'form' => $form->createView(),
         ]);
@@ -64,7 +64,7 @@ class ActivityController extends AbstractController
      */
     public function show(Activity $activity): Response
     {
-        return $this->render('admin/activity/show.html.twig', [
+        return $this->render('admin/admin/activity/show.html.twig', [
             'activity' => $activity,
         ]);
     }
@@ -83,7 +83,7 @@ class ActivityController extends AbstractController
             return $this->redirectToRoute('admin_activity_index');
         }
 
-        return $this->render('admin/activity/edit.html.twig', [
+        return $this->render('admin/admin/activity/edit.html.twig', [
             'activity' => $activity,
             'form' => $form->createView(),
         ]);

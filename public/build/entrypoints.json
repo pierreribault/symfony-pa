@@ -1,0 +1,52 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_to-object_js--642f45.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_for-each_js-node_mo-96cbb6.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
+      ]
+    },
+    "admin": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_to-object_js--642f45.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_for-each_js-node_mo-96cbb6.js",
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-e7e1e4.js",
+        "/build/admin.js"
+      ],
+      "css": [
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-e7e1e4.css",
+        "/build/admin.css"
+      ]
+    },
+    "collection": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_to-object_js--642f45.js",
+        "/build/vendors-node_modules_core-js_modules_es_string_replace_js.js",
+        "/build/collection.js"
+      ]
+    },
+    "app/page/home": {
+      "js": [
+        "/build/runtime.js"
+      ],
+      "css": [
+        "/build/app/page/home.css"
+      ]
+    },
+    "app/page/login": {
+      "js": [
+        "/build/runtime.js"
+      ],
+      "css": [
+        "/build/app/page/login.css"
+      ]
+    }
+  }
+}

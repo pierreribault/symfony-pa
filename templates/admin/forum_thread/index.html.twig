@@ -10,7 +10,6 @@
             <tr>
                 <th>Id</th>
                 <th>Title</th>
-                <th>Description</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>actions</th>
@@ -21,7 +20,6 @@
             <tr>
                 <td>{{ forum_thread.id }}</td>
                 <td>{{ forum_thread.title }}</td>
-                <td>{{ forum_thread.description }}</td>
                 <td>{{ forum_thread.createdAt ? forum_thread.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ forum_thread.updatedAt ? forum_thread.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>

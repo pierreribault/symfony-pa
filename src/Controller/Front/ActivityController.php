@@ -5,7 +5,7 @@ namespace App\Controller\Front;
 
 
 use App\Entity\Activity;
-use App\Form\ActivityType;
+use App\Form\Front\ActivityType;
 use App\Repository\ActivityRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

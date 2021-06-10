@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -83,6 +84,12 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=ForumThreadAnswer::class, mappedBy="author")
      */
     private $forumThreadAnswers;
+
+    /**
+     * @var Cart
+     * @ORM\OneToOne(targetEntity=Cart::class, mappedBy="author", cascade={"persist", "remove"})
+     */
+    private $cart;
 
     public function __construct()
     {

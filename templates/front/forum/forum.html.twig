@@ -2,17 +2,34 @@
 
 {% block title %}Forum{% endblock %}
 
-{% block body %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('build/app/page/forum.css')}}"/>
+{% endblock %}
 
-    <h1>Forum</h1>
-    <a href="{{ path('front_forum_thread_new') }}" class="btn">Nouveau sujet</a> <br><br>
+{% block body %}
+<section id="forum">
+    <div class="mb-10 flex items-center">
+        <h1 class="text-4xl font-bold">List of threads</h1>
+        <a
+        href="{{ path('front_forum_thread_new') }}"
+        class="ml-8 bg-gradient-to-r from-burn-sienna to-grenadier text-white py-2 px-4 rounded-full"
+        >Add new</a>
+    </div>
 
     {% for thread in threads %}
-        Titre : {{ thread.title|capitalize }} <br>
-        Description : {{ thread.description }} <br>
-        Date de publication : {{ thread.createdAt ? thread.createdAt|date('d/m/Y') : 'NC' }} <br>
-        <a href="{{ path('front_forum_thread_show', {'id': thread.id}) }}" class="btn">Voir</a>
-        <br><br>
+    <div class="row_thread border-silver border">
+        <div class="col-1">
+            <a
+            class="text-eden text-xl font-bold"
+            href="{{ path('front_forum_thread_show', {'id': thread.id}) }}"
+            >{{ thread.title|capitalize }}</a>
+            <p>By {{ thread.author.email }}</p>
+        </div>
+        <div class="col-2">
+            <p class="text-silver pr-5">LAST MESSAGE<br/>{{ thread.updatedAt ? thread.updatedAt|date('d/m/Y') : 'NC' }}</p>
+            <p class="text-silver border-l border-silver pl-5">NB <br/>{{ thread.forumThreadAnswers|length }}</p>
+        </div>
+    </div>
     {% endfor %}
-
+</section>
 {% endblock %}

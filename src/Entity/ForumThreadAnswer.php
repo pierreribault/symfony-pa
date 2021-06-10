@@ -92,7 +92,7 @@ class ForumThreadAnswer
      * @ORM\PrePersist()
      * @return $this
      */
-    protected function setCreatedAt(): self
+    public function setCreatedAt(): self
     {
         $this->createdAt = new DateTime();
 
