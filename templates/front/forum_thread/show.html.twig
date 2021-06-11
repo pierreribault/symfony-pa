@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="m-w-100 mt-3">
-            {{ forum_thread.description|raw }}
+            {{ forum_thread.description|striptags('<b><strong><i><em><span><a><ul><li><p><u><blockquote><ol>')|raw }}
         </div>
     </div>
 
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="m-w-100 mt-3">
-            {{ answer.content|raw }}
+            {{ answer.content|striptags('<b><strong><i><em><span><a><ul><li><p><u><blockquote><ol>')|raw }}
         </div>
     </div>
     {% endfor %}
