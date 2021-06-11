@@ -19,6 +19,13 @@
         {% endif %}
     </div>
 
+    {{ form_start(search_form) }}
+        <div class="search-form-control">
+            {{ form_widget(search_form.search) }}
+            {{ form_widget(search_form.submit) }}
+        </div>
+    {{ form_end(search_form) }}
+
     {% for thread in threads %}
     <div class="row_thread border-silver border">
         <div class="col-1">
