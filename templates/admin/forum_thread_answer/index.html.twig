@@ -3,6 +3,16 @@
 {% block title %}ForumThreadAnswer index{% endblock %}
 
 {% block body %}
+    {{ include('admin/layout/table.html.twig', {
+        "headers": ["Id","Titre","Créer le", "Mise à jours le", "actions"],
+        "fields": ["id","title","createdAt", "updatedAt"],
+        "pagination": pagination,
+        "actions": ["edit", "show"],
+        "new":  'admin_forum_thread_new',
+        "edit":  'admin_forum_thread_edit',
+        "show":  'admin_forum_thread_show',
+        "title": 'Forum'
+    }) }}
     <h1>ForumThreadAnswer index</h1>
 
     <table class="table">

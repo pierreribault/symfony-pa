@@ -9,11 +9,16 @@
 import './styles/admin/admin.scss';
 
 import 'jquery'
+import 'select2/dist/js/select2.full.min'
+import 'select2/dist/css/select2.min.css'
 
 import '../assets/js/map.js'
 import "@fortawesome/fontawesome-free/css/all.css"
 import "@fortawesome/fontawesome-free/js/all"
 
+const selects = document.getElementsByTagName("select")
+
+selects.forEach(select => $(select).select2())
 
 const buttonsDropdown = document.querySelectorAll(".dropdown-section button")
 

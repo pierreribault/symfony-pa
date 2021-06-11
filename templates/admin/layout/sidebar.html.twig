@@ -1,0 +1,48 @@
+<div class="sidebar">
+	<div class="sidebar__container">
+		<div class="flex flex-col items-center flex-shrink-0 bg-gray-50">
+			<button class="sidebar__close" type="button" aria-label="Close" aria-hidden="true">
+				<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-x"
+				     width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+				     fill="none" stroke-linecap="round" stroke-linejoin="round">
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<circle cx="12" cy="12" r="9"></circle>
+					<path d="M10 10l4 4m0 -4l-4 4"></path>
+				</svg>
+			</button>
+		</div>
+		<div class="sidebar__user">
+			<img alt="testimonial" class="sidebar__user-avatar" src="https://dummyimage.com/302x302/F3F4F7/8693ac">
+			<h2 class="sidebar__user-name">{{ app.user.email }}</h2>
+			<p class="text-gray-500">Administrator</p>
+		</div>
+		<nav class="flex-grow pb-4 pr-4 h-full md:block md:pb-0 md:overflow-y-auto">
+			<ul>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_activity' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_activity_index') }}">Actvity</a>
+				</li>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_category' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_category_index') }}">Category</a>
+				</li>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_city' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_city_index') }}">City</a>
+				</li>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_company' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_company_index') }}">Company</a>
+				</li>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_contact' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_contact_index') }}">Contact</a>
+				</li>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_forum_thread' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_forum_thread_index') }}">Forum</a>
+				</li>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_road_trip' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_road_trip_index') }}">Road Trip</a>
+				</li>
+				<li>
+					<a class="{% if app.request.get('_route') starts with 'admin_user' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_user_index') }}">User</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>

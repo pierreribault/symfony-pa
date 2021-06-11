@@ -85,12 +85,6 @@ class User implements UserInterface
      */
     private $forumThreadAnswers;
 
-    /**
-     * @var Cart
-     * @ORM\OneToOne(targetEntity=Cart::class, mappedBy="author", cascade={"persist", "remove"})
-     */
-    private $cart;
-
     public function __construct()
     {
         $this->roadTrips = new ArrayCollection();

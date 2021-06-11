@@ -1,7 +1,7 @@
 @import "../app";
 @import "table";
 @import "pagination";
-
+@import "sidebar";
 
 .button {
   &-blue {
@@ -16,4 +16,18 @@
   &-orange {
     @apply bg-yellow-500 border rounded text-white p-2;
   }
+}
+
+.form_container {
+  @apply container items-center px-5 py-12 lg:px-20;
+
+  form {
+    @apply flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2;
+  }
+}
+
+/* Toggle B */
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #48bb78;
 }

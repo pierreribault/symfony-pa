@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
     {
         $pagination = Pagination::paginate($categoryRepository->createQueryBuilder("c"), $paginator, $paramFetcher);
 
-        return $this->render('admin/admin/category/index.html.twig', [
+        return $this->render('admin/category/index.html.twig', [
             'categories' => $pagination->getItems(),
             'pagination' => $pagination,
         ]);
@@ -55,7 +55,7 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('admin_category_index');
         }
 
-        return $this->render('admin/admin/category/new.html.twig', [
+        return $this->render('admin/category/new.html.twig', [
             'category' => $category,
             'form' => $form->createView(),
         ]);
@@ -66,7 +66,7 @@ class CategoryController extends AbstractController
      */
     public function show(Category $category): Response
     {
-        return $this->render('admin/admin/category/show.html.twig', [
+        return $this->render('admin/category/show.html.twig', [
             'category' => $category,
         ]);
     }
