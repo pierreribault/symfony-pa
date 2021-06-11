@@ -3,33 +3,14 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.name }}</td>
-                <td>{{ category.type }}</td>
-                <td>
-                    <a href="{{ path('admin_category_show', {'id': category.id}) }}" class="button-blue"><i class="fas fa-eye"></i></a>
-                    <a href="{{ path('admin_category_edit', {'id': category.id}) }}" class="button-green"><i class="fas fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucun résultats trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {{ include('admin/layout/pagination.html.twig', {pagination: pagination}) }}
-    <a href="{{ path('admin_category_new') }}"><button class="button-blue">Ajout</button></a>
+    {{ include('admin/layout/table.html.twig', {
+        "headers": ["Id","Name","Type","actions"],
+        "fields": ["id","name","type"],
+        "pagination": pagination,
+        "actions": ["edit", "show"],
+        "new":  'admin_category_new',
+        "edit":  'admin_category_edit',
+        "show":  'admin_category_show',
+        "title": 'Category'
+    }) }}
 {% endblock %}

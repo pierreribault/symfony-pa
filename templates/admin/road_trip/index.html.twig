@@ -3,34 +3,14 @@
 {% block title %}RoadTrip index{% endblock %}
 
 {% block body %}
-    <h1>RoadTrip index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Utilisateur</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for road_trip in road_trips %}
-            <tr>
-                <td>{{ road_trip.author.name }}</td>
-                <td>{{ road_trip.createdAt ? road_trip.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ road_trip.updatedAt ? road_trip.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('admin_road_trip_show', {'id': road_trip.id}) }}" class="button-blue"><i class="fas fa-eye"></i></a>
-                    <a href="{{ path('admin_road_trip_edit', {'id': road_trip.id}) }}" class="button-green"><i class="fas fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucun résultats trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {{ include('admin/layout/pagination.html.twig', {pagination: pagination}) }}
-
-    <a href="{{ path('admin_road_trip_new') }}"><button class="button-blue">Ajout</button></a>
+    {{ include('admin/layout/table.html.twig', {
+        "headers": ["Id","Author","Créer le", "Mise à jours le", "actions"],
+        "fields": ["id","author","createdAt", "updatedAt"],
+        "pagination": pagination,
+        "actions": ["edit", "show"],
+        "new":  'admin_road_trip_new',
+        "edit":  'admin_road_trip_edit',
+        "show":  'admin_road_trip_show',
+        "title": 'Road Trip'
+    }) }}
 {% endblock %}

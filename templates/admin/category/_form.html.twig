@@ -1,5 +1,36 @@
-{% form_theme form 'admin/layout/tailwind_2_layout.html.twig' %}
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="button-green">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% do form.name.setRendered %}
+{% do form.type.setRendered %}
+{% do form.url.setRendered %}
+
+<div class="form_container">
+	{{ form_start(form) }}
+	<div class="my-2">
+		{{ include('admin/layout/input.html.twig', {
+			'id' : form.name.vars.id,
+			'label' : form.name.vars.label,
+			'name' : form.name.vars.full_name,
+			'default' : category ? category.name : '',
+			'type': 'text'
+		}) }}
+	</div>
+	<div class="my-2">
+		{{ include('admin/layout/input.html.twig', {
+			'id' : form.type.vars.id,
+			'label' : form.type.vars.label,
+			'name' : form.type.vars.full_name,
+			'default' : category ? category.type : '',
+			'type': 'text'
+		}) }}
+	</div>
+	<div class="my-2">
+		{{ include('admin/layout/input.html.twig', {
+			'id' : form.url.vars.id,
+			'label' : form.url.vars.label,
+			'name' : form.url.vars.full_name,
+			'default' : category ? category.url : '',
+			'type': 'text'
+		}) }}
+	</div>
+	<button class="button-green">{{ button_label|default('Save') }}</button>
+	{{ form_end(form) }}
+</div>

@@ -1,0 +1,33 @@
+.sidebar {
+  @apply flex-col w-80 md:flex md:flex-row md:min-h-screen bg-gray-50;
+
+  &__container {
+    @apply flex flex-col flex-shrink-0 w-full text-gray-700 bg-white shadow-xl md:w-64;
+  }
+
+  &__close {
+    @apply p-1 m-2 ml-auto transition-colors duration-200 transform rounded-md hover:bg-opacity-25 hover:bg-gray-600 focus:outline-none;
+  }
+
+  &__user {
+    @apply flex flex-col items-center flex-shrink-0 pb-4 bg-gray-50;
+
+    &-avatar {
+      @apply inline-block object-cover object-center w-20 h-20 mb-8 bg-gray-100 rounded-full;
+    }
+
+    &-name {
+      @apply text-sm font-medium tracking-widest text-black uppercase;
+    }
+  }
+
+  &__link-active {
+    @apply block px-4 py-2 mt-2 text-base text-gray-500 transition duration-500 ease-in-out transform border-l-4 border-blue-600 focus:shadow focus:outline-none
+    focus:ring-2 ring-offset-current ring-offset-2 hover:text-black;
+  }
+
+  &__link {
+    @apply block px-4 py-4 mt-2 text-base text-gray-500 transition duration-500 ease-in-out transform border-l-4 border-white hover:border-blue-600
+    focus:shadow focus:outline-none focus:ring-2 ring-offset-current ring-offset-2 hover:text-black;
+  }
+}

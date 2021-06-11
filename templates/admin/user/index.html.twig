@@ -3,44 +3,15 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>IsVerified</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Enabled</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>{{ user.address }}</td>
-                <td>{{ user.phone }}</td>
-                <td>{{ user.enabled ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('admin_user_show', {'id': user.id}) }}" class="button-blue"><i class="fas fa-eye"></i></a>
-                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}" class="button-green"><i class="fas fa-pen"></i></a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">Aucun résultats trouvé</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    {{ include('admin/layout/pagination.html.twig', {pagination: pagination}) }}
-    <a href="{{ path('admin_user_new') }}"><button class="button-blue">Ajout</button></a>
+    
+    {{ include('admin/layout/table.html.twig', {
+        "headers": ["Id","email","Vérifier", "Activer", "actions"],
+        "fields": ["id","email","isVerified", "enabled"],
+        "pagination": pagination,
+        "actions": ["edit", "show"],
+        "new":  'admin_user_new',
+        "edit":  'admin_user_edit',
+        "show":  'admin_user_show',
+        "title": 'Usser'
+    }) }}
 {% endblock %}
