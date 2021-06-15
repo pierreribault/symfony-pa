@@ -7,6 +7,7 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Uid\Ulid;
 
@@ -53,6 +54,11 @@ class RoadTrip
      */
     protected $activities;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadTrips")
+     */
+    protected $author;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -71,6 +77,18 @@ class RoadTrip
     public function setUlid(Ulid $ulid): self
     {
         $this->ulid = $ulid;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

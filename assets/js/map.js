@@ -99,7 +99,9 @@ const submitGenerator = () => {
        departure: departure,
        arrival: arrival,
        activities: waypointsSaved,
-    }))
+    })).then(function (response) {
+        window.location.href = `/roadtrip/${response.data.ulid}/details`
+    })
 }
 
 const createActivity = (data) => {
