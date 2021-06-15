@@ -4,8 +4,8 @@
 
 {% block body %}
     {{ include('admin/layout/table.html.twig', {
-        "headers": ["Id","Name","Type","actions"],
-        "fields": ["id","name","type"],
+        "headers": ["Id","Name","img","actions"],
+        "fields": ["id","name", "url"],
         "pagination": pagination,
         "actions": ["edit", "show"],
         "new":  'admin_category_new',

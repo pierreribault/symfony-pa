@@ -14,12 +14,7 @@ class CityType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('region', TextType::class)
             ->add('country', TextType::class)
-            ->add('regionCode', TextType::class)
-            ->add('cityCode', TextType::class)
-            ->add('longitude', TextType::class)
-            ->add('latitude', TextType::class)
         ;
     }
 

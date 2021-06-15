@@ -34,6 +34,7 @@ Encore
         {from: './public/bundles/fosckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
     ])
     .addStyleEntry('app/page/forum', './assets/styles/pages/forum.scss')
+    .addStyleEntry('app/page/generator', './assets/styles/pages/generator.scss')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

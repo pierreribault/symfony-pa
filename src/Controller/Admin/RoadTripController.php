@@ -66,6 +66,7 @@ class RoadTripController extends AbstractController
     {
         return $this->render('admin/road_trip/show.html.twig', [
             'road_trip' => $roadTrip,
+            'ulid' => $this->generateUrl('front_roadtrip_restore', ['ulid' => $roadTrip->getUlid()], 0)
         ]);
     }
 

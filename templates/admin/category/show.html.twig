@@ -16,8 +16,10 @@
                 <td>{{ category.name }}</td>
             </tr>
             <tr>
-                <th>Type</th>
-                <td>{{ category.type }}</td>
+                <th>Image</th>
+                <td>
+                    <img src="{{ category.url }}" alt="{{ category.name }}">
+                </td>
             </tr>
         </tbody>
     </table>

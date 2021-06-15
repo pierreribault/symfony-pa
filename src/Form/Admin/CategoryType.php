@@ -17,10 +17,6 @@ class CategoryType extends AbstractType
                 "required" => true,
                 "label" => "Name"
             ])
-            ->add('type', TextType::class, [
-                "required" => true,
-                "label" => "Type"
-            ])
             ->add('url', TextType::class, [
                 "required" => true,
                 "label" => "Url"

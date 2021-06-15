@@ -6,8 +6,10 @@ use App\Repository\RoadTripRepository;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\PersistentCollection;
+use Symfony\Component\Uid\Ulid;
 
 /**
  * @ORM\HasLifecycleCallbacks()
@@ -23,6 +25,11 @@ class RoadTrip
     private $id;
 
     /**
+     * @ORM\Column(type="ulid", unique=true)
+     */
+    private $ulid;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -33,30 +40,61 @@ class RoadTrip
     private $updatedAt;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $departure;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $arrival;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Activity::class, inversedBy="roadTrips")
+     */
+    protected $activities;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="roadTrips")
-     * @ORM\JoinColumn(nullable=false)
      */
-    private $author;
-
-    /**
-     * @ORM\OneToMany(targetEntity=RoadTripCity::class, mappedBy="roadTrip")
-     */
-    private $roadTripCities;
-
-    /**
-     * @ORM\OneToMany(targetEntity=ForumThread::class, mappedBy="roadTrip")
-     */
-    private $forumThreads;
+    protected $author;
 
     public function __construct()
     {
-        $this->roadTripCities = new ArrayCollection();
-        $this->forumThreads = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUlid(): ?Ulid
+    {
+        return $this->ulid;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @return $this
+     */
+    public function setUlid(): self
+    {
+        $this->ulid = new Ulid();
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
     }
 
     public function getCreatedAt(): ?DateTimeInterface
@@ -68,7 +106,7 @@ class RoadTrip
      * @ORM\PrePersist()
      * @return $this
      */
-    protected function setCreatedAt(): self
+    public function setCreatedAt(): self
     {
         $this->createdAt = new DateTime();
 
@@ -81,87 +119,62 @@ class RoadTrip
     }
 
     /**
+     * @ORM\PrePersist()
      * @ORM\PreUpdate()
      * @return $this
      */
-    protected function setUpdatedAt(): self
+    public function setUpdatedAt(): self
     {
         $this->updatedAt = new DateTime();
 
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getDeparture(): string
     {
-        return $this->author;
+        return $this->departure;
     }
 
-    public function setAuthor(?User $author): self
+    public function setDeparture(string $departure): self
     {
-        $this->author = $author;
+        $this->departure = $departure;
+
+        return $this;
+    }
+
+    public function getArrival(): string
+    {
+        return $this->arrival;
+    }
+
+    public function setArrival(string $arrival): self
+    {
+        $this->arrival = $arrival;
 
         return $this;
     }
 
     /**
-     * @return Collection|RoadTripCity[]
+     * @return PersistentCollection|Activity[]
      */
-    public function getRoadTripCities(): Collection
+    public function getActivities()
     {
-        return $this->roadTripCities;
+        return $this->activities;
     }
 
-    public function addRoadTripCity(RoadTripCity $roadTripCity): self
+    public function addActivity(Activity $activity): self
     {
-        if (!$this->roadTripCities->contains($roadTripCity)) {
-            $this->roadTripCities[] = $roadTripCity;
-            $roadTripCity->setRoadTrip($this);
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
         }
-
         return $this;
     }
 
-    public function removeRoadTripCity(RoadTripCity $roadTripCity): self
+    public function removeActivity(Activity $activity): self
     {
-        if ($this->roadTripCities->contains($roadTripCity)) {
-            $this->roadTripCities->removeElement($roadTripCity);
-            // set the owning side to null (unless already changed)
-            if ($roadTripCity->getRoadTrip() === $this) {
-                $roadTripCity->setRoadTrip(null);
-            }
+        if ($this->activities->contains($activity)) {
+            $this->activities->removeElement($activity);
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ForumThread[]
-     */
-    public function getForumThreads(): Collection
-    {
-        return $this->forumThreads;
-    }
-
-    public function addForumThread(ForumThread $forumThread): self
-    {
-        if (!$this->forumThreads->contains($forumThread)) {
-            $this->forumThreads[] = $forumThread;
-            $forumThread->setRoadTrip($this);
-        }
-
-        return $this;
-    }
-
-    public function removeForumThread(ForumThread $forumThread): self
-    {
-        if ($this->forumThreads->contains($forumThread)) {
-            $this->forumThreads->removeElement($forumThread);
-            // set the owning side to null (unless already changed)
-            if ($forumThread->getRoadTrip() === $this) {
-                $forumThread->setRoadTrip(null);
-            }
-        }
-
         return $this;
     }
 }

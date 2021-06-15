@@ -20,12 +20,19 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        /** @var User $userCompany */
-        $userCompany = $manager->getRepository(User::class)->findOneBy(["email" => "company@example.com"]);
+        $users = $manager->getRepository(User::class)->findAll();
 
-        $company = (new Company())->setName($faker->word)->setAccount($userCompany)->setSiret($faker->word)->setSiteUrl($faker->url)->setDescription($faker->sentence);
+        foreach ($users as $user) {
+            $company = (new Company())
+                ->setName($faker->word)
+                ->setAccount($user)
+                ->setSiret($faker->word)
+                ->setSiteUrl($faker->url)
+                ->setDescription($faker->sentence);
 
-        $manager->persist($company);
+            $manager->persist($company);
+        }
+
         $manager->flush();
     }
 

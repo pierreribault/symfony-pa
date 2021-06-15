@@ -14,8 +14,8 @@ class RoadTripType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('createdAt')
-            ->add('updatedAt')
+            ->add('departure')
+            ->add('arrival')
             ->add('author', EntityType::class, [
                 "class" => User::class
             ])
