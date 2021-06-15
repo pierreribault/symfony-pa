@@ -9,16 +9,12 @@
   "build/app/page/login.css": "/build/app/page/login.css",
   "build/app/page/login.jpg": "/build/images/background.a62bead2.jpg",
   "build/app/page/forum.css": "/build/app/page/forum.css",
+  "build/app/page/generator.css": "/build/app/page/generator.css",
   "build/runtime.js": "/build/runtime.js",
   "build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_to-object_js--642f45.js": "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_to-object_js--642f45.js",
-<<<<<<< HEAD
-  "build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_for-each_js-node_mo-96cbb6.js": "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_for-each_js-node_mo-96cbb6.js",
-=======
   "build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js": "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
->>>>>>> 9294c3f (Add save roadtrip and a restore it)
-  "build/vendors-node_modules_core-js_modules_es_string_replace_js.js": "/build/vendors-node_modules_core-js_modules_es_string_replace_js.js",
-  "build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-06f3de.css": "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-06f3de.css",
-  "build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-06f3de.js": "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-06f3de.js",
+  "build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.css": "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.css",
+  "build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js": "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js",
   "build/fonts/fa-brands-400.89a52ae1.eot": "/build/fonts/fa-brands-400.89a52ae1.eot",
   "build/images/fa-brands-400.216edb96.svg": "/build/images/fa-brands-400.216edb96.svg",
   "build/fonts/fa-brands-400.9e138496.ttf": "/build/fonts/fa-brands-400.9e138496.ttf",
@@ -34,8 +30,8 @@
   "build/fonts/fa-solid-900.07c3313b.ttf": "/build/fonts/fa-solid-900.07c3313b.ttf",
   "build/fonts/fa-solid-900.c6ec0800.woff": "/build/fonts/fa-solid-900.c6ec0800.woff",
   "build/fonts/fa-solid-900.ada6e6df.woff2": "/build/fonts/fa-solid-900.ada6e6df.woff2",
+  "build/vendors-node_modules_core-js_modules_es_string_replace_js.js": "/build/vendors-node_modules_core-js_modules_es_string_replace_js.js",
   "build/public/images/background.jpg": "/build/images/background.a62bead2.jpg",
-<<<<<<< HEAD
   "build/node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.svg": "/build/images/fa-solid-900.13de59f1.svg",
   "build/node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.svg": "/build/images/fa-brands-400.216edb96.svg",
   "build/node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.eot": "/build/fonts/fa-solid-900.efbd5d20.eot",
@@ -51,7 +47,4 @@
   "build/node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.ttf": "/build/fonts/fa-regular-400.1017bce8.ttf",
   "build/node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff": "/build/fonts/fa-regular-400.36722648.woff",
   "build/node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2": "/build/fonts/fa-regular-400.68c5af1f.woff2"
-=======
-  "build/vendors-node_modules_jquery_dist_jquery_js.js": "/build/vendors-node_modules_jquery_dist_jquery_js.js"
->>>>>>> 9294c3f (Add save roadtrip and a restore it)
 }

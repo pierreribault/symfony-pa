@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Uid\Ulid;
 
 /**
  * Class RoadTripController
@@ -32,10 +31,7 @@ class RoadTripController extends AbstractController
 
         $roadTrip = (new RoadTrip())
             ->setArrival($arrival)
-            ->setDeparture($departure)
-            ->setUlid(new Ulid())
-            ->setCreatedAt()
-            ->setUpdatedAt();
+            ->setDeparture($departure);
 
         foreach ($activities as $activity) {
             $activity = $activityRepository->find($activity);

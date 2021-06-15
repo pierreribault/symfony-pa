@@ -4,7 +4,7 @@
       "js": [
         "/build/runtime.js",
         "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_to-object_js--642f45.js",
-        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_for-each_js-node_mo-96cbb6.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
         "/build/app.js"
       ],
       "css": [
@@ -15,12 +15,12 @@
       "js": [
         "/build/runtime.js",
         "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_to-object_js--642f45.js",
-        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_for-each_js-node_mo-96cbb6.js",
-        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-06f3de.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js",
         "/build/admin.js"
       ],
       "css": [
-        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_fortawesome_fontawes-06f3de.css",
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.css",
         "/build/admin.css"
       ]
     },
@@ -54,6 +54,14 @@
       ],
       "css": [
         "/build/app/page/forum.css"
+      ]
+    },
+    "app/page/generator": {
+      "js": [
+        "/build/runtime.js"
+      ],
+      "css": [
+        "/build/app/page/generator.css"
       ]
     }
   }

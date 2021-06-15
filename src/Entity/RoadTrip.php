@@ -74,9 +74,13 @@ class RoadTrip
         return $this->ulid;
     }
 
-    public function setUlid(Ulid $ulid): self
+    /**
+     * @ORM\PrePersist()
+     * @return $this
+     */
+    public function setUlid(): self
     {
-        $this->ulid = $ulid;
+        $this->ulid = new Ulid();
 
         return $this;
     }
@@ -92,7 +96,6 @@ class RoadTrip
 
         return $this;
     }
-
 
     public function getCreatedAt(): ?DateTimeInterface
     {
@@ -116,6 +119,7 @@ class RoadTrip
     }
 
     /**
+     * @ORM\PrePersist()
      * @ORM\PreUpdate()
      * @return $this
      */
