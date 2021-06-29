@@ -20,23 +20,38 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', CKEditorType::class)
-            ->add('reservationUrl', TextType::class)
-            ->add('address', TextType::class)
-            ->add('phone', TelType::class)
-            ->add('menu', TextType::class)
+            ->add('name', TextType::class,[
+                "label" => "Nom"
+            ])
+            ->add('description', CKEditorType::class,[
+                "label" => "Description"
+            ])
+            ->add('reservationUrl', TextType::class,[
+                "label" => "Url Reservation"
+            ])
+            ->add('address', TextType::class,[
+                "label" => "Adresse"
+            ])
+            ->add('phone', TelType::class,[
+                "label" => "Téléphone"
+            ])
+            ->add('menu', TextType::class,[
+                "label" => "Menu"
+            ])
             ->add('city', EntityType::class, [
                 "class" => City::class,
-                "choice_label" => "name"
+                "choice_label" => "name",
+                "label" => "Ville"
             ])
             ->add('company', EntityType::class, [
                 "class" => Company::class,
-                "choice_label" => "name"
+                "choice_label" => "name",
+                "label" => "Entreprise"
             ])
             ->add('categories', EntityType::class, [
                 "class" => Category::class,
                 "multiple" => true,
+                "label" => "Catégories"
             ])
         ;
     }
