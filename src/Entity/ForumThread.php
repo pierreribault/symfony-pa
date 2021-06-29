@@ -59,7 +59,7 @@ class ForumThread
     private $forumThreadAnswers;
 
     /**
-     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="thread")
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="thread", cascade={"persist"})
      */
     private $likes;
 
@@ -196,7 +196,9 @@ class ForumThread
 
     public function addLike(Like $like): self
     {
-        if (!$this->likes->contains($like)) {
+        if (!$this->likes->exists(function($key, $value) use ($like) {
+            return ($value->getAuthor() === $like->getAuthor() && $value->getThread() === $like->getThread());
+        })) {
             $this->likes[] = $like;
             $like->setThread($this);
         }
@@ -208,9 +210,9 @@ class ForumThread
     {
         if ($this->likes->removeElement($like)) {
             // set the owning side to null (unless already changed)
-            if ($like->getThread() === $this) {
+            /*if ($like->getThread() === $this) {
                 $like->setThread(null);
-            }
+            }*/
         }
 
         return $this;
