@@ -3,9 +3,11 @@
 namespace App\Controller\Front;
 
 use App\Entity\ForumThreadAnswer;
+use App\Entity\LikeAnswer;
 use App\Form\ForumThreadAnswerType;
 use App\Repository\ForumThreadAnswerRepository;
 use App\Repository\ForumThreadRepository;
+use App\Repository\LikeAnswerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,6 +94,40 @@ class ForumThreadAnswerController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($forumThreadAnswer);
             $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('front_forum_thread_show', ['id' => $idThread]);
+    }
+
+    /**
+     * @Route("/{id}/likeAnswer", name="forum_thread_answer_like", methods={"POST"})
+     */
+    public function likeAnswer(Request $request, ForumThreadAnswer $forumThreadAnswer, $idThread): Response
+    {
+        if ($this->isCsrfTokenValid('like'.$forumThreadAnswer->getId(), $request->request->get('_token'))) {
+            $like = new LikeAnswer();
+            $like->setAuthor($this->getUser());
+            $forumThreadAnswer->addLikeAnswer($like);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirectToRoute('front_forum_thread_show', ['id' => $idThread]);
+    }
+
+    /**
+     * @Route("/{id}/dislikeAnswer/{idLike}", name="forum_thread_answer_dislike", methods={"POST"})
+     */
+    public function dislikeAnswer(Request $request, ForumThreadAnswer $forumThreadAnswer, LikeAnswerRepository $likeAnswerRepository, $idThread): Response
+    {
+        if ($this->isCsrfTokenValid('dislike'.$forumThreadAnswer->getId(), $request->request->get('_token'))) {
+            $routeParameters = $request->attributes->get('_route_params');
+            $like = $likeAnswerRepository->findOneBy([
+                "id" => $routeParameters['idLike']
+            ]);
+            $forumThreadAnswer->removeLikeAnswer($like);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($like);
+            $em->flush();
         }
 
         return $this->redirectToRoute('front_forum_thread_show', ['id' => $idThread]);

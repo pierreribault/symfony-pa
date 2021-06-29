@@ -4,10 +4,12 @@ namespace App\Controller\Front;
 
 use App\Entity\ForumThread;
 use App\Entity\ForumThreadAnswer;
+use App\Entity\Like;
 use App\Form\ForumThreadType;
 use App\Form\ForumThreadAnswerType;
 use App\Repository\ForumThreadRepository;
 use App\Repository\ForumThreadAnswerRepository;
+use App\Repository\LikeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -126,5 +128,39 @@ class ForumThreadController extends AbstractController
         }
 
         return $this->redirectToRoute('front_forum');
+    }
+
+    /**
+     * @Route("/{id}/likeThread", name="forum_thread_like", methods={"POST"})
+     */
+    public function likeThread(Request $request, ForumThread $forumThread): Response
+    {
+        if ($this->isCsrfTokenValid('like'.$forumThread->getId(), $request->request->get('_token'))) {
+            $like = new Like();
+            $like->setAuthor($this->getUser());
+            $forumThread->addLike($like);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirectToRoute('front_forum_thread_show', ['id' => $forumThread->getId()]);
+    }
+
+    /**
+     * @Route("/{id}/dislikeThread/{idLike}", name="forum_thread_dislike", methods={"POST"})
+     */
+    public function dislikeThread(Request $request, ForumThread $forumThread, LikeRepository $likeRepository): Response
+    {
+        if ($this->isCsrfTokenValid('dislike'.$forumThread->getId(), $request->request->get('_token'))) {
+            $routeParameters = $request->attributes->get('_route_params');
+            $like = $likeRepository->findOneBy([
+                "id" => $routeParameters['idLike']
+            ]);
+            $forumThread->removeLike($like);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($like);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('front_forum_thread_show', ['id' => $forumThread->getId()]);
     }
 }

@@ -41,7 +41,10 @@
     .hover-underline:hover { text-decoration: underline }
     form {
         height: auto;
-        button { width: auto }
+        button {
+            width: auto;
+            &:focus { outline: none }
+        }
     }
 
     .main-thread {
