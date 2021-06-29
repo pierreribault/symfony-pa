@@ -12,18 +12,19 @@
 
     <h1 class="text-4xl font-bold">Topic : <span class="text-eden">{{ forum_thread.title|capitalize }}</span></h1>
 
-    <div class="row_answer m-w-100 bg-white border border-silver rounded-lg mt-5 p-3">
-        <div class="m-w-100 flex items-center justify-between border-b border-silver pb-2">
+    <div class="row_answer m-w-100 bg-white border border-eden rounded-lg mt-5 p-3 main-thread">
+        <div class="m-w-100 flex items-center justify-between border-b border-eden pb-2">
             <div>
                 <p class="font-bold {{ forum_thread.author.roles[0] == "ROLE_ADMIN" ? "inline-block" : "" }}">{{ forum_thread.author.email }}</p>
                 {% if forum_thread.author.roles[0] == "ROLE_ADMIN" %}
                     <span class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-md py-0.5 px-1.5 ml-1.5 inline-block text-xs">Admin</span>
                 {% endif %}
-                <p class="text-sm text-silver">
+                <p class="text-sm text-eden opacity-40">
                 {{ forum_thread.createdAt ? forum_thread.createdAt|date('Y-m-d H:i:s') : '' }}
                 {{ forum_thread.updatedAt and forum_thread.updatedAt|date('Y-m-d H:i:s') > forum_thread.createdAt|date('Y-m-d H:i:s') ?
                     "(Edited)"
                 : '' }}
+                {{ forum_thread.likes|length }}
                 </p>
             </div>
             <div class="flex items-center">
@@ -44,6 +45,10 @@
         <div class="m-w-100 mt-3">
             {{ forum_thread.description|striptags('<b><strong><i><em><span><a><ul><li><p><u><blockquote><ol>')|raw }}
         </div>
+        <div class="m-w-100 mt-3 flex items-center">
+            <i class="far fa-heart text-grenadier mr-1.5 cursor-pointer"></i>
+            <span class="text-sm text-eden opacity-40">{{ forum_thread.likes|length }}</span>
+        </div>
     </div>
 
     {% for answer in forum_thread_answers %}
@@ -56,6 +61,9 @@
                 {% endif %}
                 <p class="text-sm text-silver">
                 {{ answer.createdAt ? answer.createdAt|date('Y-m-d H:i:s') : '' }}
+                {{ answer.updatedAt and answer.updatedAt|date('Y-m-d H:i:s') > answer.createdAt|date('Y-m-d H:i:s') ?
+                    "(Edited)"
+                : '' }}
                 </p>
             </div>
             <div class="flex items-center">
