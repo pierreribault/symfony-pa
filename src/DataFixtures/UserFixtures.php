@@ -25,12 +25,18 @@ class UserFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        $user = (new User())
-            ->setEmail($faker->email)
-            ->setAddress($faker->address)
-            ->setEnabled(true)
-            ->setIsVerified(true)
-            ->setPhone($faker->phoneNumber);
+        for ($j=0; $j < 20;$j++){
+            $user = (new User())
+                ->setEmail($faker->email)
+                ->setAddress($faker->address)
+                ->setEnabled(true)
+                ->setIsVerified(true)
+                ->setPhone($faker->phoneNumber);
+
+            $userPwd = $this->encoder->encodePassword($user, 'root');
+            $user->setPassword($userPwd);
+            $manager->persist($user);
+        }
 
         for ($i = 0; $i < 30; $i++) {
             $company = (new User())
@@ -54,10 +60,8 @@ class UserFixtures extends Fixture
             ->setPhone($faker->phoneNumber)
             ->setRoles(["ROLE_ADMIN"]);
 
-        $userPwd = $this->encoder->encodePassword($user, 'root');
         $adminPwd = $this->encoder->encodePassword($admin, 'root');
 
-        $user->setPassword($userPwd);
         $admin->setPassword($adminPwd);
 
         $manager->persist($user);

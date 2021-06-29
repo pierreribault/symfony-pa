@@ -25,6 +25,7 @@
         "@fortawesome/fontawesome-free": "^5.15.3",
         "@tailwindcss/forms": "^0.3.2",
         "axios": "^0.21.1",
+        "chart.js": "^3.4.0",
         "ckeditor": "^4.0.0",
         "jquery": "^3.5.1",
         "postcss": "^8.2.4",

@@ -45,15 +45,4 @@ class ActivityRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    /*
-    public function findOneBySomeField($value): ?Activity
-    {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

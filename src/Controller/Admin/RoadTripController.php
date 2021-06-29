@@ -2,10 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
+use App\Entity\City;
 use App\Entity\RoadTrip;
 use App\Form\Admin\RoadTripType;
 use App\Repository\RoadTripRepository;
 use App\Service\Pagination;
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -62,11 +65,11 @@ class RoadTripController extends AbstractController
     /**
      * @Route("/{id}", name="road_trip_show", methods={"GET"})
      */
-    public function show(RoadTrip $roadTrip): Response
+    public function show(RoadTrip $roadTrip, EntityManagerInterface  $entityManager): Response
     {
         return $this->render('admin/road_trip/show.html.twig', [
             'road_trip' => $roadTrip,
-            'ulid' => $this->generateUrl('front_roadtrip_restore', ['ulid' => $roadTrip->getUlid()], 0)
+            'ulid' => $this->generateUrl('front_roadtrip_restore', ['ulid' => $roadTrip->getUlid()], 0),
         ]);
     }
 

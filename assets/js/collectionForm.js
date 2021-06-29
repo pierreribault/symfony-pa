@@ -1,4 +1,14 @@
 $(document).ready(function () {
+
+    const buttonCollectionDelete = $(".button-collection-delete")
+
+    buttonCollectionDelete.map(function(key, button) {
+        console.log(button)
+        button.addEventListener("click", function () {
+            $(this).parent().remove()
+        })
+    })
+
     $('.add-another-collection-widget').click(function (e) {
         const list = $($(this).attr('data-list-selector'));
         // Try to find the counter of the list or use the length of the list
@@ -18,7 +28,7 @@ $(document).ready(function () {
         let deleteBtn = document.createElement("button");
         deleteBtn.append(document.createTextNode("Supprimer"))
         deleteBtn.setAttribute("type", 'button')
-        deleteBtn.addEventListener("click", function (){
+        deleteBtn.addEventListener("click", function () {
             $(this).parent().remove()
         })
         // create a new list element and add it to the list

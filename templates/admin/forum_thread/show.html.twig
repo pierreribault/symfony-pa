@@ -4,12 +4,13 @@
 
 {% block body %}
     <section id="show_thread">
-        <h1 class="text-4xl font-bold">Topic : <span class="text-eden">{{ forum_thread.title|capitalize }}</span></h1>
-        
-{#        <a#}
-{#                href="{{ path('front_forum_thread_answer_new', {'idThread': forum_thread.id}) }}"#}
-{#                class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-full py-2 px-4 mt-5 inline-block">Reply</a>#}
         <a href="{{ path('admin_forum_thread_index') }}" class="underline text-blue-500"><i class="fas fa-arrow-left"></i> Retour</a>
+        
+        <h1 class="text-4xl font-bold">Topic : <span class="text-eden">{{ forum_thread.title|capitalize }}</span></h1>
+    
+        {#        <a#}
+        {#                href="{{ path('front_forum_thread_answer_new', {'idThread': forum_thread.id}) }}"#}
+        {#                class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-full py-2 px-4 mt-5 inline-block">Reply</a>#}
         
         <div class="row_answer m-w-100 bg-white border border-silver rounded-lg mt-5 p-3">
             <div class="m-w-100 flex items-center justify-between border-b border-silver pb-2">
@@ -43,6 +44,13 @@
                         <p class="text-sm text-silver">
                             {{ answer.createdAt ? answer.createdAt|date('Y-m-d H:i:s') : '' }}
                         </p>
+                    </div>
+                    <div class="flex items-center">
+{#                                            <a#}
+{#                                                    href="{{ path('front_forum_thread_edit', {'id': forum_thread.id}) }}"#}
+{#                                                    class="bg-gradient-to-r from-burn-sienna to-grenadier text-white rounded-full py-2 px-4 mr-3"#}
+{#                                            >Edit</a>#}
+                        {{ include('front/forum_thread/_delete_form.html.twig') }}
                     </div>
 {#                    <div class="flex items-center">#}
 {#                        <a#}

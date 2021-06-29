@@ -20,9 +20,6 @@ class ForumThreadAnswerType extends AbstractType
             ->add('content', CKEditorType::class, [
                 "label" => "Contenu"
             ])
-            ->add('forumThread', ForumThreadType::class, [
-                "label" => "Forum"
-            ])
             ->add('author', EntityType::class, [
                 "class" => User::class
             ])

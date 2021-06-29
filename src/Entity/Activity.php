@@ -13,6 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=ActivityRepository::class)
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks()
  */
 class Activity
 {
@@ -91,6 +92,12 @@ class Activity
      * @ORM\ManyToMany(targetEntity=RoadTrip::class, mappedBy="activities")
      */
     private $roadTrips;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     * @var \DateTime
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -305,4 +312,23 @@ class Activity
         }
         return $this;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @param \DateTime $createdAt
+     */
+    public function setCreatedAt(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+
 }

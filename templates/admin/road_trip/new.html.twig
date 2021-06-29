@@ -3,9 +3,14 @@
 {% block title %}New RoadTrip{% endblock %}
 
 {% block body %}
+    <a href="{{ path('admin_road_trip_index') }}" class="underline text-blue-500"><i class="fas fa-arrow-left"></i> Retour</a>
     <h1 class="text-center text-6xl font-normal leading-normal mt-0 mb-2">Create new RoadTrip</h1>
-
+    
     {{ include('admin/road_trip/_form.html.twig') }}
 
-    <a href="{{ path('admin_road_trip_index') }}" class="underline text-blue-500"><i class="fas fa-arrow-left"></i> Retour</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('collection') }}
 {% endblock %}

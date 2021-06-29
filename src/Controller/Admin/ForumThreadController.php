@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\ForumThread;
 use App\Form\Admin\ForumThreadType;
+use App\Repository\ForumThreadAnswerRepository;
 use App\Repository\ForumThreadRepository;
 use App\Service\Pagination;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -72,18 +73,23 @@ class ForumThreadController extends AbstractController
     /**
      * @Route("/{id}/edit", name="forum_thread_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, ForumThread $forumThread): Response
+    public function edit(Request $request, ForumThread $forumThread, ForumThreadAnswerRepository  $forumThreadAnswerRepository): Response
     {
         $form = $this->createForm(ForumThreadType::class, $forumThread);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $empty = $forumThreadAnswerRepository->findBy(["forumThread" => null]);
+
+            foreach ($empty as $item) {
+                $this->getDoctrine()->getManager()->remove($item);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('admin_forum_thread_index');
         }
 
-        return $this->render('admin_forum_thread/edit.html.twig', [
+        return $this->render('admin/forum_thread/edit.html.twig', [
             'forum_thread' => $forumThread,
             'form' => $form->createView(),
         ]);

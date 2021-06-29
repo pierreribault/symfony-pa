@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Company
 {
@@ -54,6 +55,12 @@ class Company
      * @ORM\OneToMany(targetEntity=Contact::class, mappedBy="company")
      */
     private $contacts;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     * @var
+     */
+    private $createdAt;
 
     public function __construct()
     {
@@ -192,4 +199,23 @@ class Company
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+
 }

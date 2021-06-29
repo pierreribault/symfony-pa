@@ -2,65 +2,77 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.f1f07a11.js",
-        "/build/349.1b469f9c.js",
-        "/build/469.3f7244c7.js",
-        "/build/app.f1c913ca.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
+        "/build/vendors-node_modules_core-js_internals_array-method-has-species-support_js-node_modules_jquer-86ef90.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
+        "/build/app.js"
       ],
       "css": [
-        "/build/app.f8dde770.css"
+        "/build/app.css"
       ]
     },
     "admin": {
       "js": [
-        "/build/runtime.f1f07a11.js",
-        "/build/349.1b469f9c.js",
-        "/build/469.3f7244c7.js",
-        "/build/486.36b5d8ba.js",
-        "/build/admin.a592f361.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
+        "/build/vendors-node_modules_core-js_internals_array-method-has-species-support_js-node_modules_jquer-86ef90.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js",
+        "/build/admin.js"
       ],
       "css": [
-        "/build/486.ffa47c8a.css",
-        "/build/admin.e78f681e.css"
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.css",
+        "/build/admin.css"
+      ]
+    },
+    "dashboard": {
+      "js": [
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
+        "/build/vendors-node_modules_chart_js_dist_chart_esm_js-node_modules_core-js_modules_es_array_for-eac-89ca0f.js",
+        "/build/dashboard.js"
       ]
     },
     "collection": {
       "js": [
-        "/build/runtime.f1f07a11.js",
-        "/build/349.1b469f9c.js",
-        "/build/collection.b1980130.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
+        "/build/vendors-node_modules_core-js_internals_array-method-has-species-support_js-node_modules_jquer-86ef90.js",
+        "/build/vendors-node_modules_core-js_modules_es_array_map_js-node_modules_core-js_modules_es_string_r-54d850.js",
+        "/build/collection.js"
       ]
     },
     "app/page/home": {
       "js": [
-        "/build/runtime.f1f07a11.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/app/page/home.7c8b27f4.css"
+        "/build/app/page/home.css"
       ]
     },
     "app/page/login": {
       "js": [
-        "/build/runtime.f1f07a11.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/app/page/login.7c8b27f4.css"
+        "/build/app/page/login.css"
       ]
     },
     "app/page/forum": {
       "js": [
-        "/build/runtime.f1f07a11.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/app/page/forum.7b79b16b.css"
+        "/build/app/page/forum.css"
       ]
     },
     "app/page/generator": {
       "js": [
-        "/build/runtime.f1f07a11.js"
+        "/build/runtime.js"
       ],
       "css": [
-        "/build/app/page/generator.2bfaaf84.css"
+        "/build/app/page/generator.css"
       ]
     }
   }
