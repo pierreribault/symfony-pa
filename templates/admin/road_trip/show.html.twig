@@ -12,6 +12,12 @@
                 <td>{{ road_trip.id }}</td>
             </tr>
             <tr>
+                <th>Ulid</th>
+                <td>
+                    <a href="{{ ulid }}">{{ road_trip.ulid }}</a>
+                </td>
+            </tr>
+            <tr>
                 <th>CreatedAt</th>
                 <td>{{ road_trip.createdAt ? road_trip.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

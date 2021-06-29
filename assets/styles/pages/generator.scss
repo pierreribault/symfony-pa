@@ -1,0 +1,13 @@
+#generator-box {
+  height: 75vh;
+
+  #map-container #map {
+    width: 100% !important;
+    height: 100% !important;
+    @apply rounded-l-lg;
+  }
+
+  #activity-list div:last-child {
+    border: none !important;
+  }
+}

@@ -4,8 +4,8 @@
 
 {% block body %}
     {{ include('admin/layout/table.html.twig', {
-        "headers": ["Id","Name","Région","Pays","actions"],
-        "fields": ["id","name","region", "country"],
+        "headers": ["Id", "Name", "Pays", "actions"],
+        "fields": ["id", "name", "country"],
         "pagination": pagination,
         "actions": ["edit", "show"],
         "new":  'admin_city_new',

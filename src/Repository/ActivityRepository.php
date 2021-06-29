@@ -19,22 +19,31 @@ class ActivityRepository extends ServiceEntityRepository
         parent::__construct($registry, Activity::class);
     }
 
-    // /**
-    //  * @return Activity[] Returns an array of Activity objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findWithFilters($category, $city, $fromLongitude, $fromLatitude, $toLongitude, $toLatitude)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $this->createQueryBuilder('a')
+            ->join('a.categories', 'c')
+            ->andWhere('a.latitude >= :fromLatitude')
+            ->andWhere('a.latitude <= :toLatitude')
+            ->andWhere('a.longitude >= :fromLongitude')
+            ->andWhere('a.longitude <= :toLongitude')
+            ->setParameter(':fromLatitude', $fromLatitude)
+            ->setParameter(':toLatitude', $toLatitude)
+            ->setParameter(':fromLongitude', $fromLongitude)
+            ->setParameter(':toLongitude', $toLongitude);
+
+        if ($category) {
+            $query->andWhere('c.id = :category')
+                ->setParameter(':category', $category);
+        }
+
+        if ($city) {
+            $query->andWhere('a.city = :city')
+                ->setParameter(':city', $city);
+        }
+
+        return $query->getQuery()->getResult();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Activity

@@ -25,6 +25,7 @@ class ActivityController extends AbstractController
     /**
      * @param Request $request
      * @param ActivityRepository $activityRepository
+     * @return Response
      * @Route("/", name="_all", methods={"GET"})
      */
     public function getAll(Request $request, ActivityRepository $activityRepository)

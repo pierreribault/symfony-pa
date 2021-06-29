@@ -93,14 +93,19 @@ class User implements UserInterface
         $this->forumThreadAnswers = new ArrayCollection();
     }
 
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     * @return int|null
-     */
+    public function getUserIdentifier(): ?int
+    {
+        return $this->id;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function __toString(): string
+    {
+        return $this->email;
     }
 
     public function getEmail(): ?string
@@ -349,10 +354,5 @@ class User implements UserInterface
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->email;
     }
 }

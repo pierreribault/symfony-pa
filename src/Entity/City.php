@@ -27,42 +27,7 @@ class City
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $region;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $country;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $regionCode;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $cityCode;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $longitude;
-
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $latitude;
-
-    /**
-     * @ORM\OneToMany(targetEntity=RoadTripCity::class, mappedBy="city")
-     */
-    private $roadTripCities;
-
-    /**
-     * @ORM\OneToMany(targetEntity=RoadTripCity::class, mappedBy="previousCity")
-     */
-    private $roadTripPreviousCities;
 
     /**
      * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="city")
@@ -71,8 +36,6 @@ class City
 
     public function __construct()
     {
-        $this->roadTripCities = new ArrayCollection();
-        $this->roadTripPreviousCities = new ArrayCollection();
         $this->activities = new ArrayCollection();
     }
 
@@ -98,18 +61,6 @@ class City
         return $this;
     }
 
-    public function getRegion(): ?string
-    {
-        return $this->region;
-    }
-
-    public function setRegion(string $region): self
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
     public function getCountry(): ?string
     {
         return $this->country;
@@ -118,116 +69,6 @@ class City
     public function setCountry(string $country): self
     {
         $this->country = $country;
-
-        return $this;
-    }
-
-    public function getRegionCode(): ?int
-    {
-        return $this->regionCode;
-    }
-
-    public function setRegionCode(int $regionCode): self
-    {
-        $this->regionCode = $regionCode;
-
-        return $this;
-    }
-
-    public function getCityCode(): ?int
-    {
-        return $this->cityCode;
-    }
-
-    public function setCityCode(int $cityCode): self
-    {
-        $this->cityCode = $cityCode;
-
-        return $this;
-    }
-
-    public function getLongitude(): ?float
-    {
-        return $this->longitude;
-    }
-
-    public function setLongitude(float $longitude): self
-    {
-        $this->longitude = $longitude;
-
-        return $this;
-    }
-
-    public function getLatitude(): ?float
-    {
-        return $this->latitude;
-    }
-
-    public function setLatitude(float $latitude): self
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|RoadTripCity[]
-     */
-    public function getRoadTripCities(): Collection
-    {
-        return $this->roadTripCities;
-    }
-
-    public function addRoadTripCity(RoadTripCity $roadTripCity): self
-    {
-        if (!$this->roadTripCities->contains($roadTripCity)) {
-            $this->roadTripCities[] = $roadTripCity;
-            $roadTripCity->setCity($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRoadTripCity(RoadTripCity $roadTripCity): self
-    {
-        if ($this->roadTripCities->contains($roadTripCity)) {
-            $this->roadTripCities->removeElement($roadTripCity);
-            // set the owning side to null (unless already changed)
-            if ($roadTripCity->getCity() === $this) {
-                $roadTripCity->setCity(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|RoadTripCity[]
-     */
-    public function getRoadTripPreviousCities(): Collection
-    {
-        return $this->roadTripPreviousCities;
-    }
-
-    public function addRoadTripPreviousCity(RoadTripCity $roadTripPreviousCity): self
-    {
-        if (!$this->roadTripPreviousCities->contains($roadTripPreviousCity)) {
-            $this->roadTripPreviousCities[] = $roadTripPreviousCity;
-            $roadTripPreviousCity->setPreviousCity($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRoadTripPreviousCity(RoadTripCity $roadTripPreviousCity): self
-    {
-        if ($this->roadTripPreviousCities->contains($roadTripPreviousCity)) {
-            $this->roadTripPreviousCities->removeElement($roadTripPreviousCity);
-            // set the owning side to null (unless already changed)
-            if ($roadTripPreviousCity->getPreviousCity() === $this) {
-                $roadTripPreviousCity->setPreviousCity(null);
-            }
-        }
 
         return $this;
     }

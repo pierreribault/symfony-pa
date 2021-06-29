@@ -18,13 +18,7 @@ class CityFixtures extends Fixture
         for ($i = 0; $i < 30; $i++) {
             $city = (new City())
                 ->setName($faker->city)
-                ->setCityCode(0)
-                ->setCountry("France")
-                ->setLatitude(0)
-                ->setLongitude(0)
-                ->setRegion($faker->country)
-                ->setRegionCode(0)
-            ;
+                ->setCountry("France");
             $manager->persist($city);
         }
 

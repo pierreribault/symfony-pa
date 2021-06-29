@@ -32,16 +32,22 @@ class UserFixtures extends Fixture
             ->setIsVerified(true)
             ->setPhone($faker->phoneNumber);
 
-        $company = (new User())
-            ->setEmail("company@example.com")
-            ->setAddress($faker->address)
-            ->setEnabled(true)
-            ->setIsVerified(true)
-            ->setPhone($faker->phoneNumber)
-            ->setRoles(["ROLE_COMPANY"]);
+        for ($i = 0; $i < 30; $i++) {
+            $company = (new User())
+                ->setEmail(sprintf("company%s@example.com", $i))
+                ->setAddress($faker->address)
+                ->setEnabled(true)
+                ->setIsVerified(true)
+                ->setPhone($faker->phoneNumber)
+                ->setRoles(["ROLE_COMPANY"]);
+
+            $company->setPassword($this->encoder->encodePassword($company, 'root'));
+
+            $manager->persist($company);
+        }
 
         $admin = (new User())
-            ->setEmail($faker->email)
+            ->setEmail("admin@admin.com")
             ->setAddress($faker->address)
             ->setEnabled(true)
             ->setIsVerified(true)
@@ -49,15 +55,12 @@ class UserFixtures extends Fixture
             ->setRoles(["ROLE_ADMIN"]);
 
         $userPwd = $this->encoder->encodePassword($user, 'root');
-        $compPwd = $this->encoder->encodePassword($company, 'root');
         $adminPwd = $this->encoder->encodePassword($admin, 'root');
 
         $user->setPassword($userPwd);
-        $company->setPassword($compPwd);
         $admin->setPassword($adminPwd);
 
         $manager->persist($user);
-        $manager->persist($company);
         $manager->persist($admin);
 
         $manager->flush();
