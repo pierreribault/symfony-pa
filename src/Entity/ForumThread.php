@@ -58,9 +58,15 @@ class ForumThread
      */
     private $forumThreadAnswers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="thread")
+     */
+    private $likes;
+
     public function __construct()
     {
         $this->forumThreadAnswers = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +180,36 @@ class ForumThread
             // set the owning side to null (unless already changed)
             if ($forumThreadAnswer->getForumThread() === $this) {
                 $forumThreadAnswer->setForumThread(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setThread($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getThread() === $this) {
+                $like->setThread(null);
             }
         }
 

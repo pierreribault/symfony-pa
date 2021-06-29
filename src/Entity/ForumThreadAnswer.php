@@ -42,6 +42,11 @@ class ForumThreadAnswer
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,6 +100,22 @@ class ForumThreadAnswer
     public function setCreatedAt(): self
     {
         $this->createdAt = new DateTime();
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     * @return $this
+     */
+    public function setUpdatedAt(): self
+    {
+        $this->updatedAt = new DateTime();
 
         return $this;
     }
