@@ -70,6 +70,8 @@ class ForumThreadAnswerController extends AbstractController
      */
     public function edit(Request $request, ForumThreadAnswer $forumThreadAnswer, $idThread): Response
     {
+        $this->denyAccessUnlessGranted("answer_edit", $forumThreadAnswer);
+
         $form = $this->createForm(ForumThreadAnswerType::class, $forumThreadAnswer);
         $form->handleRequest($request);
 
@@ -90,6 +92,8 @@ class ForumThreadAnswerController extends AbstractController
      */
     public function delete(Request $request, ForumThreadAnswer $forumThreadAnswer, $idThread): Response
     {
+        $this->denyAccessUnlessGranted("answer_delete", $forumThreadAnswer);
+
         if ($this->isCsrfTokenValid('delete'.$forumThreadAnswer->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($forumThreadAnswer);
