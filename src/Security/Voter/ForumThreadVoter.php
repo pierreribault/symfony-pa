@@ -12,6 +12,7 @@ use App\Entity\User;
 class ForumThreadVoter extends Voter
 {
 
+    const THREAD_POST = "thread_post";
     const THREAD_EDIT = "thread_edit";
     const THREAD_DELETE = "thread_delete";
 
@@ -25,7 +26,7 @@ class ForumThreadVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, [self::THREAD_EDIT, self::THREAD_DELETE])
+        return in_array($attribute, [self::THREAD_POST, self::THREAD_EDIT, self::THREAD_DELETE])
             && $forumThread instanceof \App\Entity\ForumThread;
     }
 
@@ -38,10 +39,14 @@ class ForumThreadVoter extends Voter
         }
 
         // check author
-        if($forumThread->getAuthor() === null) return false;
+        if($forumThread->getAuthor() === null && $attribute !== self::THREAD_POST) return false;
 
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
+            case self::THREAD_POST:
+                // logic to determine if the user can POST
+                return $this->canPost($forumThread, $user);
+                break;
             case self::THREAD_EDIT:
                 // logic to determine if the user can EDIT
                 return $this->canEdit($forumThread, $user);
@@ -53,6 +58,10 @@ class ForumThreadVoter extends Voter
         }
 
         return false;
+    }
+
+    private function canPost() {
+        return true;
     }
 
     private function canEdit(ForumThread $forumThread, User $user) {

@@ -37,6 +37,9 @@ class ForumThreadController extends AbstractController
     public function new(Request $request): Response
     {
         $forumThread = new ForumThread();
+
+        $this->denyAccessUnlessGranted("thread_post", $forumThread);
+
         $form = $this->createForm(ForumThreadType::class, $forumThread);
         $form->handleRequest($request);
 
