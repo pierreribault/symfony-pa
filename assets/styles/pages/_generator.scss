@@ -1,0 +1,60 @@
+#generator-box {
+  height: 75vh;
+
+  #map-container {
+    #map {
+        width: 100% !important;
+        height: 100% !important;
+        @apply rounded-lg;
+      }
+  }
+
+  #activities {
+    .filters {
+      @apply mb-4;
+      @apply text-2xl;
+      @apply text-violet;
+      @apply font-medium;
+      @apply ml-1;
+    }
+
+    label {
+      @apply hidden;
+      @apply font-medium;
+      @apply text-black;
+      @apply text-lg;
+    }
+
+    select {
+      @apply bg-gray-100;
+      @apply rounded-full;
+      @apply pl-4;
+      @apply pr-8;
+      @apply py-2;
+      @apply text-silver;
+      @apply outline-none;
+      @apply border-none;
+    }
+
+    button[type=submit] {
+      @apply mt-5;
+      @apply bg-gigas;
+      @apply px-8;
+      @apply py-4;
+      @apply rounded-full;
+      @apply text-white;
+      @apply font-medium;
+      @apply text-lg;
+    }
+  }
+}
+
+#generator-details {
+  h1 {
+    @apply mb-4;
+    @apply text-2xl;
+    @apply text-violet;
+    @apply font-medium;
+    @apply ml-1;
+  }
+}

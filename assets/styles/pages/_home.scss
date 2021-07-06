@@ -1,0 +1,69 @@
+#home {
+    #upper {
+        img {
+
+        }
+
+        #description {
+            > h1 {
+                @apply font-black;
+                @apply text-violet;
+                @apply text-7xl;
+                @apply leading-none;
+                max-width: 65%;
+            }
+
+            > p {
+                @apply text-violet;
+                @apply text-xl;
+                @apply mt-10;
+                @apply font-medium;
+                max-width: 50%;
+            }
+
+            form {
+
+                #group-input {
+                    @apply bg-gray-100;
+                    @apply rounded-full;
+                    @apply items-center;
+                    @apply overflow-hidden;
+                    @apply py-2;
+
+                    input {
+                        @apply text-violet;
+                        @apply text-xl;
+                        @apply outline-none;
+                        @apply bg-transparent;
+                        @apply border-none;
+                        @apply px-8;
+                        @apply py-2;
+
+                        &:focus {
+                            @apply ring-0;
+                        }
+
+                        &:-webkit-autofill,
+                        &:-webkit-autofill:hover,
+                        &:-webkit-autofill:focus,
+                        &:-webkit-autofill:active
+                        {
+                            -webkit-box-shadow: 0 0 0 30px #f3f4f6 inset !important;
+                        }
+                    }
+                }
+
+                button {
+                    @apply mt-5;
+                    @apply bg-carnation;
+                    @apply px-8;
+                    @apply py-4;
+                    @apply rounded-full;
+                    @apply text-white;
+                    @apply font-medium;
+                    @apply text-lg;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+header {
+  nav {
+    @apply flex;
+    @apply justify-center;
+    @apply items-center;
+    @apply font-medium;
+    @apply mt-1;
+
+    a {
+      @apply font-bold;
+      @apply text-violet;
+      @apply mr-10;
+      @apply text-lg;
+    }
+
+    button {
+      @apply bg-gigas;
+      @apply px-8;
+      @apply py-4;
+      @apply rounded-full;
+      @apply text-white;
+      @apply text-lg;
+    }
+  }
+}
