@@ -3,13 +3,18 @@
 namespace App\Controller\Front;
 
 use App\Entity\ForumThread;
+use App\Entity\ForumThreadAnswer;
+use App\Entity\Like;
 use App\Form\ForumThreadType;
+use App\Form\ForumThreadAnswerType;
 use App\Repository\ForumThreadRepository;
 use App\Repository\ForumThreadAnswerRepository;
+use App\Repository\LikeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/forum/thread")
@@ -32,6 +37,9 @@ class ForumThreadController extends AbstractController
     public function new(Request $request): Response
     {
         $forumThread = new ForumThread();
+
+        $this->denyAccessUnlessGranted("thread_post", $forumThread);
+
         $form = $this->createForm(ForumThreadType::class, $forumThread);
         $form->handleRequest($request);
 
@@ -51,15 +59,43 @@ class ForumThreadController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="forum_thread_show", methods={"GET"})
+     * @Route("/{id}", name="forum_thread_show", methods={"GET","POST"})
      */
-    public function show(ForumThread $forumThread, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
+    public function show(Request $request, PaginatorInterface $paginator, ForumThread $forumThread, ForumThreadRepository $forumThreadRepository, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
     {
+
+        // PAGINATION
+        $data = $forumThreadAnswerRepository->findBy([
+            "forumThread" => $forumThread
+        ], ['createdAt' => 'asc']);
+
+        $answers = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            25 // Nombre de résultats par page
+        );
+
+        // ANSWER FORM
+        $forumThreadAnswer = new ForumThreadAnswer();
+        $form = $this->createForm(ForumThreadAnswerType::class, $forumThreadAnswer);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $forumThreadAnswer->setAuthor($this->getUser());
+            $forumThreadAnswer->setForumThread($forumThreadRepository->findOneBy([
+                "id" => $forumThread->getId()
+            ]));
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($forumThreadAnswer);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('front_forum_thread_show', ['id' => $forumThread->getId()]);
+        }
+
         return $this->render('front/forum_thread/show.html.twig', [
             'forum_thread' => $forumThread,
-            'forum_thread_answers' => $forumThreadAnswerRepository->findBy([
-                "forumThread" => $forumThread
-            ])
+            'forum_thread_answers' => $answers,
+            'form' => $form->createView()
         ]);
     }
 
@@ -68,6 +104,8 @@ class ForumThreadController extends AbstractController
      */
     public function edit(Request $request, ForumThread $forumThread): Response
     {
+        $this->denyAccessUnlessGranted("thread_edit", $forumThread);
+
         $form = $this->createForm(ForumThreadType::class, $forumThread);
         $form->handleRequest($request);
 
@@ -88,6 +126,8 @@ class ForumThreadController extends AbstractController
      */
     public function delete(Request $request, ForumThread $forumThread): Response
     {
+        $this->denyAccessUnlessGranted("thread_delete", $forumThread);
+
         if ($this->isCsrfTokenValid('delete'.$forumThread->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($forumThread);
@@ -95,5 +135,39 @@ class ForumThreadController extends AbstractController
         }
 
         return $this->redirectToRoute('front_forum');
+    }
+
+    /**
+     * @Route("/{id}/likeThread", name="forum_thread_like", methods={"POST"})
+     */
+    public function likeThread(Request $request, ForumThread $forumThread): Response
+    {
+        if ($this->isCsrfTokenValid('like'.$forumThread->getId(), $request->request->get('_token'))) {
+            $like = new Like();
+            $like->setAuthor($this->getUser());
+            $forumThread->addLike($like);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirectToRoute('front_forum_thread_show', ['id' => $forumThread->getId()]);
+    }
+
+    /**
+     * @Route("/{id}/dislikeThread/{idLike}", name="forum_thread_dislike", methods={"POST"})
+     */
+    public function dislikeThread(Request $request, ForumThread $forumThread, LikeRepository $likeRepository): Response
+    {
+        if ($this->isCsrfTokenValid('dislike'.$forumThread->getId(), $request->request->get('_token'))) {
+            $routeParameters = $request->attributes->get('_route_params');
+            $like = $likeRepository->findOneBy([
+                "id" => $routeParameters['idLike']
+            ]);
+            $forumThread->removeLike($like);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($like);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('front_forum_thread_show', ['id' => $forumThread->getId()]);
     }
 }

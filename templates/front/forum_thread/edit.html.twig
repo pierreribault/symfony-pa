@@ -8,8 +8,10 @@
 
 {% block body %}
 <section id="edit_thread">
-    <h1 class="text-4xl font-bold text-eden inline-block">Edit thread</h1>
-    <a href="{{ path('front_forum_thread_show', {'id': forum_thread.id}) }}" class="inline-block ml-6">Back to thread</a>
+
+    <a href="{{ path('front_forum_thread_show', {'id': forum_thread.id}) }}" class="inline-block mb-5 ml-1 hover-underline">&lt;&lt; Back to thread</a>
+
+    <h1 class="text-4xl font-bold text-eden">Edit thread</h1>
 
     {{ include('front/forum_thread/_form.html.twig', {'button_label': 'Edit'}) }}
 </section>

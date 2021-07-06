@@ -47,4 +47,13 @@ class ForumThreadRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByTitle($text) {
+        return $this->createQueryBuilder('f')
+            ->where('f.title LIKE :title')
+            ->setParameter('title', '%'.$text.'%')
+            ->orderBy('f.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
