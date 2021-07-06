@@ -3,7 +3,6 @@
 {% block title %}Forum{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{asset('build/app/page/forum.css')}}"/>
 {% endblock %}
 
 {% block body %}
@@ -12,10 +11,11 @@
         <h1 class="text-4xl font-bold">List of threads</h1>
 
         {% if app.user %}
-            <a
-            href="{{ path('front_forum_thread_new') }}"
-            class="ml-8 bg-gradient-to-r from-burn-sienna to-grenadier text-white py-2 px-4 rounded-full"
-            >Add new</a>
+            <a href="{{ path('front_forum_thread_new') }}">
+                <button class="principal_btn bg-gigas">
+                Add new
+                </button>
+            </a>
         {% endif %}
     </div>
 

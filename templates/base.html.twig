@@ -12,6 +12,11 @@
                 <p class="text-5xl font-bold">Traaavl.</p>
             </a>
             <nav>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{path('admin_dashboard')}}">
+                    <p>Dashboard</p>
+                </a>
+                {% endif %}
                 <a href="{{path('front_forum')}}">
                     <p>Destinations</p>
                 </a>
