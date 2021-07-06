@@ -3,12 +3,14 @@
 namespace App\Controller\Front;
 
 use App\Entity\ForumThread;
+use App\Entity\RoadTrip;
 use App\Entity\ForumThreadAnswer;
 use App\Entity\Like;
 use App\Form\ForumThreadType;
 use App\Form\ForumThreadAnswerType;
 use App\Repository\ForumThreadRepository;
 use App\Repository\ForumThreadAnswerRepository;
+use App\Repository\RoadTripRepository;
 use App\Repository\LikeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,6 +51,10 @@ class ForumThreadController extends AbstractController
             $entityManager->persist($forumThread);
             $entityManager->flush();
 
+            if ($roadTripUlid = $request->get('roadtrip_ulid')) {
+                $this->handleRoadTrip($roadTripUlid, $forumThread);
+            }
+
             return $this->redirectToRoute('front_forum_thread_show', ['id' => $forumThread->getId()]);
         }
 
@@ -59,7 +65,30 @@ class ForumThreadController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="forum_thread_show", methods={"GET","POST"})
+     * Associate thread and roadtrip.
+     *
+     * @param string $roadTripUlid
+     * @param ForumThread $thread
+     */
+    private function handleRoadTrip(string $roadTripUlid, ForumThread $thread)
+    {
+        /** @var RoadTripRepository $roadTripRepository */
+        $roadTripRepository = $this->getDoctrine()->getRepository(RoadTrip::class);
+
+        $roadTrip = $roadTripRepository->findOneBy([
+            'ulid' => $roadTripUlid,
+            'author' => $this->getUser()
+        ]);
+
+        $thread->setRoadTrip($roadTrip);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($thread);
+        $entityManager->flush();
+    }
+
+    /**
+     * @Route("/{id}", name="forum_thread_show", methods={"GET"})
      */
     public function show(Request $request, PaginatorInterface $paginator, ForumThread $forumThread, ForumThreadRepository $forumThreadRepository, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
     {
