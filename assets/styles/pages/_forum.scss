@@ -1,5 +1,71 @@
-#forum {
-    padding: 50px 5%;
+#forum, #new_thread {
+    @apply container;
+
+
+    h1 {
+        @apply text-2xl;
+        @apply text-violet;
+        @apply font-medium;
+        @apply mr-10;
+    }
+
+    .principal_btn {
+        @apply px-5;
+        @apply h-8;
+        @apply rounded-full;
+        @apply text-white;
+        @apply font-medium;
+    }
+
+    .submit_btn {
+        @apply px-5;
+        @apply py-2;
+        @apply rounded-full;
+        @apply bg-gigas;
+        @apply text-white;
+        @apply font-medium;
+    }
+
+    .form {
+        &.title {
+            @apply block;
+            @apply text-2xl;
+            @apply font-bold;
+            @apply mb-3;
+            @apply border-none;
+            @apply p-0;
+            @apply outline-none;
+            @apply w-full;
+        }
+
+        &.content {
+            @apply block;
+            @apply w-full;
+            @apply text-xl;
+            @apply mb-3;
+            @apply border-none;
+            @apply p-0;
+            @apply outline-none;
+        }
+
+        &.roadtrip {
+            @apply flex;
+            @apply text-gray-500;
+
+            select {
+                @apply text-xl;
+                @apply border-none;
+                @apply py-0;
+            }
+        }
+
+        &:focus, select:focus {
+            @apply border-none;
+            @apply outline-none;
+            @apply shadow-none;
+            @apply ring-0;
+        }
+    }
 
     .row_thread {
         background-color: white;
@@ -21,8 +87,8 @@
     }
 }
 
-#new_thread, #edit_thread, #new_answer, #edit_answer {
-    padding: 50px 5%;
+#edit_thread, #new_answer, #edit_answer {
+    @apply container;
 
     form {
         margin-top: 35px;

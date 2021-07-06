@@ -1,70 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}LMDVoyages{% endblock %}</title>
         <link rel="stylesheet" href="{{asset('build/app.css')}}"/>
         {% block stylesheets %}{% endblock %}
-        <script src="https://kit.fontawesome.com/9791e51add.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <header class="container grid grid-cols-3 items-center mt-10">
-            <a href="/" alt="home">
-                <p class="text-5xl font-bold spectral">Traaavl.</p>
+        <header class="container flex justify-between items-center my-10">
+            <a href="/">
+                <p class="text-5xl font-bold">Traaavl.</p>
             </a>
-            <div class="flex justify-center font-medium text-lg mt-1">
-                <a
-                href="/"
-                {% if app.request.attributes.get('_route') == "front_home" %}
-                class="text-eden border-b border-black cursor-pointer"
-                {% else %}
-                class="hover:text-eden cursor-pointer"
+            <nav>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{path('admin_dashboard')}}">
+                    <p>Dashboard</p>
+                </a>
                 {% endif %}
-                >
-                    <p>Home</p>
+                <a href="{{path('front_forum')}}">
+                    <p>Destinations</p>
                 </a>
-                <a
-                href="{{path('front_forum')}}"
-                {% if app.request.attributes.get('_route')|slice(0, 11) == "front_forum" %}
-                class="text-eden border-b border-black cursor-pointer ml-12"
-                {% else %}
-                class="hover:text-eden cursor-pointer ml-12"
-                {% endif %}>
-                    <p>Forum</p>
+                <a href="{{path('front_forum')}}">
+                    <p>Reviews</p>
                 </a>
-                {% if is_granted('ROLE_COMPANY') %}
-                    <a
-                    href="{{ path('front_app_activity_all')}}"
-                    {% if app.request.attributes.get('_route') == "front_app_activity_all" %}
-                    class="text-eden border-b border-black cursor-pointer ml-12"
-                    {% else %}
-                    class="hover:text-eden cursor-pointer ml-12"
-                    {% endif %}>
-                        <p>My activities</p>
-                    </a>
-                {% endif %}
-            </div>
-            {% if app.user %}
-                <a href="/logout" class="justify-end font-medium flex items-center text-lg hover:text-eden cursor-pointer">
-                    <img src="{{asset('images/icons/user.svg')}}" alt="user" draggable=false />
-                    <p class="mt-1 ml-2">Logout</p>
+                <a href="{{path('front_forum')}}">
+                    <p>Feedbacks</p>
                 </a>
-            {% else %}
-                <div class="flex justify-end">
-                    <a href="/login" class="justify-end font-medium flex items-center text-lg mr-12 hover:text-eden cursor-pointer">
-                        <p class="mt-1">Login</p>
-                    </a>
-                    <a href="/register" class="justify-end font-medium flex items-center text-lg hover:text-eden cursor-pointer">
-                        <p class="mt-1">Register</p>
-                    </a>
-                </div>
-            {% endif %}
+                <button>
+                    My account
+                </button>
+            </nav>
         </header>
 
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
         {{ encore_entry_script_tags('app') }}
-
-        <script src="https://kit.fontawesome.com/fde258db28.js" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -24,18 +24,6 @@ Encore
     .addEntry('admin', './assets/admin.js')
     .addEntry('collection', './assets/js/collectionForm.js')
 
-    .addStyleEntry('app/page/home', './assets/styles/pages/home.scss')
-    .addStyleEntry('app/page/login', './assets/styles/pages/login.scss')
-    .copyFiles([
-        {from: './public/bundles/fosckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
-        {from: './public/bundles/fosckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
-        {from: './public/bundles/fosckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
-        {from: './public/bundles/fosckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
-        {from: './public/bundles/fosckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
-    ])
-    .addStyleEntry('app/page/forum', './assets/styles/pages/forum.scss')
-    .addStyleEntry('app/page/generator', './assets/styles/pages/generator.scss')
-
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
@@ -83,8 +71,8 @@ Encore
     .autoProvidejQuery()
 
     .enablePostCssLoader((options) => {
-        options.config = {
-            path: './postcss.config.js'
+        options.postcssOptions = {
+            config: './postcss.config.js'
         };
     })
 ;

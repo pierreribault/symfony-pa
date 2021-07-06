@@ -2,65 +2,37 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.f1f07a11.js",
-        "/build/349.1b469f9c.js",
-        "/build/469.3f7244c7.js",
-        "/build/app.f1c913ca.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_min_js.js",
+        "/build/app.js"
       ],
       "css": [
-        "/build/app.f8dde770.css"
+        "/build/app.css"
       ]
     },
     "admin": {
       "js": [
-        "/build/runtime.f1f07a11.js",
-        "/build/349.1b469f9c.js",
-        "/build/469.3f7244c7.js",
-        "/build/486.36b5d8ba.js",
-        "/build/admin.a592f361.js"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
+        "/build/vendors-node_modules_jquery_dist_jquery_js.js",
+        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js",
+        "/build/admin.js"
       ],
       "css": [
-        "/build/486.ffa47c8a.css",
-        "/build/admin.e78f681e.css"
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.css",
+        "/build/admin.css"
       ]
     },
     "collection": {
       "js": [
-        "/build/runtime.f1f07a11.js",
-        "/build/349.1b469f9c.js",
-        "/build/collection.b1980130.js"
-      ]
-    },
-    "app/page/home": {
-      "js": [
-        "/build/runtime.f1f07a11.js"
-      ],
-      "css": [
-        "/build/app/page/home.7c8b27f4.css"
-      ]
-    },
-    "app/page/login": {
-      "js": [
-        "/build/runtime.f1f07a11.js"
-      ],
-      "css": [
-        "/build/app/page/login.7c8b27f4.css"
-      ]
-    },
-    "app/page/forum": {
-      "js": [
-        "/build/runtime.f1f07a11.js"
-      ],
-      "css": [
-        "/build/app/page/forum.7b79b16b.css"
-      ]
-    },
-    "app/page/generator": {
-      "js": [
-        "/build/runtime.f1f07a11.js"
-      ],
-      "css": [
-        "/build/app/page/generator.2bfaaf84.css"
+        "/build/runtime.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
+        "/build/vendors-node_modules_jquery_dist_jquery_js.js",
+        "/build/vendors-node_modules_core-js_modules_es_string_replace_js.js",
+        "/build/collection.js"
       ]
     }
   }
