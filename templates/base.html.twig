@@ -5,6 +5,7 @@
         <title>{% block title %}LMDVoyages{% endblock %}</title>
         <link rel="stylesheet" href="{{asset('build/app.css')}}"/>
         {% block stylesheets %}{% endblock %}
+        <script src="https://kit.fontawesome.com/9791e51add.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <header class="container grid grid-cols-3 items-center mt-10">
@@ -24,7 +25,7 @@
                 </a>
                 <a
                 href="{{path('front_forum')}}"
-                {% if app.request.attributes.get('_route') == "front_forum" %}
+                {% if app.request.attributes.get('_route')|slice(0, 11) == "front_forum" %}
                 class="text-eden border-b border-black cursor-pointer ml-12"
                 {% else %}
                 class="hover:text-eden cursor-pointer ml-12"

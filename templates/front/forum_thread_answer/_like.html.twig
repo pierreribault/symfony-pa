@@ -1,0 +1,28 @@
+{% set authorLikes = answer.likeAnswers|filter(lk => lk.author == app.user) %}
+<form
+method="post"
+action="{{
+    authorLikes is empty ? path('front_forum_thread_answer_like', {'id': answer.id, 'idThread': forum_thread.id})
+    : path('front_forum_thread_answer_dislike', {
+        'id': answer.id,
+        'idThread': forum_thread.id,
+        'idLike': authorLikes|first.id
+    })
+}}"
+onsubmit="{{ app.user ? "" : "mustLogin(event)" }}"
+>
+    <input type="hidden" name="_token" value="{{ authorLikes is empty ? csrf_token('like' ~ answer.id) : csrf_token('dislike' ~ answer.id) }}">
+    <div class="m-w-100 mt-3 flex items-center">
+        <button class="no-style">
+            <i class="{{ authorLikes is empty ? "far" : "fas" }} fa-heart text-grenadier mr-1.5 cursor-pointer"></i>
+            <span class="text-sm text-silver">{{ answer.likeAnswers|length }}</span>
+        </button>
+    </div>
+</form>
+
+<script>
+function mustLogin(e) {
+    e.preventDefault();
+    alert('To leave a like, you must log in');
+}
+</script>
