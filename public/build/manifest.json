@@ -1,11 +1,9 @@
 {
+  "build/app.css": "/build/app.css",
   "build/app.js": "/build/app.js",
   "build/collection.js": "/build/collection.js",
   "build/runtime.js": "/build/runtime.js",
   "build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js": "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
-  "build/vendors-node_modules_fortawesome_fontawesome-free_js_solid_min_js-node_modules_axios_index_js-d5aff3.js": "/build/vendors-node_modules_fortawesome_fontawesome-free_js_solid_min_js-node_modules_axios_index_js-d5aff3.js",
-  "build/vendors-node_modules_core-js_modules_es_string_replace_js-node_modules_jquery_dist_jquery_js.js": "/build/vendors-node_modules_core-js_modules_es_string_replace_js-node_modules_jquery_dist_jquery_js.js",
-  "build/app.css": "/build/app.css",
   "build/vendors-node_modules_fortawesome_fontawesome-free_js_all_min_js-node_modules_axios_index_js-n-8f6451.js": "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_min_js-node_modules_axios_index_js-n-8f6451.js",
-  "build/vendors-node_modules_fortawesome_fontawesome-free_js_fontawesome_min_js-node_modules_axios_in-45b153.js": "/build/vendors-node_modules_fortawesome_fontawesome-free_js_fontawesome_min_js-node_modules_axios_in-45b153.js"
+  "build/vendors-node_modules_core-js_modules_es_string_replace_js-node_modules_jquery_dist_jquery_js.js": "/build/vendors-node_modules_core-js_modules_es_string_replace_js-node_modules_jquery_dist_jquery_js.js"
 }

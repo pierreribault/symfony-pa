@@ -55,6 +55,34 @@
     @apply text-2xl;
     @apply text-violet;
     @apply font-medium;
-    @apply ml-1;
+  }
+
+  .clipboard {
+    @apply flex;
+
+    .icon {
+      @apply bg-carnation;
+      @apply text-white;
+      @apply px-2;
+      @apply flex ;
+      @apply items-center;
+      @apply h-full;
+      @apply rounded-l-xl;
+      @apply px-4;
+    }
+
+    input {
+      @apply border;
+      @apply border-carnation;
+      @apply rounded-r-xl;
+      @apply px-2;
+    }
+  }
+
+  .destination {
+    @apply flex;
+    @apply mt-5;
+    @apply text-lg;
+    @apply text-violet;
   }
 }
