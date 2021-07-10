@@ -19,6 +19,9 @@
 		<nav class="flex-grow pb-4 pr-4 h-full md:block md:pb-0 md:overflow-y-auto">
 			<ul>
 				<li>
+					<a class="{% if app.request.get('_route') starts with 'dashboard' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_dashboard') }}">Dashboard</a>
+				</li>
+				<li>
 					<a class="{% if app.request.get('_route') starts with 'admin_activity' %}sidebar__link-active{% else %}sidebar__link{% endif %}" href="{{ path('admin_activity_index') }}">Actvity</a>
 				</li>
 				<li>

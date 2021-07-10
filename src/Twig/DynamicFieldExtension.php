@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -34,10 +35,16 @@ class DynamicFieldExtension extends AbstractExtension
                     $value = $value->format("Y-m-d");
                 }elseif (is_bool($value)){
                     $value = $value ? "Yes" : "No";
+                }elseif ($value instanceof Collection){
+                    $value = implode(",", $value->toArray());
+                }elseif (gettype($value) == "array"){
+                    $value = implode(",", array_values($value));
                 }
             }else{
                 throw new Exception("Method not exist $field");
             }
+        }elseif (gettype($object) == "array"){
+            $value = $object[$field];
         }
 
         return $value;

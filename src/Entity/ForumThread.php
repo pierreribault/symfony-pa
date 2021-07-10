@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ForumThreadRepository;
-use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -49,12 +48,17 @@ class ForumThread
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=RoadTrip::class, inversedBy="forumThreads")
+     * @ORM\ManyToOne(targetEntity=RoadTrip::class, inversedBy="forumThreads", cascade={"persist", "remove"})
      */
     private $roadTrip;
 
     /**
-     * @ORM\OneToMany(targetEntity=ForumThreadAnswer::class, mappedBy="forumThread")
+     * @ORM\OneToMany(
+     *     targetEntity=ForumThreadAnswer::class,
+     *      mappedBy="forumThread",
+     *      cascade={"persist", "remove"},
+     *     orphanRemoval=true
+     *     )
      */
     private $forumThreadAnswers;
 
@@ -178,9 +182,9 @@ class ForumThread
         if ($this->forumThreadAnswers->contains($forumThreadAnswer)) {
             $this->forumThreadAnswers->removeElement($forumThreadAnswer);
             // set the owning side to null (unless already changed)
-            if ($forumThreadAnswer->getForumThread() === $this) {
-                $forumThreadAnswer->setForumThread(null);
-            }
+//            if ($forumThreadAnswer->getForumThread() === $this) {
+//                $forumThreadAnswer->setForumThread(null);
+//            }
         }
 
         return $this;

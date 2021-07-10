@@ -1,0 +1,42 @@
+{% for child in form.children %}
+	<div class="py-4">
+		{% do child.setRendered %}
+		{% if child.vars.block_prefixes[1] in ["email", "text", "number"] %}
+			{{ include('admin/layout/input.html.twig', {
+				'id' : child.vars.id,
+				'label' : child.vars.label,
+				'name' : child.vars.full_name,
+				'default' : dynamic_field(entity, child.vars.name),
+				'type': child.vars.block_prefixes[1]
+			}) }}
+		{% elseif child.vars.block_prefixes[1] == "checkbox" %}
+			{{ include('admin/layout/checkbox.html.twig', {
+				'id' : child.vars.id,
+				'label' : child.vars.label,
+				'name' : child.vars.full_name,
+				'checked' : dynamic_field(entity, child.vars.name),
+				'required': true
+			}) }}
+		{% elseif child.vars.block_prefixes[1] == "repeated" %}
+			{% for child in child.children %}
+				{{ include('admin/layout/input.html.twig', {
+					'id' : child.vars.id,
+					'label' : child.vars.label,
+					'name' : child.vars.full_name,
+					'default' : '',
+					'type': "password"
+				}) }}
+			{% endfor %}
+		{% elseif child.vars.block_prefixes[1] == "choice" %}
+			{% dump(child) %}
+			{{ include('admin/layout/select.html.twig', {
+				'id' : child.vars.id,
+				'label' : child.vars.label,
+				'name' : child.vars.full_name,
+				'selectedValue' : dynamic_field(entity, child.vars.name),
+				'values': child.vars.choices
+			}) }}
+		{% elseif child.vars.block_prefixes[1] == "hidden" %}
+		{% endif %}
+	</div>
+{% endfor %}

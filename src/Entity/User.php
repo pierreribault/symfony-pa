@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -86,6 +87,10 @@ class User implements UserInterface
     private $forumThreadAnswers;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $createdAt;
+  
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="author")
      */
     private $likes;
@@ -368,6 +373,23 @@ class User implements UserInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt(): void
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+
      * @return Collection|Like[]
      */
     public function getLikes(): Collection

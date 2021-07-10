@@ -1,5 +1,26 @@
 {% form_theme form 'admin/layout/tailwind_2_layout.html.twig' %}
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.author) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.roadTrip) }}
+<ul id="forumThreadAnswers-fields-list" class=""
+    data-prototype="{{ form_widget(form.forumThreadAnswers.vars.prototype)|e }}"
+    data-widget-tags="{{ '<li class="p-2 my-6 bg-white border rounded-lg shadow-xl flex-grow p-6 py-2 rounded-lg"></li>'|e }}"
+    data-widget-counter="{{ form.forumThreadAnswers|length }}">
+    {% for forumThreadAnswer in form.forumThreadAnswers %}
+        <li class="p-2 my-6 bg-white border rounded-lg shadow-xl flex-grow p-6 py-2 rounded-lg">
+            {{ form_errors(forumThreadAnswer) }}
+            {{ form_widget(forumThreadAnswer) }}
+            <button type="button" class="button-collection-delete">Supprimer</button>
+        </li>
+    {% endfor %}
+</ul>
+
+<button type="button"
+        class="add-another-collection-widget"
+        data-list-selector="#forumThreadAnswers-fields-list">Ajout d'une réponse</button>
+
+
     <button class="button-green">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

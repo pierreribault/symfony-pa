@@ -1,5 +1,7 @@
-{% form_theme form 'admin/layout/tailwind_2_layout.html.twig' %}
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="button-green">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="form_container">
+	
+	{{ form_start(form) }}
+	{{ include('admin/layout/_form.html.twig', {entity: company}) }}
+	<button class="button-green">{{ button_label|default('Save') }}</button>
+	{{ form_end(form) }}
+</div>

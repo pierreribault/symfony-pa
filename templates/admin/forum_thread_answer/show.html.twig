@@ -3,7 +3,7 @@
 {% block title %}ForumThreadAnswer{% endblock %}
 
 {% block body %}
-    <h1>ForumThreadAnswer</h1>
+    <h1 class="text-center text-6xl font-normal leading-normal mt-0 mb-2">ForumThreadAnswer</h1>
 
     <table class="table">
         <tbody>
@@ -22,7 +22,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('admin_forum_thread_answer_index') }}">back to list</a>
+    <a href="{{ path('admin_forum_thread_answer_index') }}" class="underline text-blue-500"><i class="fas fa-arrow-left"></i> Retour</a>
 
     <a href="{{ path('admin_forum_thread_answer_edit', {'id': forum_thread_answer.id}) }}" class="p-4 bg-green-700 text-white"><i class="fas fa-pen"></i></a>
 

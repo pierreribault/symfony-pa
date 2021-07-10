@@ -17,8 +17,9 @@ class ForumThreadAnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', CKEditorType::class)
-            ->add('forumThread', ForumThreadType::class)
+            ->add('content', CKEditorType::class, [
+                "label" => "Contenu"
+            ])
             ->add('author', EntityType::class, [
                 "class" => User::class
             ])

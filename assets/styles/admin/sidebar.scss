@@ -1,5 +1,5 @@
 .sidebar {
-  @apply flex-col w-80 md:flex md:flex-row md:min-h-screen bg-gray-50;
+  @apply flex-col md:flex md:flex-row md:min-h-screen bg-gray-50;
 
   &__container {
     @apply flex flex-col flex-shrink-0 w-full text-gray-700 bg-white shadow-xl md:w-64;

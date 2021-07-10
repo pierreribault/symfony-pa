@@ -16,13 +16,22 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('siret', TextType::class)
-            ->add('description', CKEditorType::class)
-            ->add('siteUrl', TextType::class)
+            ->add('name', TextType::class, [
+                "label" => "Nom"
+            ])
+            ->add('siret', TextType::class, [
+                "label" => "Siret"
+            ])
+            ->add('description', CKEditorType::class, [
+                "label" => "Description"
+            ])
+            ->add('siteUrl', TextType::class, [
+                "label" => "Url"
+            ])
             ->add('account', EntityType::class, [
                 "class" => User::class,
-                "choice_label" => "email"
+                "choice_label" => "email",
+                "label" => "Utilisateur"
             ])
         ;
     }

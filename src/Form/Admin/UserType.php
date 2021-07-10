@@ -3,6 +3,7 @@
 namespace App\Form\Admin;
 
 use App\Entity\Company;
+use App\Entity\Person;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,8 +24,11 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', TextType::class)
+            ->add('email', TextType::class, [
+                "label" => "Email"
+            ])
             ->add('roles', ChoiceType::class, [
+                "label" => "Roles",
                 "expanded" => false,
                 "multiple" => false,
                 "choices" => [
@@ -63,14 +67,27 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('isVerified', CheckboxType::class)
-            ->add('address', TextType::class)
-            ->add('phone', TelType::class)
-            ->add('enabled', CheckboxType::class)
-            ->add('person')
+            ->add('isVerified', CheckboxType::class, [
+                "label" => "Verified"
+            ])
+            ->add('address', TextType::class, [
+                "label" => "Address"
+            ])
+            ->add('phone', TelType::class, [
+                "label" => "Phone"
+            ])
+            ->add('enabled', CheckboxType::class, [
+                "label" => "Enabled"
+            ])
+            ->add('person', EntityType::class, [
+                "class" => Person::class,
+                "choice_label" => "name",
+                "label" => "Person"
+            ])
             ->add('company', EntityType::class, [
                 "class" => Company::class,
-                "choice_label" => "name"
+                "choice_label" => "name",
+                "label" => "Company"
             ])
         ;
 
