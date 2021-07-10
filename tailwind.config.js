@@ -6,10 +6,10 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'eden': '#175D62',
-                'burn-sienna': '#E66740',
-                'grenadier': '#DD3E00',
-                'silver': '#B9B9B9'
+                'silver': '#B9B9B9',
+                'gigas': '#4141A5',
+                'violet': '#1B0A3C',
+                'carnation': '#FC5156',
             },
             screens: {
                 'xs': {'max': '369px'},

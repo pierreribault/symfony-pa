@@ -3,18 +3,28 @@
 {% block title %}Forum{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{asset('build/app/page/forum.css')}}"/>
 {% endblock %}
 
 {% block body %}
 <section id="forum">
     <div class="mb-10 flex items-center">
         <h1 class="text-4xl font-bold">List of threads</h1>
-        <a
-        href="{{ path('front_forum_thread_new') }}"
-        class="ml-8 bg-gradient-to-r from-burn-sienna to-grenadier text-white py-2 px-4 rounded-full"
-        >Add new</a>
+
+        {% if app.user %}
+            <a href="{{ path('front_forum_thread_new') }}">
+                <button class="principal_btn bg-gigas">
+                Add new
+                </button>
+            </a>
+        {% endif %}
     </div>
+
+    {{ form_start(search_form) }}
+        <div class="search-form-control">
+            {{ form_widget(search_form.search) }}
+            {{ form_widget(search_form.submit) }}
+        </div>
+    {{ form_end(search_form) }}
 
     {% for thread in threads %}
     <div class="row_thread border-silver border">
@@ -31,5 +41,7 @@
         </div>
     </div>
     {% endfor %}
+
+    {{ knp_pagination_render(threads) }}
 </section>
 {% endblock %}

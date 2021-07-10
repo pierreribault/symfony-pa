@@ -90,12 +90,23 @@ class User implements UserInterface
      * @ORM\Column(type="date", nullable=true)
      */
     private $createdAt;
+  
+     * @ORM\OneToMany(targetEntity=Like::class, mappedBy="author")
+     */
+    private $likes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=LikeAnswer::class, mappedBy="author")
+     */
+    private $likeAnswers;
 
     public function __construct()
     {
         $this->roadTrips = new ArrayCollection();
         $this->forumThreads = new ArrayCollection();
         $this->forumThreadAnswers = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+        $this->likeAnswers = new ArrayCollection();
     }
 
     public function getUserIdentifier(): ?int
@@ -379,4 +390,62 @@ class User implements UserInterface
     }
 
 
+     * @return Collection|Like[]
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes[] = $like;
+            $like->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getAuthor() === $this) {
+                $like->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LikeAnswer[]
+     */
+    public function getLikeAnswers(): Collection
+    {
+        return $this->likeAnswers;
+    }
+
+    public function addLikeAnswer(LikeAnswer $likeAnswer): self
+    {
+        if (!$this->likeAnswers->contains($likeAnswer)) {
+            $this->likeAnswers[] = $likeAnswer;
+            $likeAnswer->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikeAnswer(LikeAnswer $likeAnswer): self
+    {
+        if ($this->likeAnswers->removeElement($likeAnswer)) {
+            // set the owning side to null (unless already changed)
+            if ($likeAnswer->getAuthor() === $this) {
+                $likeAnswer->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
 }

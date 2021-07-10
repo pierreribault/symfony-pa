@@ -3,9 +3,9 @@
     "app": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
-        "/build/vendors-node_modules_core-js_internals_array-method-has-species-support_js-node_modules_jquer-86ef90.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
         "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
+        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_min_js.js",
         "/build/app.js"
       ],
       "css": [
@@ -15,8 +15,8 @@
     "admin": {
       "js": [
         "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
-        "/build/vendors-node_modules_core-js_internals_array-method-has-species-support_js-node_modules_jquer-86ef90.js",
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
+        "/build/vendors-node_modules_jquery_dist_jquery_js.js",
         "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
         "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js",
         "/build/admin.js"
@@ -73,6 +73,10 @@
       ],
       "css": [
         "/build/app/page/generator.css"
+        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
+        "/build/vendors-node_modules_jquery_dist_jquery_js.js",
+        "/build/vendors-node_modules_core-js_modules_es_string_replace_js.js",
+        "/build/collection.js"
       ]
     }
   }
