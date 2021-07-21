@@ -6,6 +6,7 @@
         "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
         "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
         "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_min_js.js",
+        "/build/assets_js_map_js.js",
         "/build/app.js"
       ],
       "css": [
@@ -19,6 +20,7 @@
         "/build/vendors-node_modules_jquery_dist_jquery_js.js",
         "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
         "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js",
+        "/build/assets_js_map_js.js",
         "/build/admin.js"
       ],
       "css": [

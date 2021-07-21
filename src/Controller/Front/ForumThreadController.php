@@ -90,7 +90,7 @@ class ForumThreadController extends AbstractController
     /**
      * @Route("/{id}", name="forum_thread_show", methods={"GET"})
      */
-    public function show(Request $request, PaginatorInterface $paginator, ForumThread $forumThread, ForumThreadRepository $forumThreadRepository, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
+    public function show(Request $request, PaginatorInterface $paginator, ForumThread $forumThread, ForumThreadRepository $forumThreadRepository, ForumThreadAnswerRepository $forumThreadAnswerRepository, RoadTripRepository $roadTripRepository): Response
     {
 
         // PAGINATION
