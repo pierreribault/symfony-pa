@@ -35,6 +35,9 @@
                         {% include 'api/activity.html.twig' with {'thread': 'true'} %}
                     {% endfor %}
                 </div>
+                <div class="flex justify-center mt-auto">
+                    <a href="{{ share }}" id="generator-open">Duplicate this Roadtrip!</a>
+                </div>
             </div>
         </div>
     {% endif %}

@@ -25,6 +25,17 @@
         @apply font-medium;
     }
 
+    #generator-open {
+        @apply mt-5;
+        @apply bg-gigas;
+        @apply px-8;
+        @apply py-4;
+        @apply rounded-full;
+        @apply text-white;
+        @apply font-medium;
+        @apply text-lg;
+    }
+
     .form {
         &.title {
             @apply block;
