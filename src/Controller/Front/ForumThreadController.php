@@ -90,7 +90,7 @@ class ForumThreadController extends AbstractController
     /**
      * @Route("/{id}", name="forum_thread_show", methods={"GET"})
      */
-    public function show(Request $request, PaginatorInterface $paginator, ForumThread $forumThread, ForumThreadRepository $forumThreadRepository, ForumThreadAnswerRepository $forumThreadAnswerRepository): Response
+    public function show(Request $request, PaginatorInterface $paginator, ForumThread $forumThread, ForumThreadRepository $forumThreadRepository, ForumThreadAnswerRepository $forumThreadAnswerRepository, RoadTripRepository $roadTripRepository): Response
     {
 
         // PAGINATION
@@ -124,7 +124,10 @@ class ForumThreadController extends AbstractController
         return $this->render('front/forum_thread/show.html.twig', [
             'forum_thread' => $forumThread,
             'forum_thread_answers' => $answers,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'share' => ($forumThread->getRoadTrip())
+                ? $this->generateUrl('front_roadtrip_restore', ['ulid' => $forumThread->getRoadTrip()->getUlid()], 0)
+                : ""
         ]);
     }
 

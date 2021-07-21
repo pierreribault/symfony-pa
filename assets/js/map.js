@@ -15,32 +15,40 @@ let toLatitude
 let toLongitude
 let departure
 let arrival
-
+let thread = false
+let route
 
 if (activitiesList) {
+    if (document.getElementById('show_thread')) {
+        thread = true
+    }
+
     // Make a request for a user with a given ID
     departure = document.getElementById('map-container').getAttribute('data-departure')
     arrival = document.getElementById('map-container').getAttribute('data-arrival')
-    rayon = document.getElementById('rayon').value
 
-    document.getElementById('city').addEventListener('change', (event) => {
-        city = event.target.value
-        removeActivitiesNotSelected()
-    })
+    if (!thread) {
+        rayon = document.getElementById('rayon').value
 
-    document.getElementById('rayon').addEventListener('change', (event) => {
-        rayon = event.target.value
-        removeActivitiesNotSelected()
-    })
+        document.getElementById('city').addEventListener('change', (event) => {
+            city = event.target.value
+            removeActivitiesNotSelected()
+        })
 
-    document.getElementById('category').addEventListener('change', (event) => {
-        category = event.target.value
-        removeActivitiesNotSelected()
-    })
+        document.getElementById('rayon').addEventListener('change', (event) => {
+            rayon = event.target.value
+            removeActivitiesNotSelected()
+        })
 
-    document.getElementById('generator-submit').addEventListener('click', (event) => {
-        submitGenerator()
-    })
+        document.getElementById('category').addEventListener('change', (event) => {
+            category = event.target.value
+            removeActivitiesNotSelected()
+        })
+
+        document.getElementById('generator-submit').addEventListener('click', (event) => {
+            submitGenerator()
+        })
+    }
 
     let geocoder = new google.maps.Geocoder();
     geocoder.geocode({address: departure})
@@ -70,35 +78,40 @@ if (activitiesList) {
         }
      }
 
-     axios.post('/api/activities/', qs.stringify({
-         fromLongitude: fromLongitude,
-         fromLatitude: fromLatitude,
-         toLongitude: toLongitude,
-         toLatitude: toLatitude,
-         rayon: rayon,
-         city: city,
-         category: category
-     }))
-         .then(function (response) {
-             initMap();
-             for (let activity in response.data) {
-                 createActivity(response.data[activity])
-             }
-         })
-         .catch(function (error) {
-             // handle error
-             console.log(error);
-         })
+     if (!thread) {
+         axios.post('/api/activities/', qs.stringify({
+             fromLongitude: fromLongitude,
+             fromLatitude: fromLatitude,
+             toLongitude: toLongitude,
+             toLatitude: toLatitude,
+             rayon: rayon,
+             city: city,
+             category: category
+         }))
+             .then(function (response) {
+                 initMap();
+                 for (let activity in response.data) {
+                     createActivity(response.data[activity])
+                 }
+             })
+             .catch(function (error) {
+                 // handle error
+                 console.log(error);
+             })
+     }
  }
 
 const submitGenerator = () => {
-    console.log(waypointsSaved)
-    console.log(departure, arrival)
+    let waypointsOrder = []
+
+    for (let index of route.routes[0].waypoint_order) {
+        waypointsOrder.push(waypointsSaved[index])
+    }
 
     axios.post(`/api/roadtrip/`, qs.stringify({
        departure: departure,
        arrival: arrival,
-       activities: waypointsSaved,
+       activities: waypointsOrder,
     })).then(function (response) {
         window.location.href = `/roadtrip/${response.data.ulid}/details`
     })
@@ -157,11 +170,33 @@ const initMap = () => {
             markers[i].setMap(map);
         }
     }
+
+    console.log(waypointsSaved)
 }
 
 const createMarker = (data) => {
-    return new google.maps.Marker(data);
+    const marker = new google.maps.Marker(data);
+
+    marker.addListener ('click', () => {
+        resetBackgroundActivities()
+        const activity = document.getElementById(`listing-${marker.id }`)
+        activity.classList.add('bg-gray-200')
+        activity.scrollIntoView({behavior: "smooth"});
+        map.setZoom(8)
+        map.setCenter(marker.getPosition())
+    })
+
+    return marker
 }
+
+const resetBackgroundActivities = () => {
+    let activities = document.getElementsByClassName('listing')
+
+    for (const activity of activities) {
+        activity.classList.remove('bg-gray-200')
+    }
+}
+
 
 const addMarker = (location) => {
     const marker = createMarker(location)
@@ -246,6 +281,8 @@ window.calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
             travelMode: google.maps.TravelMode.DRIVING,
         },
         (response, status) => {
+            route = response;
+
             if (status === "OK") {
                 directionsRenderer.setDirections(response);
             } else {
@@ -254,3 +291,13 @@ window.calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
         }
     );
 }
+
+document.getElementById('clipboard').addEventListener('click', () => {
+    document.getElementById('copy').select()
+    document.execCommand('copy')
+
+    document.getElementById('clipboard-icon').classList.add('bg-pastel-green')
+    document.getElementById('clipboard-icon').classList.remove('bg-gigas')
+    document.getElementById('copy').classList.add('border-pastel-green')
+    document.getElementById('copy').classList.remove('border-gigas')
+})
