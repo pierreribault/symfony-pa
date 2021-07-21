@@ -599,7 +599,7 @@
   "build/public/bundles/fosckeditor/plugins/smiley/images/kiss.gif": "/build/images/kiss.f4be0649.gif",
   "build/public/bundles/fosckeditor/skins/moono-lisa/icons.png": "/build/images/icons.5b61cd4c.png",
   "build/public/bundles/fosckeditor/plugins/icons_hidpi.png": "/build/images/icons_hidpi.e7172bfe.png",
-  "build/public/bundles/fosckeditor/plugins/icons.png": "/build/images/icons.b1782f8b.png"
+  "build/public/bundles/fosckeditor/plugins/icons.png": "/build/images/icons.b1782f8b.png",
   "build/collection.js": "/build/collection.js",
   "build/runtime.js": "/build/runtime.js",
   "build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js": "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",

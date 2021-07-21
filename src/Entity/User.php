@@ -90,7 +90,8 @@ class User implements UserInterface
      * @ORM\Column(type="date", nullable=true)
      */
     private $createdAt;
-  
+
+    /*
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="author")
      */
     private $likes;
@@ -389,7 +390,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTime();
     }
 
-
+    /*
      * @return Collection|Like[]
      */
     public function getLikes(): Collection
