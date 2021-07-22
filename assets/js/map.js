@@ -174,7 +174,7 @@ const restoreMarker = (event) => {
 
     btn.innerHTML = '+'
     btn.classList.toggle('bg-green-500')
-    btn.classList.toggle('bg-red-500')
+    btn.classList.toggle('bg-carnation')
 
     markers[event.target.getAttribute('data-index')] = createMarker({
         position: {
@@ -191,7 +191,7 @@ const removeMarker = (event) => {
 
     btn.innerHTML = '-'
     btn.classList.toggle('bg-green-500')
-    btn.classList.toggle('bg-red-500')
+    btn.classList.toggle('bg-carnation')
 
     markers[event.target.getAttribute('data-index')] = null
 }

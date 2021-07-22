@@ -189,7 +189,7 @@
         "version": "2.8.0"
     },
     "php": {
-        "version": "7.3"
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.2.0"
@@ -462,6 +462,9 @@
     },
     "symfony/process": {
         "version": "v5.1.7"
+    },
+    "symfony/profiler-pack": {
+        "version": "v1.0.5"
     },
     "symfony/property-access": {
         "version": "v5.1.7"

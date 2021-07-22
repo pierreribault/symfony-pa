@@ -1,5 +1,65 @@
-{% extends 'base.html.twig' %}
+{% do form.email.setRendered %}
+	{% do form.phone.setRendered %}
+	{% do form.plainPassword.setRendered %}
+	{% do form.address.setRendered %}
+	{% do form.person.setRendered %}
 
-{% block body %}
+<div class="form_container">
+	{{ form_start(form) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.email.vars.id,
+		'label' : form.email.vars.label,
+		'name' : form.email.vars.full_name,
+		'default' : user.email,
+		'type': form.email.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.address.vars.id,
+		'label' : form.address.vars.label,
+		'name' : form.address.vars.full_name,
+		'default' :  user.address,
+		'type': form.address.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.phone.vars.id,
+		'label' : form.phone.vars.label,
+		'name' : form.phone.vars.full_name,
+		'default' :  user.phone,
+		'type': form.phone.vars.block_prefixes[1]
+	}) }}
+	
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.plainPassword.children.first.vars.id,
+		'label' : form.plainPassword.children.first.vars.label,
+		'name' : form.plainPassword.children.first.vars.full_name,
+		'default' : "",
+		"required": false,
+		'type': form.plainPassword.children.first.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.plainPassword.children.second.vars.id,
+		'label' : form.plainPassword.children.second.vars.label,
+		'name' : form.plainPassword.children.second.vars.full_name,
+		'default' :  "",
+		"required": false,
+		'type': form.plainPassword.children.second.vars.block_prefixes[1]
+	}) }}
+	<h2 class="text-center">Person</h2>
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.person.children.firstName.vars.id,
+		'label' : form.person.children.firstName.vars.label,
+		'name' : form.person.children.firstName.vars.full_name,
+		'default' : user.person.firstName,
+		'type': form.person.children.firstName.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.person.children.lastName.vars.id,
+		'label' : form.person.children.lastName.vars.label,
+		'name' : form.person.children.lastName.vars.full_name,
+		'default' : user.person.lastName,
+		'type': form.person.children.lastName.vars.block_prefixes[1]
+	}) }}
+	<button class="bg-blue-600 rounded-md text-white py-4">{{ button_label|default('Save') }}</button>
+	{{ form_end(form) }}
+</div>
 
-{% endblock %}

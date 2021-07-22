@@ -19,14 +19,8 @@ services:
       - appserver
   node:
     type: node:14
-  chromedriver:
-    type: compose
-    app_mount: false
-    services:
-      image: selenium/standalone-chrome:85.0
-      command: /opt/bin/entry_point.sh
-      expose:
-        - "4444"
+  database:
+    portforward: 50432
 
 tooling:
   redis-cli:

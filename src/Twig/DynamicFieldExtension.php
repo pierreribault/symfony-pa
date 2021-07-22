@@ -17,6 +17,7 @@ class DynamicFieldExtension extends AbstractExtension
             new TwigFunction('dynamic_field', [$this, 'render']),
         ];
     }
+
     public function render( $object, string $field)
     {
         $method = "get".u($field)->title();

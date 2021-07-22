@@ -3,13 +3,19 @@
 {% block title %}Traaavl - New thread{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{asset('build/app/page/forum.css')}}"/>
 {% endblock %}
 
 {% block body %}
 <section id="new_thread">
-    <h1 class="text-4xl font-bold text-eden inline-block">Create new thread</h1>
-    <a href="{{ path('front_forum') }}" class="inline-block ml-6">Back to list</a>
+    <div class="mb-10 flex items-center">
+        <h1 class="text-4xl font-bold text-eden">Create new thread</h1>
+
+        <a href="{{ path('front_forum') }}">
+            <button class="principal_btn bg-carnation">
+                Back to list
+            </button>
+        </a>
+    </div>
 
     {{ include('front/forum_thread/_form.html.twig') }}
 </section>

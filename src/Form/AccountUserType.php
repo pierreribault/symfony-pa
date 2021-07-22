@@ -25,10 +25,6 @@ class AccountUserType extends AbstractType
     {
         return  $builder
             ->add('email')
-            ->add('password', PasswordType::class, [
-                'mapped' => false,
-                'required' => false,
-            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'required' => false,
@@ -52,6 +48,7 @@ class AccountUserType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
+                        'allowNull' => true,
                     ]),
                     new Length([
                         'min' => 6,

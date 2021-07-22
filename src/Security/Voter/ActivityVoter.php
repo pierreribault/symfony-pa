@@ -28,13 +28,9 @@ class ActivityVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case 'POST_EDIT':
-                // logic to determine if the user can EDIT
-                // return true or false
-                break;
+                return $user->getCompany()->getId() === $subject->getCompany()->getId() || in_array("ROLE_ADMIN", $user->getRoles());
             case 'POST_DELETE':
-                // logic to determine if the user can VIEW
-                // return true or false
-                break;
+                return $user->getCompany()->getId() === $subject->getCompany()->getId() || in_array("ROLE_ADMIN", $user->getRoles());
         }
 
         return false;

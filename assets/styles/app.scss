@@ -4,38 +4,57 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import "modules/header";
+@import "pages/home";
+@import "pages/generator";
+@import "pages/forum";
+
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 
 /* CSS */
 
 body {
-    background-color: #F8F8F8;
-    
-    .spectral {
-        font-family: Spectral;
-    }
+  font-family: Roboto, serif;
 
-    h1 {
-        font-size: 4rem;
-    }
+  h1 {
+    font-size: 4rem;
+  }
 
-    #generator {
-        height: 65px;
+  #generator {
+    height: 65px;
 
-        button {
-            width: 65px;
-        }
+    button {
+      width: 65px;
     }
+  }
 }
 
 /* BOUTONS */
 
 .btn {
-    padding: 15px 40px;
-    border-radius: 50px;
-    text-decoration: none;
+  padding: 15px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+}
+
+.form_container {
+  @apply container items-center px-5 py-12 lg:px-20;
+
+  form {
+    @apply flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-2/3;
+  }
+
+  .check-slide {
+    /* Toggle B */
+    input:checked ~ .dot {
+      transform: translateX(100%);
+      background-color: #48bb78;
+    }
+
+    input:checked + svg {
+      display: block;
+    }
+  }
 }

@@ -10,8 +10,8 @@
     {{ include('admin/layout/show.html.twig', {
         title: 'Utilisateur',
         entity: user,
-        label : ["Email", "Roles","Adresse", "Téléphone", "Vérifier","Activer"],
-        fields : ["email", "roles", "address", "phone", "isVerified", "enabled"],
+        label : ["Email","Adresse", "Téléphone"],
+        fields : ["email", "address", "phone"],
         edit: "admin_user_edit"
     }) }}
     

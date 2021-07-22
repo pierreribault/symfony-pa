@@ -9,26 +9,31 @@
 {% block body %}
 
 <div id="home" class="container">
-    <div class="text-center text-eden mt-24">
-        <h1 class="spectral">In <span class="font-bold spectral">pursuit</span> of new adventure</h1>
-        <h2 class="text-2xl">Find the best places to discover</h2>
-
-        <form id="generator" action="/roadtrip" method="POST" class="flex justify-center mt-20">
-            <div class="bg-white rounded-md flex items-center px-8">
-                <div class="text-left mx-4">
-                    <label for="departure" class="font-medium text-black block text-md">From</label>
-                    <input id="departure" name="departure" type="text" class="text-silver text-md w-52 outline-none" placeholder="City of departure" />
+    <div id="upper" class="flex">
+        <div class="w-1/2 p-20">
+            <img src="/images/traveling_woman.svg" alt="traveling woman">
+        </div>
+        <div id="description" class="w-1/2 py-20">
+            <h1>Life is short and the world is wide!</h1>
+            <p>To get the best of your adventure you just need to leave and go where you like. We are waiting for you.</p>
+            <form action="/roadtrip" method="POST" class="mt-10 inline-block justify-center">
+                <div id="group-input" class="flex items-center">
+                    <div class="text-left mr-4">
+                        <label for="departure" class="hidden">From</label>
+                        <input id="departure" name="departure" type="text" placeholder="City of departure" />
+                    </div>
+                    <p class="m-auto">-></p>
+                    <div class="text-left ml-4">
+                        <label for="arrival" class="hidden">To</label>
+                        <input id="arrival" name="arrival" type="text" placeholder="City of arrival" />
+                    </div>
                 </div>
-                <div class="h-11 border-l-2 border-eden"></div>
-                <div class="text-left mx-4">
-                    <label for="arrival" class="font-medium text-black block text-md">To</label>
-                    <input id="arrival" name="arrival" type="text" class="text-silver text-md w-52 outline-none" placeholder="City of arrival" />
-                </div>
-            </div>
-            <button class="rounded-md bg-gradient-to-r from-burn-sienna to-grenadier ml-2 flex justify-center items-center" type="submit">
-                <img src="images/icons/search.svg" alt="search" draggable=false/>
-            </button>
-        </form>
+                <button type="submit">
+                    Plan a trip >
+                </button>
+            </form>
+        </div>
     </div>
 </div>
+
 {% endblock %}

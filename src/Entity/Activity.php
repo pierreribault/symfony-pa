@@ -17,6 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Activity
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -106,7 +107,7 @@ class Activity
         $this->roadTrips = new ArrayCollection();
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

@@ -4,6 +4,7 @@
 namespace App\Controller\Front;
 
 
+use App\Entity\User;
 use App\Form\AccountCompanyType;
 use App\Form\AccountUserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,55 +26,63 @@ class AccountController extends AbstractController
     /**
      * @Route("/", name="_show", methods={"GET"})
      */
-    public function account(){
+    public function account()
+    {
         return $this->render("front/account/account.html.twig", [
             "user" => $this->getUser()
         ]);
     }
 
     /**
+     * @Route("/delete", name="_delete", methods={"POST", "DELETE"})
+     */
+    public function delete()
+    {
+        /** @var User $user */
+        $user= $this->getUser();
+        $user->setEnabled(false);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute("app_logout");
+    }
+
+    /**
      * @Route("/edit", name="_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder){
+    public function edit(Request $request, EntityManagerInterface $entityManager, UserPasswordEncoderInterface $passwordEncoder)
+    {
         $user = $this->getUser();
 
-        if($this->isGranted("ROLE_COMPANY")){
+        if ($this->isGranted("ROLE_COMPANY")) {
             $form = $this->createForm(AccountCompanyType::class, $user);
-        }else if($this->isGranted("ROLE_USER")){
-            $form = $this->createForm(AccountUserType::class, $user);
+        } else {
+            if ($this->isGranted("ROLE_USER")) {
+                $form = $this->createForm(AccountUserType::class, $user);
+            }
         }
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
-            $oldPassword = $form->get('password')->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
             $plainPassword = $form->get("plainPassword")->getData();
-            $isValidPassword = $passwordEncoder->isPasswordValid($user,$oldPassword);
-            $differentPassword = $plainPassword !== $form->get('password')->getData();
 
-            if ($isValidPassword && $differentPassword){
+            if (!is_null($plainPassword)) {
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
                         $user,
-                        $form->get('plainPassword')->getData()
+                        $plainPassword
                     )
                 );
-                $entityManager->flush();
-                return $this->redirectToRoute("front_app_account_show");
-            }else{
-                if ($differentPassword){
-                    $this->addFlash("error","Vous devez entrez un mot de passe différent de celui actuel");
-                }
-
-                if ($isValidPassword){
-                    $this->addFlash("error","Vous devez entrez un votre mot de passe actuel");
-                }
             }
+
+            $entityManager->flush();
+            return $this->redirectToRoute("front_app_account_show");
         }
 
         return $this->render("front/account/edit.html.twig", [
             "user" => $user,
             'form' => $form->createView(),
+            "errors" => $form->getErrors()
         ]);
     }
 }
