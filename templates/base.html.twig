@@ -18,17 +18,22 @@
                 </a>
                 {% endif %}
                 <a href="{{path('front_forum')}}">
-                    <p>Destinations</p>
-                </a>
-                <a href="{{path('front_forum')}}">
                     <p>Forum</p>
                 </a>
-                <a href="{{path('front_forum')}}">
-                    <p>Contact us</p>
-                </a>
+                {% if app.user %}
                 <button>
                     My account
                 </button>
+                {%  else %}
+                    <a href="{{path('app_login')}}">
+                        <p>Register as a Company</p>
+                    </a>
+                    <a href="{{ path('app_login') }}">
+                        <button>
+                            Login / Register
+                        </button>
+                    </a>
+                {% endif %}
             </nav>
         </header>
 

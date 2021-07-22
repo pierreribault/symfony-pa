@@ -34,7 +34,7 @@ class ContactController extends AbstractController
             $entityManager->flush();
 
             $mailerService->sendContact($contact);
-            return $this->redirectToRoute('contact_index');
+            return $this->redirectToRoute('front_contact_index');
         }
 
         return $this->render('contact/new.html.twig', [
