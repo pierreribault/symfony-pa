@@ -28,7 +28,6 @@
 				}) }}
 			{% endfor %}
 		{% elseif child.vars.block_prefixes[1] == "choice" %}
-			{% dump(child) %}
 			{{ include('admin/layout/select.html.twig', {
 				'id' : child.vars.id,
 				'label' : child.vars.label,

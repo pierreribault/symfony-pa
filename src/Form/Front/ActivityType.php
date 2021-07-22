@@ -21,27 +21,46 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', CKEditorType::class)
-            ->add('reservationUrl', TextType::class)
-            ->add('address', TextType::class)
-            ->add('longitude', NumberType::class)
-            ->add('latitude', NumberType::class)
-            ->add('phone', TelType::class)
-            ->add('menu', CKEditorType::class)
+            ->add('name', TextType::class, [
+                "label" => "Name"
+            ])
+            ->add('description', CKEditorType::class, [
+                "label" => "Description"
+            ])
+            ->add('reservationUrl', TextType::class, [
+                "label" => "Reservation url"
+            ])
+            ->add('address', TextType::class, [
+                "label" => "Address"
+            ])
+            ->add('longitude', NumberType::class, [
+                "label" => "Longitude"
+            ])
+            ->add('latitude', NumberType::class, [
+                "label" => "Latitude"
+            ])
+            ->add('phone', TelType::class, [
+                "label" => "Phone"
+            ])
+            ->add('menu', CKEditorType::class, [
+                "label" => "Menu"
+            ])
             ->add('images', CollectionType::class, [
                 "entry_type" => ImageType::class,
                 "allow_add" => true,
                 "allow_delete" => true,
+                "by_reference" => false
             ])
             ->add('city', EntityType::class, [
+                "label" => "City",
                 "class" => City::class,
                 "choice_label" => 'name'
             ])
             ->add('categories', EntityType::class, [
                 "multiple" => true,
                 "class" => Category::class,
-                "choice_label" => 'name'
+                "choice_label" => 'name',
+                "label" => "Categories"
             ])
         ;
     }

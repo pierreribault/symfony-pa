@@ -11,3 +11,11 @@ import './styles/app.scss';
 import '../assets/js/map.js'
 
 import '@fortawesome/fontawesome-free/js/all.min'
+
+
+const dropdown = document.getElementById("account-dropdown")
+console.log(dropdown)
+dropdown.addEventListener("click", () => {
+    const menu = document.getElementById("account-menu")
+    menu.classList.toggle("hidden")
+})

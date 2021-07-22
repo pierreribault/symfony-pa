@@ -15,9 +15,11 @@ class PersonType extends AbstractType
         $builder
             ->add('firstName', TextType::class, [
                 "required" => true,
+                "label" => "First Name"
             ])
             ->add('lastName', TextType::class, [
                 "required" => true,
+                "label" => "Last Name"
             ])
         ;
     }

@@ -20,20 +20,43 @@
                 <a href="{{path('front_forum')}}">
                     <p>Forum</p>
                 </a>
-                {% if app.user %}
-                <button>
-                    My account
-                </button>
-                {%  else %}
-                    <a href="{{path('app_login')}}">
-                        <p>Register as a Company</p>
-                    </a>
-                    <a href="{{ path('app_login') }}">
-                        <button>
-                            Login / Register
-                        </button>
-                    </a>
-                {% endif %}
+                <div class="relative">
+                    <!-- Dropdown toggle button -->
+                    <button id="account-dropdown">
+                        My Account
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="account-menu" class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800 hidden">
+    
+                        {% if app.user %}
+                        <a href="{{ path('front_app_account_show') }}" class="block mr-0 px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
+                            Profil
+                        </a>
+                        {% endif %}
+                        {% if app.user and "ROLE_COMPANY" in app.user.roles %}
+                        <a href="{{ path('front_app_activity_all') }}" class="block mr-0 px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
+                            Mes activités
+                        </a>
+                        {% endif %}
+                        {% if app.user and "ROLE_ADMIN" in app.user.roles %}
+                        <a href="{{ path('admin_dashboard') }}" class="block mr-0 px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
+                            Dashboard
+                        </a>
+                        {% endif %}
+                        {% if app.user %}
+                        <a href="{{ path('app_logout') }}" class="block mr-0 px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
+                            Sign Out
+                        </a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="block mr-0 px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
+                                log In
+                            </a>
+                            <a href="{{ path('app_login') }}" class="block mr-0 px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white dark:hover:text-white">
+                                Register as a Company
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
             </nav>
         </header>
 

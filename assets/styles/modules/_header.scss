@@ -11,6 +11,16 @@ header {
       @apply text-violet;
       @apply mr-10;
       @apply text-lg;
+
+    }
+
+    a.button {
+      @apply bg-gigas;
+      @apply px-8;
+      @apply py-4;
+      @apply rounded-full;
+      @apply text-white;
+      @apply text-lg;
     }
 
     button {

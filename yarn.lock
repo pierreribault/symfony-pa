@@ -1713,7 +1713,15 @@ chalk@^2.0.0, chalk@^2.3.2, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
+chalk@^4.0.0, chalk@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.npmjs.org/chalk/-/chalk-4.1.0.tgz"
+  integrity sha512-qwx12AxXe2Q5xQ43Ac//I6v5aXTipYrSESdOgzrN+9XjgEpyjpKuvSGaN4qE93f7TQTlerQQ8S+EQ0EyDoVL1A==
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
+chalk@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.1.tgz#c80b3fab28bf6371e6863325eee67e618b77e6ad"
   integrity sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==
@@ -1721,10 +1729,10 @@ chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.1:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chart.js@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.4.0.tgz#4fb2a750225fcc1b387221422f5d4260b55b4579"
-  integrity sha512-mJsRm2apQm5mwz2OgYqGNG4erZh/qljcRZkWSa0kLkFr3UC3e1wKRMgnIh6WdhUrNu0w/JT9PkjLyylqEqHXEQ==
+chart.js@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.4.1.tgz#ff3b2b2a04a37b83618b4a6399a5f87ccc0f1e8a"
+  integrity sha512-0R4mL7WiBcYoazIhrzSYnWcOw6RmrRn7Q4nKZNsBQZCBrlkZKodQbfeojCCo8eETPRCs1ZNTsAcZhIfyhyP61g==
 
 chokidar@^3.4.3:
   version "3.5.1"

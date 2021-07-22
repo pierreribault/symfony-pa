@@ -1,31 +1,128 @@
-{{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.reservationUrl) }}
-    {{ form_row(form.address) }}
-    {{ form_row(form.phone) }}
-    {{ form_row(form.menu) }}
-
-{{ form_label(form.images) }}
-<ul id="images-fields-list"
-    data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
-    data-widget-tags="{{ '<li></li>'|e }}"
-    data-widget-counter="{{ form.images|length }}">
-    {% for imageFild in form.images %}
-        <li>
-            {{ form_errors(imageFild) }}
-            {{ form_widget(imageFild) }}
-        </li>
-    {% endfor %}
-</ul>
-
-<button type="button"
-        class="add-another-collection-widget"
-        data-list-selector="#images-fields-list">Add another image</button>
-
+{% do form.name.setRendered %}
+{% do form.reservationUrl.setRendered %}
+{% do form.address.setRendered %}
+{% do form.phone.setRendered %}
+{% do form.menu.setRendered %}
 {% do form.images.setRendered %}
+{% do form.city.setRendered %}
+{% do form.latitude.setRendered %}
+{% do form.longitude.setRendered %}
 
-{{ form_widget(form) }}
-
-    <button class="bg-blue-600 rounded-md text-white py-4">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="form_container">
+	{{ form_start(form) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.name.vars.id,
+		'label' : form.name.vars.label,
+		'name' : form.name.vars.full_name,
+		'default' : activity ? activity.name : "",
+		'type': form.name.vars.block_prefixes[1]
+	}) }}
+	<div class="relative mt-4 flex flex-col" data-children-count="1">
+		<label for="{{ form.description.vars.id }}" class="text-base leading-7 text-blueGray-500">{{ form.description.vars.label }}</label>
+		{{ form_widget(form.description) }}
+	</div>
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.reservationUrl.vars.id,
+		'label' : form.reservationUrl.vars.label,
+		'name' : form.reservationUrl.vars.full_name,
+		'default' :  activity ? activity.reservationUrl : "",
+		'type': form.reservationUrl.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.address.vars.id,
+		'label' : form.address.vars.label,
+		'name' : form.address.vars.full_name,
+		'default' :  activity ? activity.address : "",
+		'type': form.address.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.phone.vars.id,
+		'label' : form.phone.vars.label,
+		'name' : form.phone.vars.full_name,
+		'default' : activity ? activity.phone : "",
+		'type': form.phone.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.menu.vars.id,
+		'label' : form.menu.vars.label,
+		'name' : form.menu.vars.full_name,
+		'default' : activity ? activity.menu : "",
+		'type': form.menu.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.longitude.vars.id,
+		'label' : form.longitude.vars.label,
+		'name' : form.longitude.vars.full_name,
+		'default' : activity ? activity.longitude : "",
+		'type': form.longitude.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/input.html.twig', {
+		'id' : form.latitude.vars.id,
+		'label' : form.latitude.vars.label,
+		'name' : form.latitude.vars.full_name,
+		'default' : activity ? activity.latitude : "",
+		'type': form.latitude.vars.block_prefixes[1]
+	}) }}
+	{{ include('admin/layout/select.html.twig', {
+		'id' : form.city.vars.id,
+		'label' : form.city.vars.label,
+		'name' : form.city.vars.full_name,
+		'selectedValue' : activity ? activity.city : "",
+		'values': form.city.vars.choices
+	}) }}
+	<div class="relative mt-4 flex flex-col" data-children-count="1">
+		<label for="{{ form.categories.vars.id }}" class="text-base leading-7 text-blueGray-500">{{ form.categories.vars.label }}</label>
+		{{ form_widget(form.categories) }}
+	</div>
+	<table class="min-w-full leading-normal">
+		<thead>
+		<tr>
+			<th scope="col" class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal">Image</th>
+			<th scope="col" class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal">Modifier</th>
+			<th scope="col" class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal">Télécharger</th>
+			<th scope="col" class="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-center text-sm uppercase font-normal">Supprimer</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for image in form.images %}
+			<tr>
+				<td class="w-1/3"><img src="{{ image.children.imageFile.vars.image_uri }}" alt=""/></td>
+				<td>{{ include('admin/layout/input.html.twig', {
+						"id" : image.children.imageFile.children.file.vars.id,
+						"name" : image.children.imageFile.children.file.vars.full_name,
+						"label": "",
+						"type": "file"
+					}) }}</td>
+				<td><a href="{{ image.children.imageFile.vars.download_uri }}" target="_blank">Télécharger</a></td>
+				<td>{{ include('admin/layout/checkbox.html.twig', {
+						"id" : image.children.imageFile.children.delete.vars.id,
+						"name" : image.children.imageFile.children.delete.vars.full_name,
+						"label": "",
+						"checked": false,
+						"required": false
+					}) }}</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	
+	<ul id="images-fields-list"
+	    data-prototype="{{ form_widget(form.images.vars.prototype)|e }}"
+	    data-widget-tags="{{ '<li></li>'|e }}"
+	    data-widget-counter="{{ form.images|length }}">
+	</ul>
+	
+	<button type="button"
+	        class="add-another-collection-widget"
+	        data-list-selector="#images-fields-list">Add another image
+	</button>
+	
+	{{ form_widget(form) }}
+	
+	<button class="bg-blue-600 rounded-md text-white py-4">{{ button_label|default('Save') }}</button>
+	
+	{{ form_end(form) }}
+	{% if activity is defined and activity.id is not null %}
+		{{ include('front/activity/_delete_form.html.twig') }}
+	{% endif %}
+</div>

@@ -5,9 +5,11 @@ namespace App\Form;
 
 
 use App\Entity\User;
+use App\Form\Front\CompanyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -24,10 +26,9 @@ class AccountCompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         return  $builder
-            ->add('email')
-            ->add('password', PasswordType::class, [
-                'mapped' => false,
-                'required' => false,
+            ->add('email', EmailType::class, [
+                "label" => "Email",
+                "required" => true
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -35,6 +36,7 @@ class AccountCompanyType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 "first_options" => [
+                    'required' => false,
                     "attr" => [
                         "placeholder" => "Mot de passe",
                         "class" => "form-control"
@@ -42,6 +44,7 @@ class AccountCompanyType extends AbstractType
                     "label" => "Mot de passe"
                 ],
                 "second_options" => [
+                    'required' => false,
                     "attr" => [
                         "placeholder" => "Confirmation",
                         "class" => "form-control"
@@ -52,6 +55,7 @@ class AccountCompanyType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
+                        'allowNull' => true,
                     ]),
                     new Length([
                         'min' => 6,
@@ -62,9 +66,11 @@ class AccountCompanyType extends AbstractType
                 ],
             ])
             ->add('address', TextType::class, [
-                "required" => false
+                "label" => "Address",
+                "required" => true
             ])
             ->add('phone', TelType::class, [
+                "label" => "Phone",
                 "required" => false
             ])
             ->add('person', PersonType::class)
