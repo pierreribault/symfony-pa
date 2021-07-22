@@ -86,6 +86,11 @@ class User implements UserInterface
     private $forumThreadAnswers;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $createdAt;
+
+    /**
      * @ORM\OneToMany(targetEntity=Like::class, mappedBy="author")
      */
     private $likes;
@@ -365,6 +370,23 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt(): void
+    {
+        $this->createdAt = new \DateTime();
     }
 
     /**

@@ -59,6 +59,7 @@ class ForumThreadVoter extends Voter
 
         return false;
     }
+  
 
     private function canPost() {
         return true;
@@ -71,4 +72,5 @@ class ForumThreadVoter extends Voter
     private function canDelete(ForumThread $forumThread, User $user) {
         return $forumThread->getAuthor() === $user || $this->security->isGranted("ROLE_ADMIN");
     }
+
 }
