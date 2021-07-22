@@ -10,6 +10,7 @@ module.exports = {
                 'gigas': '#4141A5',
                 'violet': '#1B0A3C',
                 'carnation': '#FC5156',
+                'pastel-green': '#61E786',
             },
             screens: {
                 'xs': {'max': '369px'},

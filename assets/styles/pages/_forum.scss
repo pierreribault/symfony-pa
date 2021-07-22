@@ -1,6 +1,5 @@
-#forum, #new_thread {
+#forum, #new_thread, #show_thread {
     @apply container;
-
 
     h1 {
         @apply text-2xl;
@@ -24,6 +23,17 @@
         @apply bg-gigas;
         @apply text-white;
         @apply font-medium;
+    }
+
+    #generator-open {
+        @apply mt-5;
+        @apply bg-gigas;
+        @apply px-8;
+        @apply py-4;
+        @apply rounded-full;
+        @apply text-white;
+        @apply font-medium;
+        @apply text-lg;
     }
 
     .form {
@@ -84,37 +94,6 @@
         a:hover {
             text-decoration: underline;
         }
-    }
-}
-
-#edit_thread, #new_answer, #edit_answer {
-    @apply container;
-
-    form {
-        margin-top: 35px;
-        height: auto;
-        button { width: auto }
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-}
-
-#show_thread {
-    padding: 50px 5%;
-
-    .hover-underline:hover { text-decoration: underline }
-    form {
-        height: auto;
-        button {
-            width: auto;
-            &:focus { outline: none }
-        }
-    }
-
-    .main-thread {
-        background-color: rgba(23, 93, 98, 0.05);
     }
 }
 
