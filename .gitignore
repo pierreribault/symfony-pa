@@ -23,5 +23,3 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 public/bundles
 public/build
-
-.env
