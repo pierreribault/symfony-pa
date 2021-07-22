@@ -2,83 +2,44 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
-        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
-        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_min_js.js",
-        "/build/assets_js_map_js.js",
-        "/build/app.js"
+        "/build/runtime.c793f42a.js",
+        "/build/730.5469fab3.js",
+        "/build/469.d2121430.js",
+        "/build/341.b9cdf399.js",
+        "/build/app.516563f5.js"
       ],
       "css": [
-        "/build/app.css"
+        "/build/app.2672b508.css"
       ]
     },
     "admin": {
       "js": [
-        "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
-        "/build/vendors-node_modules_jquery_dist_jquery_js.js",
-        "/build/vendors-node_modules_axios_index_js-node_modules_core-js_modules_es_array_index-of_js-node_mo-2de5d8.js",
-        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.js",
-        "/build/assets_js_map_js.js",
-        "/build/admin.js"
+        "/build/runtime.c793f42a.js",
+        "/build/730.5469fab3.js",
+        "/build/483.9d5849c4.js",
+        "/build/469.d2121430.js",
+        "/build/177.a62f7e2d.js",
+        "/build/admin.a4d579ba.js"
       ],
       "css": [
-        "/build/vendors-node_modules_fortawesome_fontawesome-free_js_all_js-node_modules_core-js_modules_es_a-b9556d.css",
-        "/build/admin.css"
+        "/build/177.3196ba25.css",
+        "/build/admin.2f13cb03.css"
       ]
     },
     "dashboard": {
       "js": [
-        "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
-        "/build/vendors-node_modules_chart_js_dist_chart_esm_js-node_modules_core-js_modules_es_array_for-eac-89ca0f.js",
-        "/build/dashboard.js"
+        "/build/runtime.c793f42a.js",
+        "/build/730.5469fab3.js",
+        "/build/592.7546b056.js",
+        "/build/dashboard.89f10ed3.js"
       ]
     },
     "collection": {
       "js": [
-        "/build/runtime.js",
-        "/build/vendors-node_modules_core-js_internals_array-method-uses-to-length_js-node_modules_core-js_in-1c4dda.js",
-        "/build/vendors-node_modules_core-js_internals_array-method-has-species-support_js-node_modules_jquer-86ef90.js",
-        "/build/vendors-node_modules_core-js_modules_es_array_map_js-node_modules_core-js_modules_es_string_r-54d850.js",
-        "/build/collection.js"
-      ]
-    },
-    "app/page/home": {
-      "js": [
-        "/build/runtime.js"
-      ],
-      "css": [
-        "/build/app/page/home.css"
-      ]
-    },
-    "app/page/login": {
-      "js": [
-        "/build/runtime.js"
-      ],
-      "css": [
-        "/build/app/page/login.css"
-      ]
-    },
-    "app/page/forum": {
-      "js": [
-        "/build/runtime.js"
-      ],
-      "css": [
-        "/build/app/page/forum.css"
-      ]
-    },
-    "app/page/generator": {
-      "js": [
-        "/build/runtime.js"
-      ],
-      "css": [
-        "/build/app/page/generator.css",
-        "/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_well-known-sy-07cc72.js",
-        "/build/vendors-node_modules_jquery_dist_jquery_js.js",
-        "/build/vendors-node_modules_core-js_modules_es_string_replace_js.js",
-        "/build/collection.js"
+        "/build/runtime.c793f42a.js",
+        "/build/730.5469fab3.js",
+        "/build/483.9d5849c4.js",
+        "/build/collection.e6ceeb1e.js"
       ]
     }
   }

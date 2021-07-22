@@ -22,4 +22,4 @@ yarn-error.log
 /.vscode/
 ###< symfony/webpack-encore-bundle ###
 public/bundles
-public/build
+##public/build
