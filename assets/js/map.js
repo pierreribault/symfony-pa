@@ -292,12 +292,16 @@ window.calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
     );
 }
 
-document.getElementById('clipboard').addEventListener('click', () => {
-    document.getElementById('copy').select()
-    document.execCommand('copy')
+let clipboard = document.getElementById('clipboard');
 
-    document.getElementById('clipboard-icon').classList.add('bg-pastel-green')
-    document.getElementById('clipboard-icon').classList.remove('bg-gigas')
-    document.getElementById('copy').classList.add('border-pastel-green')
-    document.getElementById('copy').classList.remove('border-gigas')
-})
+if(clipboard) {
+    clipboard.addEventListener('click', () => {
+        document.getElementById('copy').select()
+        document.execCommand('copy')
+
+        document.getElementById('clipboard-icon').classList.add('bg-pastel-green')
+        document.getElementById('clipboard-icon').classList.remove('bg-gigas')
+        document.getElementById('copy').classList.add('border-pastel-green')
+        document.getElementById('copy').classList.remove('border-gigas')
+    })
+}
