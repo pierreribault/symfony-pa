@@ -33,8 +33,8 @@ class ActivityController extends AbstractController
         $rayon = $request->request->get('rayon');
 
         $variationLatitude = $rayon / self::LATITUDE_1DEGREE_KM;
-        $variationFromLongitude = $rayon / (self::LATITUDE_1DEGREE_KM * cos($fromLatitude));
-        $variationToLongitude = $rayon / (self::LATITUDE_1DEGREE_KM * cos($toLatitude));
+        $variationFromLongitude = $rayon / (self::LATITUDE_1DEGREE_KM * cos($fromLatitude) +1);
+        $variationToLongitude = $rayon / (self::LATITUDE_1DEGREE_KM * cos($toLatitude) +1);
 
         if ($fromLatitude - $toLatitude > 0) {
             $fromLatitude += $toLatitude;
